@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Image Scrolling</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #f0f0f0;
+        }
+
+        #image-container {
+            position: relative;
+            min-height: 200vh; /* Ensure enough space to scroll */
+        }
+
+        .random-image {
+            position: absolute;
+            width: 100px; /* Image size */
+            height: 100px;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+<div id="image-container">
+    <!-- Images will be appended here -->
+</div>
+
+<script>
+    // List of image URLs (replace with your own images)
+    const images = [
+        'https://via.placeholder.com/100x100/FF0000/FFFFFF?text=1',
+        'https://via.placeholder.com/100x100/00FF00/FFFFFF?text=2',
+        'https://via.placeholder.com/100x100/0000FF/FFFFFF?text=3'
+    ];
+
+    // Function to generate a random position
+    function getRandomPosition() {
+        const x = Math.floor(Math.random() * window.innerWidth); // Random X position
+        const y = Math.floor(Math.random() * document.body.scrollHeight); // Random Y position
+        return { x, y };
+    }
+
+    // Function to create an image element at a random position
+    function createRandomImage() {
+        const img = document.createElement('img');
+        const randomImage = images[Math.floor(Math.random() * images.length)];
+        const { x, y } = getRandomPosition();
+
+        img.src = randomImage;
+        img.classList.add('random-image');
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
+
+        document.getElementById('image-container').appendChild(img);
+    }
+
+    // Infinite scroll functionality
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            createRandomImage(); // Create an image every time the user scrolls
+        }, 100); // Delay to prevent too many images from being added at once
+    });
+
+    // Create initial images
+    for (let i = 0; i < 10; i++) {
+        createRandomImage();
+    }
+
+</script>
+
+</body>
+</html>
