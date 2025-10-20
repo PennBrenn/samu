@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>aura farm simulator 2025</title>
+  <title>Massive Scrolling Chaos</title>
   <style>
     body {
       margin: 0;
       overflow-x: hidden;
-      background-color: #111;
+      transition: background-color 0.2s linear;
     }
 
     #image-container {
@@ -19,13 +19,13 @@
 
     .random-image {
       position: absolute;
-      object-fit: fill; /* Stretch image to fit container */
-      opacity: 0.9;
-      transition: transform 0.2s;
+      object-fit: fill;
+      opacity: 0.85;
+      pointer-events: none;
     }
 
     .random-image:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -35,13 +35,13 @@
 
 <script>
   const container = document.getElementById('image-container');
-  const imageSrc = 'sam.png'; // Ensure this is in the root directory
+  const imageSrc = 'sam.png'; // Make sure sam.png is in the root
 
-  function getRandomSize(min = 40, max = 160) {
+  function getRandomSize(min = 120, max = 480) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  function spawnImages(count = 10) {
+  function spawnImages(count = 50) {
     const scrollHeight = document.body.scrollHeight;
 
     for (let i = 0; i < count; i++) {
@@ -49,9 +49,9 @@
       img.src = imageSrc;
       img.className = 'random-image';
 
-      // Random size for stretching
-      const randomWidth = getRandomSize();
-      const randomHeight = getRandomSize();
+      // Random size (3x larger than before)
+      const width = getRandomSize();
+      const height = getRandomSize();
 
       // Random position
       const x = Math.random() * window.innerWidth;
@@ -60,26 +60,30 @@
       // Apply styles
       img.style.left = `${x}px`;
       img.style.top = `${y}px`;
-      img.style.width = `${randomWidth}px`;
-      img.style.height = `${randomHeight}px`;
+      img.style.width = `${width}px`;
+      img.style.height = `${height}px`;
 
       container.appendChild(img);
     }
 
-    // Increase scrollable height
-    container.style.minHeight = `${document.body.scrollHeight + 1000}px`;
+    // Grow page height so the user can keep scrolling
+    container.style.minHeight = `${document.body.scrollHeight + 2000}px`;
   }
 
-  // Initial images
-  spawnImages(30);
+  // Initial burst
+  spawnImages(100);
 
-  // Infinite scroll
+  // Handle scroll event
   window.addEventListener('scroll', () => {
     const scrollPosition = window.scrollY + window.innerHeight;
-    const nearBottom = scrollPosition > document.body.scrollHeight - 600;
+    const nearBottom = scrollPosition > document.body.scrollHeight - 800;
+
+    // Change background color based on scroll
+    const hue = Math.floor((window.scrollY / 10) % 360);
+    document.body.style.backgroundColor = `hsl(${hue}, 60%, 15%)`;
 
     if (nearBottom) {
-      spawnImages(20);
+      spawnImages(50);
     }
   });
 </script>
