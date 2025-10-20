@@ -1,80 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Image Scrolling</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            background-color: #f0f0f0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Infinite Scroll with sam.png</title>
+  <style>
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background-color: #111;
+    }
 
-        #image-container {
-            position: relative;
-            min-height: 200vh; /* Ensure enough space to scroll */
-        }
+    #image-container {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+    }
 
-        .random-image {
-            position: absolute;
-            width: 100px; /* Image size */
-            height: 100px;
-            object-fit: cover;
-            opacity: 0.7;
-        }
-    </style>
+    .random-image {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      opacity: 0.9;
+      transition: transform 0.2s;
+    }
+
+    .random-image:hover {
+      transform: scale(1.2);
+    }
+  </style>
 </head>
 <body>
 
-<div id="image-container">
-    <!-- Images will be appended here -->
-</div>
+<div id="image-container"></div>
 
 <script>
-    // List of image URLs (replace with your own images)
-    const images = [
-        'https://via.placeholder.com/100x100/FF0000/FFFFFF?text=1',
-        'https://via.placeholder.com/100x100/00FF00/FFFFFF?text=2',
-        'https://via.placeholder.com/100x100/0000FF/FFFFFF?text=3'
-    ];
+  const container = document.getElementById('image-container');
+  const imageSrc = 'sam.png'; // Path to image in the root directory
 
-    // Function to generate a random position
-    function getRandomPosition() {
-        const x = Math.floor(Math.random() * window.innerWidth); // Random X position
-        const y = Math.floor(Math.random() * document.body.scrollHeight); // Random Y position
-        return { x, y };
+  function spawnImages(count = 10) {
+    const scrollHeight = document.body.scrollHeight;
+    for (let i = 0; i < count; i++) {
+      const img = document.createElement('img');
+      img.src = imageSrc;
+      img.className = 'random-image';
+
+      const x = Math.random() * window.innerWidth;
+      const y = scrollHeight + Math.random() * 800; // Place below current scroll
+
+      img.style.left = `${x}px`;
+      img.style.top = `${y}px`;
+
+      container.appendChild(img);
     }
 
-    // Function to create an image element at a random position
-    function createRandomImage() {
-        const img = document.createElement('img');
-        const randomImage = images[Math.floor(Math.random() * images.length)];
-        const { x, y } = getRandomPosition();
+    // Increase the container height so user can keep scrolling
+    container.style.minHeight = `${document.body.scrollHeight + 1000}px`;
+  }
 
-        img.src = randomImage;
-        img.classList.add('random-image');
-        img.style.left = `${x}px`;
-        img.style.top = `${y}px`;
+  // Initial images
+  spawnImages(30);
 
-        document.getElementById('image-container').appendChild(img);
+  // Infinite scroll logic
+  window.addEventListener('scroll', () => {
+    const scrollPosition = window.scrollY + window.innerHeight;
+    const nearBottom = scrollPosition > document.body.scrollHeight - 600;
+
+    if (nearBottom) {
+      spawnImages(20); // Spawn more as user gets close to bottom
     }
-
-    // Infinite scroll functionality
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-        if (scrollTimeout) clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            createRandomImage(); // Create an image every time the user scrolls
-        }, 100); // Delay to prevent too many images from being added at once
-    });
-
-    // Create initial images
-    for (let i = 0; i < 10; i++) {
-        createRandomImage();
-    }
-
+  });
 </script>
 
 </body>
