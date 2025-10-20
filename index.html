@@ -1,156 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>sams aura farm simulator 2025 real real sam no cap thanks see you tomorw</title>
-  <style>
-    body {
-      margin: 0;
-      overflow-x: hidden;
-      background-color: hsl(0, 60%, 15%);
-      transition: background-color 0.2s linear;
-      font-family: sans-serif;
-    }
-
-    #image-container {
-      position: relative;
-      min-height: 100vh;
-      width: 100%;
-      z-index: 1;
-    }
-
-    .random-image {
-      position: absolute;
-      object-fit: fill;
-      opacity: 0.9;
-      pointer-events: auto;
-      cursor: pointer;
-      transition: transform 0.2s;
-      filter: hue-rotate(0deg);
-    }
-
-    .random-image:hover {
-      transform: scale(1.05);
-    }
-
-    #center-title {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 48px;
-      color: white;
-      z-index: 10;
-      text-shadow: 2px 2px 10px #000;
-      pointer-events: none;
-    }
-
-    #jumpscare {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      pointer-events: none;
-    }
-
-    #jumpscare img {
-      width: 300%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.5;
-    }
-  </style>
-</head>
-<body>
-
-<div id="image-container"></div>
-<div id="center-title">samsaura&nbsp;farm&nbsp;simulator&nbsp;2025&nbsp;real&nbsp;real&nbsp;sam&nbsp;no&nbsp;cap&nbsp;thanks&nbsp;see&nbsp;you&nbsp;tomorw</div>
-<div id="jumpscare">
-  <img src="sam.png" alt="Jumpscare">
-</div>
-
 <script>
-  const container = document.getElementById('image-container');
-  const imageSrc = 'sam.png';
-  const jumpscareDiv = document.getElementById('jumpscare');
+const container = document.getElementById('image-container');
+const jumpscareDiv = document.getElementById('jumpscare');
+const jumpscareImg = jumpscareDiv.querySelector('img');
+const centerTitle = document.getElementById('center-title');
 
-  function getRandom(min, max) {
-    return Math.random() * (max - min) + min;
-  }
+const samImages = ['sam.png', 'sam1.png', 'sam2.png', 'sam3.png', 'sam4.png', 'sam5.png'];
+const fonts = ['Comic Sans MS', 'Impact', 'Courier New', 'Georgia', 'Verdana', 'Times New Roman', 'Monospace', 'Cursive', 'Arial Black'];
 
-  function spawnImage(x = null, y = null, fromClick = false) {
-    const img = document.createElement('img');
-    img.src = imageSrc;
-    img.className = 'random-image';
+function getRandom(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
-    // Random size and rotation
-    const width = getRandom(5, 2000);
-    const height = getRandom(5, 2000);
-    const rotate = getRandom(0, 360);
-    const hue = getRandom(0, 360);
+function randomFilter() {
+  return `hue-rotate(${getRandom(0, 360)}deg) saturate(${getRandom(0.5, 4)}) brightness(${getRandom(0.5, 2)})`;
+}
 
-    // Random position unless clicked
-    const posX = x !== null ? x : Math.random() * window.innerWidth;
-    const posY = y !== null ? y : document.body.scrollHeight + Math.random() * 800;
+function spawnImage(x = null, y = null, fromClick = false) {
+  const img = document.createElement('img');
+  img.src = samImages[Math.floor(Math.random() * samImages.length)];
+  img.className = 'random-image';
 
-    // Styles
-    img.style.width = `${width}px`;
-    img.style.height = `${height}px`;
-    img.style.left = `${posX}px`;
-    img.style.top = `${posY}px`;
-    img.style.transform = `rotate(${rotate}deg)`;
-    img.style.filter = `hue-rotate(${hue}deg)`;
+  const width = getRandom(100, 500);
+  const height = getRandom(100, 500);
+  const rotate = getRandom(0, 360) + 'deg';
+  const posX = x !== null ? x : Math.random() * window.innerWidth;
+  const posY = y !== null ? y : document.body.scrollHeight + Math.random() * 800;
 
-    // Click to duplicate
-    img.addEventListener('click', (e) => {
-      e.stopPropagation();
-      for (let i = 0; i < 2; i++) {
-        spawnImage(posX + getRandom(-50, 50), posY + getRandom(-50, 50), true);
-      }
-    });
+  img.style.width = `${width}px`;
+  img.style.height = `${height}px`;
+  img.style.left = `${posX}px`;
+  img.style.top = `${posY}px`;
+  img.style.setProperty('--rot', rotate);
+  img.style.filter = randomFilter();
 
-    container.appendChild(img);
-  }
+  // Bounce around randomly
+  setInterval(() => {
+    const dx = getRandom(-10, 10);
+    const dy = getRandom(-10, 10);
+    const currentLeft = parseFloat(img.style.left || '0');
+    const currentTop = parseFloat(img.style.top || '0');
+    img.style.left = `${Math.max(0, currentLeft + dx)}px`;
+    img.style.top = `${Math.max(0, currentTop + dy)}px`;
+  }, 100); // Adjust speed here
 
-  function spawnImages(count = 5000) {
-    for (let i = 0; i < count; i++) {
-      spawnImage();
-    }
-    container.style.minHeight = `${document.body.scrollHeight + 2000}px`;
-  }
-
-  function triggerJumpscare() {
-    jumpscareDiv.style.display = 'flex';
-    setTimeout(() => {
-      jumpscareDiv.style.display = 'none';
-    }, 300);
-    setTimeout(triggerJumpscare, getRandom(1, 1000));
-  }
-
-  // Background color hue change
-  window.addEventListener('scroll', () => {
-    const scrollPosition = window.scrollY + window.innerHeight;
-    const nearBottom = scrollPosition > document.body.scrollHeight - 800;
-
-    const hue = Math.floor((window.scrollY / 10) % 360);
-    document.body.style.backgroundColor = `hsl(${hue}, 60%, 15%)`;
-
-    if (nearBottom) {
-      spawnImages(50);
+  img.addEventListener('click', (e) => {
+    e.stopPropagation();
+    for (let i = 0; i < 5; i++) {
+      spawnImage(posX + getRandom(-100, 100), posY + getRandom(-100, 100), true);
     }
   });
 
-  // Initial load
-  spawnImages(100);
-  triggerJumpscare();
-</script>
+  container.appendChild(img);
+}
 
-</body>
-</html>
+function spawnImages(count = 200) {
+  for (let i = 0; i < count; i++) {
+    spawnImage();
+  }
+  container.style.minHeight = `${document.body.scrollHeight + 2000}px`;
+}
+
+function triggerJumpscare() {
+  const randomSam = samImages[Math.floor(Math.random() * samImages.length)];
+  jumpscareImg.src = randomSam;
+  jumpscareDiv.style.display = 'flex';
+  document.body.style.backgroundColor = `hsl(${Math.floor(Math.random() * 360)}, 100%, 20%)`;
+  setTimeout(() => {
+    jumpscareDiv.style.display = 'none';
+  }, 300);
+  setTimeout(triggerJumpscare, getRandom(1000, 3000));
+}
+
+// Scroll-triggered chaos
+window.addEventListener('scroll', () => {
+  const scrollPosition = window.scrollY + window.innerHeight;
+  const nearBottom = scrollPosition > document.body.scrollHeight - 800;
+  const hue = Math.floor((window.scrollY / 5 + getRandom(0, 90)) % 360);
+  document.body.style.backgroundColor = `hsl(${hue}, 100%, 10%)`;
+  if (nearBottom) {
+    spawnImages(100);
+  }
+});
+
+// Change font every 100ms
+setInterval(() => {
+  const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+  centerTitle.style.fontFamily = randomFont;
+}, 100);
+
+// Initial Load
+spawnImages(200);
+triggerJumpscare();
+</script>
