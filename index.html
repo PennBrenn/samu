@@ -5,663 +5,318 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning but no cap</title>
 <style>
-  :root{
-    --bg:#080808;
-    --text:#ffffff;
-  }
   html,body{
-    height:100%;
     margin:0;
+    height:100%;
+    background:black;
     overflow:auto;
-    background:var(--bg);
-    color:var(--text);
-    font-family:system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color:white;
+    font-family:sans-serif;
   }
-
-  /* INITIAL SCREEN */
   #intro{
-    height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
+    height:100vh;
     text-align:center;
-    padding:2rem;
+    cursor:pointer;
   }
   #intro p{
-    font-size:18px;
-    line-height:1.4;
-    max-width:900px;
-    background:rgba(0,0,0,0.4);
-    padding:1.2rem;
+    font-size:20px;
+    background:rgba(255,255,255,0.05);
+    padding:1.5rem;
     border-radius:10px;
-    border:2px solid rgba(255,255,255,0.06);
   }
 
-  b{ font-weight:900; }
-
-  /* MAIN UI */
-  #game {
+  #game{
     display:none;
     position:relative;
-    min-height:300vh; /* allow lots of scrolling */
-    height:auto;
+    min-height:400vh;
   }
 
-  /* Aura meter at top */
-  #auraWrap{
-    position:fixed;
-    left:50%;
-    transform:translateX(-50%);
-    top:12px;
-    width:60%;
-    max-width:900px;
-    height:28px;
-    background:rgba(255,255,255,0.06);
-    border-radius:16px;
-    overflow:visible;
-    z-index:2000;
-    border:1px solid rgba(255,255,255,0.06);
-    box-shadow:0 6px 18px rgba(0,0,0,0.6);
-  }
-  #aura{
-    height:100%;
-    width:1%;
-    background:linear-gradient(90deg,#00ffba,#0099ff);
-    border-radius:16px;
-    transform-origin:left center;
-    transition: width 0.6s linear;
-    box-shadow:0 0 12px rgba(0,255,200,0.12), inset 0 0 8px rgba(255,255,255,0.06);
-  }
-  /* overflow visual: show the aura "pouring out" */
-  #auraOverflow {
-    position:absolute;
-    left:100%;
-    top:0;
-    height:100%;
-    min-width:0;
-    pointer-events:none;
-    display:flex;
-    align-items:center;
-    gap:6px;
-    padding-left:8px;
-  }
-  .spill{
-    width:6px;height:6px;border-radius:50%;opacity:0.9;
-    animation:drip 1.2s linear infinite;
-  }
-  @keyframes drip{ 0%{transform:translateY(0) scale(1);}50%{transform:translateY(12px) scale(0.7);}100%{transform:translateY(0) scale(1);} }
-
-  /* Large centered title */
-  #title {
+  #title{
     position:fixed;
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
     text-align:center;
-    z-index:1500;
+    z-index:2000;
     pointer-events:none;
-    padding:1rem 2rem;
-    background:rgba(0,0,0,0.1);
-    border-radius:10px;
-    backdrop-filter: blur(3px);
   }
   #title h1{
     margin:0;
+    font-size:clamp(20px,8vw,60px);
     font-weight:900;
-    font-size: clamp(22px, 8vw, 64px);
-    letter-spacing:0.02em;
   }
 
-  /* fake chatbot */
-  #chatbot{
+  /* Aura meter */
+  #auraWrap{
     position:fixed;
-    bottom:18px;
-    right:18px;
-    width:200px;
-    max-width:40%;
+    left:50%;
+    top:10px;
+    transform:translateX(-50%);
+    width:70%;
+    max-width:900px;
+    height:26px;
+    background:rgba(255,255,255,0.1);
+    border-radius:16px;
+    overflow:visible;
     z-index:3000;
-    background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,0.06);
-    padding:8px;
-    box-shadow:0 8px 28px rgba(0,0,0,0.6);
-    font-size:14px;
-  }
-  #chatbot .msg{
-    padding:8px 10px;
-    background:rgba(0,0,0,0.3);
-    border-radius:8px;
-    color:white;
     text-align:left;
+    padding:2px 8px;
+    box-shadow:0 0 20px rgba(0,0,0,0.6);
+  }
+  #auraLabel{
+    position:absolute;
+    top:-18px;
+    left:0;
+    font-size:13px;
+    color:#0ff;
+    text-shadow:0 0 4px #0ff;
+  }
+  #aura{
+    height:100%;
+    width:1%;
+    background:linear-gradient(90deg,#00ffff,#ff00ff);
+    border-radius:16px;
+    transition:width 0.3s linear;
   }
 
-  /* container for sam images */
-  .sam {
-    position:fixed;
-    width:64px;
-    height:64px;
-    will-change: transform, filter;
+  .sam{
+    position:absolute;
+    will-change:transform,filter;
     pointer-events:none;
     user-select:none;
-    display:block;
-    backface-visibility:hidden;
-    transform-origin:center center;
     mix-blend-mode:screen;
   }
 
-  /* bounce visual enhancement */
-  @keyframes floatBounce {
-    0%{ transform: translateY(0); }
-    50%{ transform: translateY(-6px) rotate(0.2deg); }
-    100%{ transform: translateY(0); }
+  #chatbot{
+    position:fixed;
+    bottom:15px;
+    right:15px;
+    width:230px;
+    z-index:4000;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:10px;
+    padding:8px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.7);
+  }
+  #chatlog{
+    max-height:150px;
+    overflow-y:auto;
+    font-size:13px;
+  }
+  #chatbot input{
+    width:100%;
+    border:none;
+    background:rgba(255,255,255,0.1);
+    color:white;
+    padding:4px;
+    border-radius:6px;
+    margin-top:6px;
   }
 
-  /* jumpscare overlay */
-  #jumpscare {
+  #jumpscare{
     position:fixed;
     inset:0;
+    background:black;
     display:none;
     align-items:center;
     justify-content:center;
-    z-index:4000;
-    background:rgba(0,0,0,0.0);
+    z-index:5000;
   }
   #jumpscare img{
-    max-width:120vw;
-    max-height:120vh;
-    transform:scale(1.3);
-    filter:drop-shadow(0 0 64px rgba(255,0,0,0.6));
+    max-width:100%;
+    max-height:100%;
+    filter:drop-shadow(0 0 60px red);
   }
-
-  /* small HUD for controls */
-  #hud {
-    position:fixed;
-    left:12px;
-    top:12px;
-    z-index:2000;
-    font-size:13px;
-    color:rgba(255,255,255,0.8);
-    text-shadow:0 2px 8px rgba(0,0,0,0.6);
-  }
-
-  /* reduce pointer cursor */
-  .click-to-play { cursor:pointer; }
 </style>
 </head>
 <body>
-  <!-- Initial intro screen (blank-ish) -->
-  <div id="intro" class="click-to-play">
-    <p>
-      sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning
-      <b>click to play</b>
-    </p>
+  <div id="intro">
+    <p>sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning <b>click to play</b></p>
   </div>
 
-  <!-- Main game layer (hidden until click) -->
-  <div id="game" aria-hidden="true">
+  <div id="game">
     <div id="auraWrap">
+      <div id="auraLabel">Aura Level</div>
       <div id="aura"></div>
-      <div id="auraOverflow"></div>
     </div>
 
-    <div id="title" aria-hidden="false">
+    <div id="title">
       <h1 id="bigTitle">sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning but no cap</h1>
     </div>
 
-    <div id="hud">Spawn cap: <span id="capDisplay">150</span> · Live: <span id="liveCount">0</span></div>
-
-    <div id="jumpscare" role="dialog" aria-hidden="true"></div>
-
     <div id="chatbot">
-      <div class="msg">yes</div>
+      <div id="chatlog"><div><b>Chatbot:</b> yes</div></div>
+      <input id="chatInput" placeholder="Type..." />
     </div>
-    <!-- lots of vertical space so user can scroll a lot -->
-    <div style="height:5000px"></div>
+
+    <div id="jumpscare"></div>
+
+    <div style="height:6000px"></div>
   </div>
 
 <script>
-/*
- Chaos simulator script
- - Uses pooled DOM elements to reduce garbage and avoid crashing
- - Spawns images named sam1.png ... samN.png in root; chooses randomly
- - More spawn when user scrolls; user is sent back to top eventually
- - Title font changes every 100ms
- - Aura meter fills over time and overflows visually
- - Jumpscares occasionally
- - Fake chatbot: only "yes"
-*/
-
 (() => {
-  // Config
-  const MAX_LIVE = 150;            // cap to keep it not-too-lagy
-  const POOL_SIZE = MAX_LIVE + 40;
-  const SPAWN_ON_CLICK = 12;
-  const SPAWN_ON_SCROLL = 6;
-  const SCROLL_RESET_DELAY = 4500; // ms after last scroll, snap back to start
-  const JUMPSCARE_CHANCE = 0.015;  // chance per second
-  const JUMPSCARE_MIN_INTERVAL = 7000;
-  const FONT_CHANGE_MS = 100;
-  const HUE_CHANGE_SPEED = 1200;   // ms between background color shifts
-  const MAX_SPAWN_RATE_PER_SEC = 12;
-  const IMAGE_SIZE_BASE = 48;      // base size px
-  // Let's assume user has images named sam1.png, sam2.png ... up to sam200.png
   const MAX_SAM_FILES = 200;
-
-  // State
+  const MAX_LIVE = 300;
+  const SPAWN_BASE = 12;
   let started = false;
-  let live = 0;
-  let pool = [];
+  let auraValue = 0;
   let active = new Set();
-  let lastScrollTime = 0;
-  let scrollResetTimer = null;
-  let lastJumpscareAt = 0;
-  let lastSpawnTime = 0;
-  let lastBackgroundShift = 0;
+  let lastFontChange = 0;
+  let fontIndex = 0;
 
-  // DOM
   const intro = document.getElementById('intro');
   const game = document.getElementById('game');
+  const aura = document.getElementById('aura');
   const bigTitle = document.getElementById('bigTitle');
-  const auraEl = document.getElementById('aura');
-  const auraOverflow = document.getElementById('auraOverflow');
-  const liveCount = document.getElementById('liveCount');
-  const capDisplay = document.getElementById('capDisplay');
-  const jumpscareWrap = document.getElementById('jumpscare');
+  const chatInput = document.getElementById('chatInput');
+  const chatlog = document.getElementById('chatlog');
+  const jumpscare = document.getElementById('jumpscare');
 
-  capDisplay.textContent = MAX_LIVE;
+  const fonts = [
+    'Impact', '"Comic Sans MS"', '"Courier New"', 'Georgia',
+    '"Brush Script MT"', '"Trebuchet MS"', '"Lucida Console"',
+    '"Times New Roman"', '"Helvetica Neue"', '"Segoe UI"'
+  ];
 
-  // Utility
-  function rand(min=0,max=1){ return Math.random()*(max-min)+min; }
-  function irand(min,max){ return Math.floor(rand(min,max+1)); }
-  function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+  function rand(min,max){return Math.random()*(max-min)+min;}
+  function irand(min,max){return Math.floor(rand(min,max+1));}
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
 
-  // create a pool of image elements
-  function makeSamElement(){
+  function makeSam(){
     const img = document.createElement('img');
     img.className = 'sam';
-    img.style.width = IMAGE_SIZE_BASE + 'px';
-    img.style.height = IMAGE_SIZE_BASE + 'px';
-    img.draggable = false;
-    img.loading = 'eager';
-    img.style.opacity = '0.95';
-    // internal state
-    img.__vx = 0;
-    img.__vy = 0;
-    img.__rot = 0;
-    img.__scaleX = 1;
-    img.__scaleY = 1;
-    img.__hue = 0;
-    img.__alive = false;
-    return img;
-  }
-
-  for(let i=0;i<POOL_SIZE;i++){
-    pool.push(makeSamElement());
-  }
-
-  // append all to body but hidden (offscreen) to be reused
-  pool.forEach(el => document.body.appendChild(el));
-
-  // spawn function
-  function spawnSam(count=1){
-    const now = performance.now();
-    // throttle spawn
-    const secSinceLast = (now - lastSpawnTime)/1000;
-    if(secSinceLast < 1 && count > 0){
-      // limit bursts
-      count = Math.max(0, Math.min(count, Math.round(MAX_SPAWN_RATE_PER_SEC * secSinceLast) || 1));
-    }
-    lastSpawnTime = now;
-
-    for(let i=0;i<count;i++){
-      if(active.size >= MAX_LIVE) break;
-      // pull from pool
-      const el = pool.find(x => !x.__alive);
-      if(!el) break;
-      // pick a file name. user said there are hundreds: we'll sample sam1..samN
-      const fileIndex = irand(1, MAX_SAM_FILES);
-      let filename = `sam${fileIndex}.png`;
-      // fallback to sam1.png or sam2.png if some images missing in user's environment is their problem.
-      el.src = filename;
-      // random position within viewport
-      const vw = Math.max(document.documentElement.clientWidth || 800, 800);
-      const vh = Math.max(window.innerHeight || 600, 600);
-      let x = rand(0, vw - 48);
-      let y = rand(0, vh - 48);
-      // allow spawn slightly offscreen to float in
-      x += rand(-24, 24);
-      y += rand(-24, 24);
-      el.style.left = x + 'px';
-      el.style.top = y + 'px';
-      // rotation
-      el.__rot = rand(0,360);
-      // random resize up to 10x in x or y or both
-      el.__scaleX = rand(0.2, 10.0);
-      el.__scaleY = rand(0.2, 10.0);
-      // small base size variation
-      const base = IMAGE_SIZE_BASE * clamp(rand(0.6, 2.2),0.3,10);
-      el.style.width = Math.max(12, base * (el.__scaleX)) + 'px';
-      el.style.height = Math.max(12, base * (el.__scaleY)) + 'px';
-      // velocity
-      el.__vx = rand(-0.35,0.35) * (el.__scaleX + 0.4);
-      el.__vy = rand(-0.35,0.35) * (el.__scaleY + 0.4);
-      // hue
-      el.__hue = irand(0,359);
-      el.style.filter = `hue-rotate(${el.__hue}deg) saturate(${rand(0.8,2.5)})`;
-      // bounce animation subtle
-      el.style.animation = `floatBounce ${rand(2.2,4.2)}s ease-in-out ${rand(0,2)}s infinite`;
-      el.style.opacity = clamp(rand(0.6,1),0.2,1);
-      el.style.transform = `rotate(${el.__rot}deg)`;
-      // z-index based on size to create depth
-      el.style.zIndex = Math.floor(100 + (el.__scaleX+el.__scaleY)*20);
-      el.__alive = true;
-      el.style.display = 'block';
-      active.add(el);
-    }
-    updateHUD();
-  }
-
-  // update HUD counters
-  function updateHUD(){
-    liveCount.textContent = active.size;
-  }
-
-  // animation loop for movement & bouncing
-  function animate(){
-    const vw = document.documentElement.clientWidth;
+    img.src = `sam${irand(1,MAX_SAM_FILES)}.png`;
+    const vw = window.innerWidth;
     const vh = window.innerHeight;
-    active.forEach(el => {
-      if(!el.__alive) return;
-      // parse position as floats
-      let x = parseFloat(el.style.left || 0);
-      let y = parseFloat(el.style.top || 0);
+    const x = window.scrollX + rand(0, vw);
+    const y = window.scrollY + rand(0, vh);
+    img.style.left = x+'px';
+    img.style.top = y+'px';
+    const scaleX = rand(0.5,10);
+    const scaleY = rand(0.5,10);
+    img.style.width = 40*scaleX+'px';
+    img.style.height = 40*scaleY+'px';
+    img.style.transform = `rotate(${rand(0,360)}deg)`;
+    img.style.filter = `hue-rotate(${irand(0,360)}deg) saturate(${rand(1,3)})`;
+    img.__vx = rand(-1,1);
+    img.__vy = rand(-1,1);
+    document.body.appendChild(img);
+    active.add(img);
+  }
+
+  function spawn(count){
+    for(let i=0;i<count;i++){
+      if(active.size<MAX_LIVE) makeSam();
+    }
+  }
+
+  function move(){
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    active.forEach(el=>{
+      const rect = el.getBoundingClientRect();
+      let x = parseFloat(el.style.left);
+      let y = parseFloat(el.style.top);
       x += el.__vx;
       y += el.__vy;
-      // bounce off edges
-      // use element size to keep in bounds
-      const w = el.offsetWidth || 48;
-      const h = el.offsetHeight || 48;
-      if(x < -w/2){ x = -w/2; el.__vx *= -1; el.__rot += rand(-18,18); }
-      if(y < -h/2){ y = -h/2; el.__vy *= -1; el.__rot += rand(-18,18); }
-      if(x > vw - w/2){ x = vw - w/2; el.__vx *= -1; el.__rot += rand(-18,18); }
-      if(y > vh - h/2){ y = vh - h/2; el.__vy *= -1; el.__rot += rand(-18,18); }
-      // slight friction
-      el.__vx *= 0.9997;
-      el.__vy *= 0.9997;
-      el.style.left = x + 'px';
-      el.style.top = y + 'px';
-      el.style.transform = `translateZ(0) rotate(${el.__rot}deg)`;
-      // small sporadic hue shifts
-      if(Math.random() < 0.003){
-        el.__hue = (el.__hue + irand(-36,36) + 360) % 360;
-        el.style.filter = `hue-rotate(${el.__hue}deg) saturate(${rand(0.8,2.5)})`;
-      }
-      // occasionally remove if way off or too old to keep pool available
-      if(Math.random() < 0.0007 && active.size > 20){
-        retire(el);
-      }
+      const w = el.offsetWidth;
+      const h = el.offsetHeight;
+      // bounce within world coords
+      const scrollTop = window.scrollY;
+      const scrollBottom = scrollTop + vh;
+      if(x<0||x>vw*2){el.__vx*=-1;}
+      if(y<scrollTop||y>scrollBottom*4){el.__vy*=-1;}
+      el.style.left=x+'px';
+      el.style.top=y+'px';
     });
-
-    // background color changes periodically
-    const now = Date.now();
-    if(now - lastBackgroundShift > HUE_CHANGE_SPEED){
-      lastBackgroundShift = now;
-      // compute a soft gradient color
-      const h = irand(0,359);
-      document.documentElement.style.setProperty('--bg', `hsl(${h} 20% 7%)`);
-    }
-
-    // random small chance of jumpscare
-    if(Date.now() - lastJumpscareAt > JUMPSCARE_MIN_INTERVAL){
-      if(Math.random() < JUMPSCARE_CHANCE){
-        triggerJumpscare();
-        lastJumpscareAt = Date.now();
-      }
-    }
-
-    requestAnimationFrame(animate);
   }
 
-  // retire element back to pool
-  function retire(el){
-    if(!el || !el.__alive) return;
-    el.__alive = false;
-    active.delete(el);
-    el.style.display = 'none';
-    el.style.left = '-9999px';
-    el.style.top = '-9999px';
-    el.src = ''; // clear to release memory (browser behaviour varies)
-    updateHUD();
-  }
-
-  // very lightweight audio jump-scare with WebAudio (no external files)
-  function playJumpscareSound(){
-    try{
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type = 'sawtooth';
-      o.frequency.value = 60;
-      g.gain.value = 0;
-      o.connect(g);
-      g.connect(ctx.destination);
-      o.start();
-      // quick aggressive ramp
-      g.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 0.02);
-      o.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.12);
-      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.5);
-      o.stop(ctx.currentTime + 0.6);
-      // small sub-bass thump
-      const o2 = ctx.createOscillator();
-      const g2 = ctx.createGain();
-      o2.type = 'sine';
-      o2.frequency.value = 28;
-      g2.gain.value = 0.4;
-      o2.connect(g2);
-      g2.connect(ctx.destination);
-      o2.start();
-      g2.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.7);
-      o2.stop(ctx.currentTime + 0.7);
-    }catch(e){
-      console.warn('Audio not available', e);
+  function changeFonts(){
+    const now=Date.now();
+    if(now-lastFontChange>100){
+      fontIndex=(fontIndex+1)%fonts.length;
+      bigTitle.style.fontFamily=fonts[fontIndex];
+      lastFontChange=now;
     }
   }
 
-  // jumpscare: overlay big image + sound
-  function triggerJumpscare(){
-    if(active.size > MAX_LIVE * 0.9){
-      // if system is stressed, skip to avoid freeze
-      return;
-    }
-    // pick a random sam image to go big
-    const idx = irand(1, Math.min(200, MAX_SAM_FILES));
-    const img = document.createElement('img');
-    img.src = `sam${idx}.png`;
-    img.alt = 'jumpscare';
-    // clear previous
-    jumpscareWrap.innerHTML = '';
-    jumpscareWrap.appendChild(img);
-    jumpscareWrap.style.display = 'flex';
-    jumpscareWrap.style.background = 'rgba(0,0,0,0.05)';
-    jumpscareWrap.setAttribute('aria-hidden','false');
-
-    // play sound
-    playJumpscareSound();
-
-    // brief flash effect
-    document.documentElement.style.transition = 'background 160ms';
-    const oldBg = getComputedStyle(document.documentElement).getPropertyValue('--bg');
-    document.documentElement.style.setProperty('--bg','hsl(0 90% 95%)');
-    setTimeout(() => {
-      document.documentElement.style.setProperty('--bg', oldBg);
-    }, 160);
-
-    // remove overlay after short time
-    setTimeout(() => {
-      jumpscareWrap.style.display = 'none';
-      jumpscareWrap.innerHTML = '';
-      jumpscareWrap.setAttribute('aria-hidden','true');
-    }, 900 + irand(0,500));
-  }
-
-  // handle scroll spawn & reset
-  let scrollCountSinceReset = 0;
-  function onScroll(){
-    lastScrollTime = Date.now();
-    // spawn some
-    spawnSam(SPAWN_ON_SCROLL + irand(0,4));
-    scrollCountSinceReset++;
-    if(scrollResetTimer) clearTimeout(scrollResetTimer);
-    scrollResetTimer = setTimeout(() => {
-      // gently return to top to keep experience controlled
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      scrollCountSinceReset = 0;
-    }, SCROLL_RESET_DELAY);
-  }
-
-  // aura meter: increases while running
-  let auraValue = 0;
   function auraTick(){
     if(!started) return;
-    // increase faster if more live elements
-    const inc = 0.02 + (active.size / MAX_LIVE) * 0.09;
-    auraValue += inc;
-    // compute width percent but allow >100%
-    const widthPct = Math.min(1000, auraValue); // cap for UI sanity
-    auraEl.style.width = widthPct + '%';
-    // create overflow particles if overflow
-    const overflowCount = Math.floor(Math.max(0, widthPct - 100) / 40);
-    auraOverflow.innerHTML = '';
-    for(let i=0;i<overflowCount;i++){
-      const s = document.createElement('div');
-      s.className = 'spill';
-      s.style.background = `hsl(${(i*37 + Math.floor(auraValue))%360} 90% 60%)`;
-      s.style.animationDelay = (i*0.12)+'s';
-      auraOverflow.appendChild(s);
-    }
+    auraValue+=0.1+(active.size/400);
+    aura.style.width=auraValue+'%';
     requestAnimationFrame(auraTick);
   }
 
-  // title font switching every 100ms
-  const fonts = [
-    'Impact, Charcoal, sans-serif',
-    '"Comic Sans MS", "Marker Felt", sans-serif',
-    '"Courier New", Courier, monospace',
-    '"Times New Roman", Times, serif',
-    'Georgia, serif',
-    '"Lucida Console", Monaco, monospace',
-    '"Trebuchet MS", Helvetica, Arial',
-    '"Brush Script MT", cursive',
-    '"Segoe UI", system-ui, -apple-system',
-    '"Helvetica Neue", Arial, sans-serif'
-  ];
-  let fontIndex = 0;
-  function tickTitleFont(){
-    if(!started) return;
-    // change randomly to keep it chaotic
-    fontIndex = (fontIndex + irand(1, fonts.length-1)) % fonts.length;
-    bigTitle.style.fontFamily = fonts[fontIndex];
-    // slight jitter in scale occasionally
-    bigTitle.style.transform = `scale(${rand(0.98,1.07)})`;
-    setTimeout(tickTitleFont, FONT_CHANGE_MS);
+  function bgCycle(){
+    document.body.style.background=`hsl(${irand(0,359)} 30% 5%)`;
   }
 
-  // small throttle-friendly event for click area to spawn some initial elements
-  function onStart(){
-    if(started) return;
-    started = true;
-    // hide intro, show game
-    intro.style.display = 'none';
-    game.style.display = 'block';
-    game.setAttribute('aria-hidden','false');
-    // initial spawns
-    spawnSam(SPAWN_ON_CLICK + irand(4,18));
-    // begin animate and aura
+  function jumpScare(){
+    if(Math.random()<0.01){
+      jumpscare.style.display='flex';
+      const img=document.createElement('img');
+      img.src=`sam${irand(1,MAX_SAM_FILES)}.png`;
+      jumpscare.innerHTML='';
+      jumpscare.appendChild(img);
+      const ctx=new (window.AudioContext||window.webkitAudioContext)();
+      const o=ctx.createOscillator();const g=ctx.createGain();
+      o.type='square';o.frequency.value=80;g.gain.value=0.5;
+      o.connect(g);g.connect(ctx.destination);
+      o.start();
+      g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.4);
+      o.stop(ctx.currentTime+0.4);
+      setTimeout(()=>jumpscare.style.display='none',500);
+    }
+  }
+
+  function animate(){
+    move();
+    changeFonts();
+    jumpScare();
     requestAnimationFrame(animate);
-    requestAnimationFrame(auraTick);
-    tickTitleFont();
-
-    // add more periodic spawns to keep energy but avoid runaway
-    setInterval(() => {
-      // spawn a few occasionally
-      spawnSam(irand(1,6));
-    }, 1500);
-
-    // slow background hue cycling
-    setInterval(() => {
-      const h = irand(0,359);
-      document.documentElement.style.setProperty('--bg', `hsl(${h} 24% 6%)`);
-    }, HUE_CHANGE_SPEED + irand(-600,1200));
-
-    // gradually grow the number of allowed live elements a little (soft difficulty)
-    setInterval(() => {
-      // create a gentle additional spawn wave when there's space
-      if(active.size < MAX_LIVE * 0.85){
-        spawnSam(irand(1,6));
-      }
-    }, 3000);
-
-    // basic pointerdown listener to create a "repel" effect where user clicks
-    document.addEventListener('pointerdown', (ev) => {
-      // make nearby elements bounce away
-      active.forEach(el => {
-        const rx = parseFloat(el.style.left || 0) + (el.offsetWidth/2);
-        const ry = parseFloat(el.style.top  || 0) + (el.offsetHeight/2);
-        const dx = rx - ev.clientX;
-        const dy = ry - ev.clientY;
-        const d2 = dx*dx + dy*dy;
-        if(d2 < 160000){ // within ~400px
-          const factor = 2.2 * (1 - Math.min(1, Math.sqrt(d2)/600));
-          el.__vx += dx * 0.002 * factor;
-          el.__vy += dy * 0.002 * factor;
-        }
-      });
-      // small spawn on click
-      spawnSam(1 + irand(0,3));
-    });
   }
 
-  // ensure scroll handler only added when started to avoid pre-start behavior
-  window.addEventListener('scroll', (e) => {
-    if(!started) return;
-    // spawn more as they scroll
-    onScroll();
-  }, { passive:true });
+  function scrollSpawn(){
+    spawn(10+irand(0,10));
+  }
 
-  // initial click to start
-  intro.addEventListener('click', onStart, { once:true, passive:true });
+  function chatbotRespond(msg){
+    const responses = [
+      'yes','yep','absolutely','indeed','yes (aura rising)',
+      'yes no cap','real real yes','affirmative aura detected'
+    ];
+    const reply = responses[irand(0,responses.length-1)];
+    chatlog.innerHTML += `<div><b>You:</b> ${msg}</div>`;
+    setTimeout(()=>{
+      chatlog.innerHTML += `<div><b>Chatbot:</b> ${reply}</div>`;
+      chatlog.scrollTop=chatlog.scrollHeight;
+    }, irand(300,1000));
+  }
 
-  // also start on any key press or touch
-  document.addEventListener('keydown', (e) => { if(!started) onStart(); }, { once:true });
-  document.addEventListener('touchstart', (e) => { if(!started) onStart(); }, { once:true });
-
-  // expose small API to window for debugging (optional)
-  window.__samsim = {
-    spawn: spawnSam,
-    retireAll: () => { Array.from(active).forEach(retire); },
-    status: () => ({ started, live: active.size, aura: auraEl.style.width })
-  };
-
-  // Ensure periodic clean / prevent runaway memory
-  setInterval(() => {
-    // if live > cap, retire some oldest
-    if(active.size > MAX_LIVE){
-      const extras = active.size - MAX_LIVE;
-      const arr = Array.from(active);
-      for(let i=0;i<extras;i++){
-        retire(arr[i]);
-      }
+  chatInput.addEventListener('keydown', e=>{
+    if(e.key==='Enter' && chatInput.value.trim()!==''){
+      chatbotRespond(chatInput.value.trim());
+      chatInput.value='';
     }
-  }, 1200);
-
-  // Simple accessibility: click on big title toggles mute (no audio except jumpscare which uses WebAudio)
-  bigTitle.addEventListener('click', () => {
-    // spawn a few for fun
-    spawnSam(4 + irand(0,6));
   });
 
-  // Start with the exact title text visible center (the title appears when game shown)
-  // Nothing else should run until click (handled above)
+  intro.addEventListener('click', ()=>{
+    intro.style.display='none';
+    game.style.display='block';
+    started=true;
+    spawn(40);
+    setInterval(()=>spawn(SPAWN_BASE+irand(5,10)),2000);
+    setInterval(bgCycle,1000);
+    auraTick();
+    animate();
+  });
+
+  window.addEventListener('scroll', scrollSpawn, {passive:true});
 })();
 </script>
 </body>
