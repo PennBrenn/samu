@@ -5,60 +5,52 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning but no cap</title>
 <style>
-  :root{ --ui-z:999999; --bg:#000; --safe-filter: none; }
-  html,body{ margin:0; height:100%; background:var(--bg); overflow:auto; color:#fff; font-family:system-ui, "Segoe UI", Roboto, Arial; transition: filter 0.2s linear; }
-  /* UI top (always on top) */
-  #uiTop{ position:fixed; left:0; right:0; top:0; display:flex; justify-content:center; pointer-events:none; z-index:1000000; padding:10px; }
-  #auraWrap{ width:70%; max-width:1100px; height:30px; background:rgba(255,255,255,0.05); border-radius:18px; padding:3px 10px; box-shadow:0 10px 40px rgba(0,0,0,0.6); pointer-events:none; }
-  #auraLabel{ position:absolute; left:12px; top:6px; font-size:13px; color:#7ff; text-shadow:0 0 6px #7ff; }
-  #aura{ height:100%; width:1%; border-radius:14px; background:linear-gradient(90deg,#00f,#0ff,#f0f); box-shadow:0 0 20px rgba(255,255,255,0.06); transition: width 0.18s linear; }
-  /* title */
-  #titleWrap{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:1000001; pointer-events:none; text-align:center; }
-  #bigTitle{ margin:0; font-weight:900; font-size:clamp(20px,8vw,72px); line-height:1; text-shadow:0 12px 40px rgba(0,0,0,0.6); transition: color 0.08s linear, transform 0.12s ease; }
-  /* world and elements */
-  #worldWrap{ position:relative; will-change:transform,filter; min-height:120vh; }
-  #world{ position:relative; height:100%; width:100%; pointer-events:none; overflow:visible; }
-  .sam{ position:absolute; pointer-events:none; user-select:none; will-change:left,top,transform; mix-blend-mode:normal; }
-  .ghost{ position:absolute; pointer-events:none; user-select:none; filter: blur(6px) brightness(1.3) saturate(1.4); opacity:0.6; }
-  /* overlay */
+  :root{ --bg:#000; }
+  html,body{ margin:0;height:100%;background:var(--bg);color:#fff;font-family:system-ui,Arial; overflow:auto; }
+  /* UI always on top */
+  #auraWrap{ position:fixed; left:50%; top:8px; transform:translateX(-50%); width:70%; max-width:1100px; height:36px; background:rgba(255,255,255,0.06); border-radius:20px; padding:4px 12px; z-index:999999; box-shadow:0 12px 60px rgba(0,0,0,0.6); pointer-events:none;}
+  #auraLabel{ position:absolute; left:12px; top:-18px; font-size:13px; color:#6ff; text-shadow:0 0 6px #6ff;}
+  #aura{ height:100%; width:1%; border-radius:14px; background:linear-gradient(90deg,#00f,#0ff,#f0f); box-shadow:0 0 30px rgba(255,0,200,0.08); transition:width 0.12s linear; }
+  #titleWrap{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:1000000; pointer-events:none; text-align:center; }
+  #bigTitle{ margin:0; font-weight:900; font-size:clamp(20px,8vw,84px); line-height:1; text-shadow:0 12px 40px rgba(0,0,0,0.6); transition:color 0.05s linear, transform 0.05s linear; }
+  /* world */
+  #worldWrap{ position:relative; will-change: transform, filter; min-height:160vh; }
+  #world{ position:absolute; left:0; top:0; right:0; bottom:0; pointer-events:none; }
+  .sam{ position:absolute; pointer-events:none; user-select:none; will-change:left,top,transform,filter; mix-blend-mode:normal; }
+  .ghost{ position:absolute; pointer-events:none; user-select:none; opacity:0.6; filter:blur(6px) saturate(1.4); }
+  /* overlay & flashes */
   #overlay{ position:fixed; inset:0; pointer-events:none; z-index:900000; mix-blend-mode:screen; }
-  .flash{ position:absolute; inset:0; background:var(--c); opacity:0; animation: flashAnim 420ms ease-out forwards; }
+  .flash{ position:absolute; inset:0; background:var(--c); opacity:0; animation: flashAnim 360ms ease-out forwards; }
   @keyframes flashAnim{ from{opacity:0.95} to{opacity:0} }
-  /* chatbot */
-  #chatbot{ position:fixed; right:16px; bottom:18px; width:260px; z-index:1000002; pointer-events:auto; background:rgba(0,0,0,0.45); color:#cff; border-radius:10px; padding:8px; border:1px solid rgba(255,255,255,0.06); box-shadow:0 10px 40px rgba(0,0,0,0.6); font-size:13px;}
-  #chatlog{ max-height:150px; overflow:auto; padding:6px; color:#cfe; }
-  #chatInput{ width:100%; padding:8px; margin-top:6px; border-radius:6px; border:none; background:rgba(255,255,255,0.04); color:white; }
   /* cubes */
-  .cubeWrap{ position:absolute; transform-style:preserve-3d; perspective:800px; pointer-events:none; }
-  .cube{ position:absolute; transform-style:preserve-3d; will-change:transform; }
-  .face{ position:absolute; width:100%; height:100%; backface-visibility:hidden; background-size:cover; background-position:center; box-shadow:0 4px 18px rgba(0,0,0,0.5); }
+  .cubeWrap{ position:absolute; transform-style:preserve-3d; perspective:900px; pointer-events:none; }
+  .cube{ position:absolute; width:100%; height:100%; transform-style:preserve-3d; will-change:transform; }
+  .face{ position:absolute; width:100%; height:100%; backface-visibility:hidden; background-size:cover; background-position:center; }
+  /* chatbot */
+  #chatbot{ position:fixed; right:18px; bottom:18px; width:300px; z-index:1000001; pointer-events:auto; background:rgba(0,0,0,0.45); color:#cff; border-radius:10px; padding:10px; border:1px solid rgba(255,255,255,0.06); box-shadow:0 12px 60px rgba(0,0,0,0.6); font-size:13px;}
+  #chatlog{ max-height:160px; overflow:auto; padding:6px; color:#cfe; }
+  #chatInput{ width:100%; padding:8px; margin-top:6px; border-radius:6px; border:none; background:rgba(255,255,255,0.04); color:white; }
   /* warnings */
-  #warning{ position:fixed; left:50%; top:8%; transform:translateX(-50%); z-index:1000003; display:none; background:rgba(255,40,40,0.95); color:white; padding:10px 18px; border-radius:8px; font-weight:900; box-shadow:0 12px 60px rgba(255,40,40,0.2); }
-  #jumpscare{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1000005; }
-  #jumpscare img{ max-width:120vw; max-height:120vh; filter: drop-shadow(0 0 60px red); }
-  /* svg wobble filter (small default) */
+  #warning{ position:fixed; left:50%; top:8%; transform:translateX(-50%); display:none; z-index:1000002; background:rgba(255,20,20,0.98); color:#fff; padding:10px 16px; border-radius:8px; font-weight:900; box-shadow:0 12px 60px rgba(255,0,0,0.15); }
+  #jumpscare{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1000003; }
+  #jumpscare img{ max-width:120vw; max-height:120vh; filter:drop-shadow(0 0 60px red); }
+  /* svg wobble filter */
   svg{ position:absolute; width:0; height:0; }
-  /* debug overlay (FPS etc) */
-  #debug{ position:fixed; left:8px; bottom:8px; z-index:1000010; background:rgba(0,0,0,0.45); padding:8px; border-radius:8px; font-family:monospace; font-size:12px; color:#bfe; pointer-events:none; }
-  /* responsive helpers */
-  @media (max-width:700px){ #bigTitle{ font-size:28px; } #chatbot{ width:46%; } }
+  /* debug */
+  #debug{ position:fixed; left:8px; bottom:8px; z-index:1000010; background:rgba(0,0,0,0.5); color:#bfe; padding:8px; border-radius:8px; font-family:monospace; font-size:12px; pointer-events:none; }
 </style>
 
-<!-- wobble filter -->
+<!-- Wobble filter -->
 <svg aria-hidden="true">
   <filter id="wobble">
-    <feTurbulence type="fractalNoise" baseFrequency="0.0002" numOctaves="1" result="noise"/>
-    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G" />
+    <feTurbulence type="fractalNoise" baseFrequency="0.0003" numOctaves="1" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
   </filter>
 </svg>
-
+</head>
 <body>
-  <div id="uiTop">
-    <div id="auraWrap"><div id="auraLabel">Aura Level</div><div id="aura"></div></div>
-  </div>
-
+  <div id="auraWrap"><div id="auraLabel">Aura Level</div><div id="aura"></div></div>
   <div id="titleWrap"><h1 id="bigTitle">sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning but no cap</h1></div>
-
   <div id="overlay"></div>
   <div id="warning">AURA OVERFLOW</div>
   <div id="jumpscare"></div>
@@ -68,866 +60,592 @@
     <input id="chatInput" placeholder="Type..." />
   </div>
 
-  <div id="intro" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#030303,#070707);z-index:1000006;cursor:pointer;">
+  <div id="intro" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#030303,#070707);z-index:1000004;cursor:pointer;">
     <p style="padding:18px;background:rgba(255,255,255,0.03);border-radius:10px;">
       sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning <b>click to play</b>
     </p>
   </div>
 
   <div id="worldWrap"><div id="world"></div></div>
-
-  <div id="debug" class="hidden">FPS: --<br/>LIVE: -- / --<br/>CUBES: --<br/>SPAWN: --</div>
+  <div id="debug" class="hidden">FPS: -- LIVE: -- CUBES: --</div>
 
 <script>
 /*
- Adaptive Chaos Edition - optimized & adaptive
- - Merges logic & measures FPS to adapt intensity
- - Reuses pools, reuses audio nodes
- - Keeps features but scales effects on low FPS
+  Heavy Chaos — Unrestrained with emergency safety:
+  - Runs with very high caps by default (extreme chaos)
+  - If measured FPS < 5 for sustained window, instantly reduce intensity to safe mode
+  - Pools images, reuses audio nodes
+  - Contains cubes, title mutation, aura overflow, jumpscares, audio, flashes
 */
 
-(() => {
-  // CONFIG (base)
-  const IMAGES = [
-    'https://sam.pennbrenn.com/sam.png',
-    'https://sam.pennbrenn.com/sam1.jpg',
-    'https://sam.pennbrenn.com/sam2.jpg',
-    'https://sam.pennbrenn.com/sam3.jpg',
-    'https://sam.pennbrenn.com/sam4.jpg',
-    'https://sam.pennbrenn.com/sam5.jpg'
-  ];
+// === CONFIG: tune these to push/pull chaos ===
+const CONFIG = {
+  // full unrestrained caps
+  MAX_LIVE_UNRESTRAINED: 2500,
+  MAX_CUBES_UNRESTRAINED: 36,
+  SPAWN_PER_INTERVAL_UNRESTRAINED: 140,
+  SPAWN_INTERVAL_UNRESTRAINED: 700, // ms
 
-  const CONFIG = {
-    MAX_LIVE_BASE: 700,
-    MAX_CUBES_BASE: 12,
-    SPAWN_INTERVAL_BASE: 1200,
-    SPAWN_PER_INTERVAL_BASE: 40,
-    INITIAL_SPAWN_BASE: 140,
-    OVERFLOW_WARNING: 1600,
-    FINAL_AURA: 12000,
-    POOL_MARGIN: 300
-  };
+  // emergency safe mode caps (applied when FPS < threshold)
+  MAX_LIVE_SAFE: 80,
+  MAX_CUBES_SAFE: 2,
+  SPAWN_PER_INTERVAL_SAFE: 6,
+  SPAWN_INTERVAL_SAFE: 1500, // ms
 
-  // Adaptive state (will be tuned)
-  let MAX_LIVE = CONFIG.MAX_LIVE_BASE;
-  let MAX_CUBES = CONFIG.MAX_CUBES_BASE;
-  let SPAWN_INTERVAL = CONFIG.SPAWN_INTERVAL_BASE;
-  let SPAWN_PER_INTERVAL = CONFIG.SPAWN_PER_INTERVAL_BASE;
-  let spawnBurst = SPAWN_PER_INTERVAL;
-  const world = document.getElementById('world');
-  const worldWrap = document.getElementById('worldWrap');
-  const auraEl = document.getElementById('aura');
-  const bigTitle = document.getElementById('bigTitle');
-  const overlay = document.getElementById('overlay');
-  const warning = document.getElementById('warning');
-  const jumpscareWrap = document.getElementById('jumpscare');
-  const chatlog = document.getElementById('chatlog');
-  const chatInput = document.getElementById('chatInput');
-  const intro = document.getElementById('intro');
-  const debug = document.getElementById('debug');
+  // thresholds
+  EMERGENCY_FPS_THRESHOLD: 5, // below this -> safe mode
+  EMERGENCY_CHECK_WINDOW: 1800, // ms to observe low FPS before forcing safe mode
+  AURA_FINAL_THRESHOLD: 15000
+};
 
-  // pools
-  let POOL_SIZE = MAX_LIVE + CONFIG.POOL_MARGIN;
-  let pool = [];
-  let ghostPool = [];
-  let poolCreated = false;
+// images
+const IMAGES = [
+  'https://sam.pennbrenn.com/sam.png',
+  'https://sam.pennbrenn.com/sam1.jpg',
+  'https://sam.pennbrenn.com/sam2.jpg',
+  'https://sam.pennbrenn.com/sam3.jpg',
+  'https://sam.pennbrenn.com/sam4.jpg',
+  'https://sam.pennbrenn.com/sam5.jpg'
+];
 
-  // runtime state
-  let started = false;
-  let active = new Set();
-  let ghosts = new Set();
-  let cubes = [];
-  let aura = 0;
-  let hue = 0;
-  let finalPhase = false;
-  let audioCtx = null;
-  let humGain = null;
-  let lastFrame = performance.now();
-  let fpsHistory = [];
-  let lastFPSCheck = performance.now();
-  let fps = 60;
+// state & DOM
+const world = document.getElementById('world');
+const auraEl = document.getElementById('aura');
+const bigTitle = document.getElementById('bigTitle');
+const overlay = document.getElementById('overlay');
+const warning = document.getElementById('warning');
+const jumpscareWrap = document.getElementById('jumpscare');
+const chatlog = document.getElementById('chatlog');
+const chatInput = document.getElementById('chatInput');
+const intro = document.getElementById('intro');
+const debug = document.getElementById('debug');
 
-  // text variants
-  const TITLE_VARIANTS = [
-    "sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning but no cap",
-    "sam's aura farm simulator 2025 all dlc unlocked no cap real real have a good morning",
-    "sams aura vortex simulator 2025 quantum dlc unlocked no cap real real have a good morning",
-    "S A M S  A U R A  F A R M  S I M 2025 — ALL DLC UNLOCKED",
-    "sams aura farm simulator 2025 (all dlc unlocked) real real no cap good morning",
-    "sams aura farm simulator 2025 /// all dlc unlocked /// real real no cap ///",
-    "s.a.f.s. 2025 — all dlc unlocked — real real no cap — have a good morning",
-    "SAM'S AURA FARM SIMULATOR 2025 — NO CAP — ALL DLC — HAVE A GOOD MORNING",
-    "sɑm's aura farm simulator 2025 all dlc unlocked real real no cap have a good morning",
-    "sams aura farm simulator Twenty Twenty-Five - all dlc - real real - no cap"
-  ];
-  const FONTS = ['Impact','"Comic Sans MS"','"Courier New"','Georgia','"Trebuchet MS"','Verdana','Palatino','serif','monospace'];
+let started = false;
+let pool = [], ghostPool = [];
+let active = new Set();
+let cubes = [];
+let aura = 0;
+let hue = 0;
+let audioCtx = null, humGain = null;
+let fpsSamples = [], lastFrame = performance.now();
+let emergencySince = null;
+let emergencyActive = false;
 
-  // utilities
-  const rand = (a,b) => Math.random()*(b-a)+a;
-  const irand = (a,b) => Math.floor(rand(a,b+1));
-  const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+// unrestrained live settings (start with unrestrained)
+let MAX_LIVE = CONFIG.MAX_LIVE_UNRESTRAINED;
+let MAX_CUBES = CONFIG.MAX_CUBES_UNRESTRAINED;
+let SPAWN_PER_INTERVAL = CONFIG.SPAWN_PER_INTERVAL_UNRESTRAINED;
+let SPAWN_INTERVAL = CONFIG.SPAWN_INTERVAL_UNRESTRAINED;
 
-  // pool creation (deferred until start to avoid load)
-  function initPools(){
-    if(poolCreated) return;
-    POOL_SIZE = MAX_LIVE + CONFIG.POOL_MARGIN;
-    for(let i=0;i<POOL_SIZE;i++){
-      const img = document.createElement('img');
-      img.className = 'sam';
-      img.style.display='none';
-      img.draggable = false;
-      img.__alive = false;
-      img.__born = 0;
-      img.__vx = 0; img.__vy = 0;
-      pool.push(img);
-      world.appendChild(img);
-    }
-    for(let i=0;i<120;i++){
-      const g = document.createElement('img');
-      g.className = 'ghost';
-      g.style.display='none';
-      g.draggable=false;
-      ghostPool.push(g);
-      world.appendChild(g);
-    }
-    poolCreated = true;
+// title variants for mutation
+const TITLE_VARIANTS = [
+  "sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning but no cap",
+  "sam's aura farm simulator 2025 all dlc unlocked no cap real real have a good morning",
+  "sams aura vortex simulator 2025 quantum dlc unlocked no cap real real have a good morning",
+  "S A M S  A U R A  F A R M  S I M 2025 — ALL DLC UNLOCKED",
+  "sams aura farm simulator 2025 (all dlc unlocked) real real no cap good morning",
+  "sams aura farm simulator 2025 /// all dlc unlocked /// real real no cap ///",
+  "s.a.f.s. 2025 — all dlc unlocked — real real no cap — have a good morning",
+  "SAM'S AURA FARM SIMULATOR 2025 — NO CAP — ALL DLC — HAVE A GOOD MORNING",
+  "sɑm's aura farm simulator 2025 all dlc unlocked real real no cap have a good morning",
+  "sams aura farm simulator Twenty Twenty-Five - all dlc - real real - no cap"
+];
+const FONTS = ['Impact','"Comic Sans MS"','"Courier New"','Georgia','"Trebuchet MS"','Verdana','Palatino','serif','monospace'];
+
+// utils
+const rand = (a,b) => Math.random()*(b-a)+a;
+const irand = (a,b) => Math.floor(rand(a,b+1));
+const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+
+// pool creation
+function initPools(){
+  if(pool.length) return;
+  const POOL_SIZE = MAX_LIVE + 200;
+  for(let i=0;i<POOL_SIZE;i++){
+    const img = document.createElement('img');
+    img.className = 'sam';
+    img.style.display='none';
+    img.draggable=false;
+    img.__alive=false;
+    img.__born=0;
+    img.__vx=0; img.__vy=0;
+    pool.push(img);
+    world.appendChild(img);
   }
-
-  function acquire(){
-    const el = pool.find(p => !p.__alive);
-    if(el) return el;
-    return null; // constrained for adaptive performance
+  for(let i=0;i<120;i++){
+    const g = document.createElement('img');
+    g.className = 'ghost';
+    g.style.display='none';
+    g.draggable=false;
+    ghostPool.push(g);
+    world.appendChild(g);
   }
-  function acquireGhost(){ return ghostPool.find(g => g.style.display==='none') || null; }
+}
 
-  // spawn functions
-  function spawnAt(x,y,opts={}){
-    const el = acquire();
-    if(!el) return null;
-    el.src = opts.src || IMAGES[irand(0,IMAGES.length-1)];
+// acquire from pool
+function acquire(){
+  for(let i=0;i<pool.length;i++) if(!pool[i].__alive) return pool[i];
+  return null;
+}
+function acquireGhost(){ for(let i=0;i<ghostPool.length;i++) if(ghostPool[i].style.display==='none') return ghostPool[i]; return null; }
+
+// spawn
+function spawnAt(x,y,opts={}){
+  const el = acquire();
+  if(!el) return null;
+  el.src = opts.src || IMAGES[irand(0,IMAGES.length-1)];
+  el.style.left = x + 'px';
+  el.style.top = y + 'px';
+  const scale = opts.scale || rand(2,16);
+  el.style.width = (40*scale) + 'px';
+  el.style.height = (40*scale) + 'px';
+  el.style.transform = `rotate(${rand(0,360)}deg)`;
+  el.style.filter = `hue-rotate(${irand(0,360)}deg)`;
+  el.style.zIndex = irand(1,30000);
+  el.__vx = opts.vx !== undefined ? opts.vx : rand(-20,20);
+  el.__vy = opts.vy !== undefined ? opts.vy : rand(-20,20);
+  el.__alive = true;
+  el.__born = Date.now();
+  el.style.display = 'block';
+  active.add(el);
+  return el;
+}
+function spawnRandomInViewport(n){
+  const vw = window.innerWidth, vh = window.innerHeight;
+  for(let i=0;i<n;i++){
+    if(active.size >= MAX_LIVE) break;
+    const x = window.scrollX + rand(-vw*0.35, vw*1.35);
+    const y = window.scrollY + rand(-vh*0.35, vh*1.35);
+    spawnAt(x,y);
+  }
+}
+function spawnExplosion(x,y,n){
+  for(let i=0;i<n;i++){
+    if(active.size >= MAX_LIVE) break;
+    spawnAt(x + rand(-40,40), y + rand(-40,40), { vx: rand(-40,40), vy: rand(-40,40), scale: rand(3,20) });
+  }
+  playSpawnSound();
+}
+function retire(el){
+  if(!el || !el.__alive) return;
+  el.__alive = false;
+  el.style.display = 'none';
+  active.delete(el);
+}
+
+// ghost trails
+function spawnGhostFrom(el){
+  const g = acquireGhost();
+  if(!g) return;
+  g.src = el.src;
+  g.style.left = el.style.left;
+  g.style.top = el.style.top;
+  g.style.width = el.style.width;
+  g.style.height = el.style.height;
+  g.style.transform = el.style.transform;
+  g.style.display = 'block';
+  g.style.opacity = 0.75;
+  const s = Date.now(), dur = 900 + irand(0,800);
+  (function fade(){
+    const t = (Date.now()-s)/dur;
+    if(t>=1){ g.style.display='none'; return; }
+    g.style.opacity = String(0.6*(1-t));
+    requestAnimationFrame(fade);
+  })();
+}
+
+// physics & attractor + cursor orbit + chatbot repulsion
+let cursor = { x:window.innerWidth/2, y:window.innerHeight/2, active:false };
+const attractor = { x: window.innerWidth/2 + window.scrollX, y: window.innerHeight/2 + window.scrollY, strength: 0.06 };
+
+function stepPhysics(dt){
+  const vw = window.innerWidth;
+  const worldH = document.body.scrollHeight;
+  const nowms = Date.now();
+  active.forEach(el=>{
+    let x = parseFloat(el.style.left) || 0;
+    let y = parseFloat(el.style.top) || 0;
+
+    // attractor
+    let dx = (attractor.x + (window.scrollX||0)) - x;
+    let dy = (attractor.y + (window.scrollY||0)) - y;
+    const d2 = dx*dx + dy*dy + 0.0001;
+    const force = attractor.strength * (1e4 / d2);
+    el.__vx += dx * force * dt * 60;
+    el.__vy += dy * force * dt * 60;
+
+    // orbit to cursor
+    if(cursor.active){
+      const cdx = cursor.x - x;
+      const cdy = cursor.y - y;
+      const dist = Math.sqrt(cdx*cdx + cdy*cdy) + 0.0001;
+      if(dist < 560){
+        const perpX = -cdy/dist; const perpY = cdx/dist;
+        const orbit = (1 - dist/560)*0.9;
+        el.__vx += perpX * orbit * dt * 60;
+        el.__vy += perpY * orbit * dt * 60;
+        el.__vx += (cdx/dist)*0.03*dt*60;
+        el.__vy += (cdy/dist)*0.03*dt*60;
+      }
+    }
+
+    // chatbot repulsion
+    const chatRect = document.getElementById('chatbot').getBoundingClientRect();
+    const chatX = chatRect.left + chatRect.width/2 + window.scrollX;
+    const chatY = chatRect.top + chatRect.height/2 + window.scrollY;
+    const cdx2 = x - chatX; const cdy2 = y - chatY; const cd = Math.sqrt(cdx2*cdx2 + cdy2*cdy2);
+    if(cd < 260){
+      const repel = (260 - cd)/260 * 0.6;
+      el.__vx += (cdx2/cd) * repel * dt * 120;
+      el.__vy += (cdy2/cd) * repel * dt * 120;
+    }
+
+    // integrate
+    el.__vx *= 0.995;
+    el.__vy *= 0.995;
+    x += el.__vx * dt * 60;
+    y += el.__vy * dt * 60;
+
+    // bounce
+    const w = el.offsetWidth || 40, h = el.offsetHeight || 40;
+    if(x < -w){ x = -w; el.__vx *= -0.9; el.__vy *= 0.98; }
+    if(x > vw*2){ x = vw*2; el.__vx *= -0.9; el.__vy *= 0.98; }
+    if(y < -h){ y = -h; el.__vy *= -0.9; el.__vx *= 0.98; }
+    if(y > worldH){ y = worldH; el.__vy *= -0.9; el.__vx *= 0.98; }
+
     el.style.left = x + 'px';
     el.style.top = y + 'px';
-    const scale = opts.scale || rand(1.8,8); // somewhat reduced scales for perf
-    el.style.width = (36*scale) + 'px';
-    el.style.height = (36*scale) + 'px';
-    el.style.transform = `rotate(${rand(0,360)}deg)`;
-    el.style.filter = `hue-rotate(${irand(0,360)}deg)`;
-    el.style.zIndex = irand(1,20000);
-    el.__vx = opts.vx !== undefined ? opts.vx : rand(-10,10);
-    el.__vy = opts.vy !== undefined ? opts.vy : rand(-10,10);
-    el.__alive = true;
-    el.__born = Date.now();
-    el.style.display = 'block';
-    active.add(el);
-    return el;
-  }
 
-  function spawnRandomInViewport(n){
-    if(!poolCreated) return;
-    const vw = window.innerWidth, vh = window.innerHeight;
-    const budget = Math.max(1, Math.floor((MAX_LIVE - active.size) * 0.5));
-    const toSpawn = Math.min(n, budget);
-    for(let i=0;i<toSpawn;i++){
-      if(active.size >= MAX_LIVE) break;
-      const x = window.scrollX + rand(-vw*0.2, vw*1.2);
-      const y = window.scrollY + rand(-vh*0.2, vh*1.2);
-      spawnAt(x,y);
-    }
-  }
+    // ghost trails
+    if(Math.random() < 0.002 && nowms - el.__born > 500) spawnGhostFrom(el);
 
-  function spawnExplosion(x,y,amount){
-    if(!poolCreated) return;
-    const cap = Math.min(amount, Math.max(4, Math.floor((MAX_LIVE - active.size)*0.75)));
-    for(let i=0;i<cap;i++){
-      spawnAt(x + rand(-40,40), y + rand(-40,40), { vx: rand(-20,20), vy: rand(-20,20), scale: rand(3,12) });
-    }
-    playSpawnSound();
-  }
-
-  function retire(el){
-    if(!el || !el.__alive) return;
-    el.__alive = false;
-    el.style.display = 'none';
-    active.delete(el);
-  }
-
-  // ghost trails
-  function spawnGhostFrom(el){
-    const g = acquireGhost();
-    if(!g) return;
-    g.src = el.src;
-    g.style.left = el.style.left;
-    g.style.top = el.style.top;
-    g.style.width = el.style.width;
-    g.style.height = el.style.height;
-    g.style.transform = el.style.transform;
-    g.style.display = 'block';
-    g.style.opacity = 0.75;
-    const start = Date.now();
-    const dur = 900 + irand(0,600);
-    (function fade(){
-      const t = (Date.now() - start) / dur;
-      if(t >= 1){ g.style.display='none'; return; }
-      g.style.opacity = String(0.6*(1 - t));
-      requestAnimationFrame(fade);
-    })();
-  }
-
-  // physics step (merged)
-  let cursor = { x: window.innerWidth/2, y: window.innerHeight/2, active:false };
-  const attractor = { x: window.innerWidth/2 + window.scrollX, y: window.innerHeight/2 + window.scrollY, strength: 0.06 };
-
-  function stepPhysics(dt){
-    const vw = window.innerWidth;
-    const worldH = document.body.scrollHeight;
-    const nowms = Date.now();
-    active.forEach(el => {
-      let x = parseFloat(el.style.left) || 0;
-      let y = parseFloat(el.style.top) || 0;
-
-      // central attractor (soft)
-      let dx = (attractor.x + (window.scrollX||0)) - x;
-      let dy = (attractor.y + (window.scrollY||0)) - y;
-      const d2 = dx*dx + dy*dy + 0.0001;
-      const force = attractor.strength * (1e4 / d2);
-      el.__vx += dx * force * dt * 60;
-      el.__vy += dy * force * dt * 60;
-
-      // orbit to cursor (only when active)
-      if(cursor.active){
-        const cdx = cursor.x - x;
-        const cdy = cursor.y - y;
-        const dist = Math.sqrt(cdx*cdx + cdy*cdy) + 0.0001;
-        if(dist < 420){
-          const perpX = -cdy/dist; const perpY = cdx/dist;
-          const orbit = (1 - dist/420) * 0.7;
-          el.__vx += perpX * orbit * dt * 60;
-          el.__vy += perpY * orbit * dt * 60;
-          el.__vx += (cdx/dist) * 0.02 * dt * 60;
-          el.__vy += (cdy/dist) * 0.02 * dt * 60;
-        }
-      }
-
-      // chatbot repulsion
-      const chatRect = document.getElementById('chatbot').getBoundingClientRect();
-      const chatX = chatRect.left + chatRect.width/2 + window.scrollX;
-      const chatY = chatRect.top + chatRect.height/2 + window.scrollY;
-      const cdx2 = x - chatX; const cdy2 = y - chatY;
-      const cd = Math.sqrt(cdx2*cdx2 + cdy2*cdy2);
-      if(cd < 220){
-        const repel = (220-cd)/220 * 0.6;
-        el.__vx += (cdx2/cd) * repel * dt * 120;
-        el.__vy += (cdy2/cd) * repel * dt * 120;
-      }
-
-      // integrate + friction
-      el.__vx *= 0.995;
-      el.__vy *= 0.995;
-      x += el.__vx * dt * 60;
-      y += el.__vy * dt * 60;
-
-      // bounce / bounds
-      const w = el.offsetWidth || 36, h = el.offsetHeight || 36;
-      if(x < -w){ x = -w; el.__vx *= -0.86; el.__vy *= 0.98; }
-      if(x > vw*1.8){ x = vw*1.8; el.__vx *= -0.86; el.__vy *= 0.98; }
-      if(y < -h){ y = -h; el.__vy *= -0.86; el.__vx *= 0.98; }
-      if(y > worldH){ y = worldH; el.__vy *= -0.86; el.__vx *= 0.98; }
-
-      el.style.left = x + 'px';
-      el.style.top = y + 'px';
-
-      // occasional ghost trails (lowered probability for perf)
-      if(Math.random() < 0.0009 && nowms - el.__born > 900){
-        spawnGhostFrom(el);
-      }
-
-      // retire extremely old
-      if(nowms - el.__born > 1200*1000){
-        retire(el);
-      }
-    });
-  }
-
-  // camera: drift, breathing, wobble (small)
-  let lastWorldTime = performance.now();
-  let driftT = 0;
-  function animateWorld(dt){
-    driftT += dt;
-    const panX = Math.sin(driftT*0.16) * 12 * (perfState.intensity);
-    const panY = Math.sin(driftT*0.11) * 8 * (perfState.intensity);
-    worldWrap.style.transform = `translate(${panX}px, ${panY}px) rotate(${(driftT*0.02) * (perfState.intensity)}deg) scale(${1 + Math.sin(driftT*0.7) * 0.018 * (perfState.intensity)})`;
-    // wobble filter scale tuned for perf
-    const turb = document.querySelector('filter feTurbulence');
-    if(turb) turb.setAttribute('baseFrequency', String(0.0002 + Math.abs(Math.sin(driftT*0.6))*0.0012 * perfState.filterMultiplier));
-    document.querySelector('filter feDisplacementMap').setAttribute('scale', String(1 + Math.abs(Math.sin(driftT))*6 * perfState.filterMultiplier));
-    // hue rotate global (controlled)
-    hue = (hue + 1.6 * perfState.intensity) % 360;
-    document.documentElement.style.filter = `hue-rotate(${hue}deg) saturate(${1 + 0.2*perfState.intensity})`;
-    // title color pulse
-    bigTitle.style.color = `hsl(${(aura/6)%360} 95% ${clamp(50 + perfState.intensity*10,40,72)}%)`;
-    if(aura > perfState.warnThreshold){
-      bigTitle.style.transform = `scale(${1 + 0.012*Math.sin(driftT*10) * perfState.intensity}) rotate(${Math.sin(driftT*6)*1*perfState.intensity}deg)`;
-    } else {
-      bigTitle.style.transform = 'scale(1) rotate(0deg)';
-    }
-  }
-
-  // overlay flash & lightning (reduced frequency on low perf)
-  function lightning(color){
-    const el = document.createElement('div');
-    el.className = 'flash';
-    el.style.setProperty('--c', color || `hsl(${irand(0,359)} 100% 60%)`);
-    overlay.appendChild(el);
-    setTimeout(()=>{ try{ overlay.removeChild(el);}catch(e){} }, 700);
-  }
-
-  // screen shake
-  let shaking = false;
-  function shake(intensity=12, duration=360){
-    if(shaking || perfState.intensity < 0.35) return;
-    shaking = true;
-    const start = Date.now();
-    const orig = document.documentElement.style.transform || '';
-    (function tick(){
-      const dt = Date.now() - start;
-      if(dt > duration){ document.documentElement.style.transform = orig; shaking=false; return; }
-      const mag = intensity * (1 - dt/duration);
-      document.documentElement.style.transform = `translate(${irand(-mag,mag)}px,${irand(-mag,mag)}px) rotate(${irand(-mag/2,mag/2)}deg)`;
-      requestAnimationFrame(tick);
-    })();
-    setTimeout(()=>{ document.documentElement.style.transform = orig; shaking=false; }, duration+50);
-  }
-
-  // solar flare (short)
-  function solarFlare(){
-    if(perfState.intensity < 0.25) return;
-    worldWrap.style.transition = 'filter 240ms ease';
-    worldWrap.style.filter = 'brightness(2.2) blur(2px) saturate(1.4)';
-    setTimeout(()=> { worldWrap.style.filter = ''; }, 260 + irand(0,600));
-  }
-
-  // audio: single AudioContext, small hum oscillator + reusable short notes
-  function initAudio(){
-    if(audioCtx) return;
-    try{
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      const lp = audioCtx.createBiquadFilter();
-      lp.type = 'lowpass'; lp.frequency.value = 1200;
-      osc.type = 'sine'; osc.frequency.value = 56;
-      gain.gain.value = 0.00005;
-      osc.connect(lp); lp.connect(gain); gain.connect(audioCtx.destination);
-      osc.start();
-      humGain = gain;
-    }catch(e){ console.warn('Audio not available', e); }
-  }
-  function setHum(){
-    if(!humGain) return;
-    const g = clamp(aura / 12000, 0.0002, 0.45);
-    try{ humGain.gain.linearRampToValueAtTime(g*0.012, audioCtx.currentTime + 0.06); }catch(e){}
-  }
-  function playSpawnSound(){
-    if(!audioCtx || perfState.intensity < 0.18) return;
-    const ctx = audioCtx;
-    const o = ctx.createOscillator(); const g = ctx.createGain();
-    o.type = 'triangle'; o.frequency.value = rand(180,700); g.gain.value = 0.0009 * perfState.intensity;
-    o.connect(g); g.connect(ctx.destination); o.start();
-    g.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.14);
-    o.stop(ctx.currentTime + 0.18);
-  }
-  function playScream(){
-    if(!audioCtx || perfState.intensity < 0.6) return;
-    const ctx = audioCtx;
-    const bufferSize = 2 * ctx.sampleRate;
-    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for(let i=0;i<bufferSize;i++) data[i] = (Math.random()*2-1) * Math.exp(-i/bufferSize*3);
-    const src = ctx.createBufferSource(); src.buffer = buffer;
-    const g = ctx.createGain(); g.gain.value = 0.6 * perfState.intensity;
-    const bi = ctx.createBiquadFilter(); bi.type='highpass'; bi.frequency.value = 200;
-    src.connect(g); g.connect(bi); bi.connect(ctx.destination);
-    src.start();
-    setTimeout(()=>{ try{ src.stop(); }catch(e){} }, 500 + irand(0,300));
-  }
-
-  // jumpscare
-  function leapscare(){
-    if(perfState.intensity < 0.25) return;
-    const img = document.createElement('img');
-    img.src = IMAGES[irand(0,IMAGES.length-1)];
-    jumpscareWrap.innerHTML = '';
-    jumpscareWrap.appendChild(img);
-    jumpscareWrap.style.display = 'flex';
-    playScream();
-    spawnGhosts(5);
-    shake(32, 650);
-    solarFlare();
-    setTimeout(()=> { jumpscareWrap.style.display = 'none'; }, 700 + irand(0,500));
-  }
-
-  function spawnGhosts(n){
-    const arr = Array.from(active);
-    for(let i=0;i<n;i++){
-      if(arr.length===0) break;
-      const s = arr[irand(0, arr.length-1)];
-      if(s) spawnGhostFrom(s);
-    }
-  }
-
-  // chatbot
-  const memory = { count:0, learned:{} };
-  const baseReplies = ['yes','yep','absolutely','indeed','yes (aura rising)','real real yes','affirmative'];
-
-  function botReply(text){
-    memory.count++;
-    text.split(/\s+/).forEach(w=>{
-      const word = w.toLowerCase().replace(/[^a-z0-9]/g,'');
-      if(!word) return;
-      memory.learned[word]=(memory.learned[word]||0)+1;
-    });
-    // summon words
-    const summon = ['summon','more','spawn','sam','aura','yes','rain'];
-    for(const s of summon) if(text.toLowerCase().includes(s)) { spawnRandomInViewport(8 + irand(1,10)); playSpawnSound(); }
-
-    const replies = baseReplies.slice();
-    if(memory.count > 20) replies.push('i am learning to say yes more convincingly');
-    if(aura > CONFIG.OVERFLOW_WARNING) replies.push('YESYESYESYES');
-    if(Math.random() < 0.08) replies.push('chatbot is vibrating');
-    if(Object.keys(memory.learned).length>0){
-      const keys = Object.keys(memory.learned);
-      const k = keys[irand(0, keys.length-1)];
-      if(k) replies.push('yes about ' + k);
-    }
-    const reply = replies[irand(0,replies.length-1)];
-    chatlog.innerHTML += `<div><b>Chatbot:</b> ${reply}</div>`;
-    chatlog.scrollTop = chatlog.scrollHeight;
-    if('speechSynthesis' in window && Math.random() < 0.12 && perfState.intensity>0.3){
-      const u = new SpeechSynthesisUtterance('yes'); u.volume = 0.05 + Math.random()*0.2; u.rate = 0.6 + Math.random()*0.8; u.pitch = 0.2 + Math.random()*1.4; speechSynthesis.speak(u);
-    }
-  }
-
-  document.getElementById('chatInput').addEventListener('keydown', (e)=>{
-    if(e.key === 'Enter'){ const t = e.target.value.trim(); if(t.length){ chatlog.innerHTML += `<div><b>You:</b> ${t}</div>`; e.target.value=''; setTimeout(()=> botReply(t), irand(200,900)); } }
+    // retire extremely old
+    if(nowms - el.__born > 1200*1000) retire(el);
   });
+}
 
-  // cubes (lightweight)
-  function createCube(x,y,size){
-    if(cubes.length >= MAX_CUBES) return null;
-    const wrap = document.createElement('div'); wrap.className='cubeWrap'; wrap.style.left = x + 'px'; wrap.style.top = y + 'px'; wrap.style.width = size + 'px'; wrap.style.height = size + 'px'; wrap.style.marginLeft = -(size/2) + 'px'; wrap.style.marginTop = -(size/2) + 'px';
-    wrap.style.perspective = (size*2) + 'px';
-    const cube = document.createElement('div'); cube.className='cube'; cube.style.width = size + 'px'; cube.style.height = size + 'px';
-    wrap.appendChild(cube);
-    const faces = [];
-    for(let i=0;i<6;i++){
-      const f = document.createElement('div'); f.className='face'; f.style.width = size + 'px'; f.style.height = size + 'px'; f.style.backgroundImage = `url(${IMAGES[irand(0,IMAGES.length-1)]})`;
-      cube.appendChild(f); faces.push(f);
-    }
-    faces[0].style.transform = `rotateY(0deg) translateZ(${size/2}px)`;
-    faces[1].style.transform = `rotateY(180deg) translateZ(${size/2}px)`;
-    faces[2].style.transform = `rotateY(90deg) translateZ(${size/2}px)`;
-    faces[3].style.transform = `rotateY(-90deg) translateZ(${size/2}px)`;
-    faces[4].style.transform = `rotateX(90deg) translateZ(${size/2}px)`;
-    faces[5].style.transform = `rotateX(-90deg) translateZ(${size/2}px)`;
-    world.appendChild(wrap);
-    const obj = { wrap, cube, size, vx: rand(-0.6,0.6), vy: rand(-0.6,0.6), ang: rand(0,360), spin: rand(0.2,1.2) };
-    cubes.push(obj);
-    return obj;
-  }
+// world camera: heavy spin/zoom/breathing
+let driftT = 0;
+let worldAngle = 0;
+let worldScale = 1;
+function animateWorld(dt){
+  driftT += dt;
+  const panX = Math.sin(driftT*0.22) * 26;
+  const panY = Math.sin(driftT*0.13) * 18;
+  worldWrap.style.transform = `translate(${panX}px, ${panY}px) rotate(${worldAngle/6}deg) scale(${worldScale})`;
+  worldAngle = (worldAngle + 2.2) % 360;
+  worldScale = 1 + Math.sin(driftT*1.2)*0.12;
+  // wobble filter scale heavy
+  const turb = document.querySelector('filter feTurbulence');
+  if(turb) turb.setAttribute('baseFrequency', String(0.0003 + Math.abs(Math.sin(driftT*0.8))*0.0026));
+  document.querySelector('filter feDisplacementMap').setAttribute('scale', String(6 + Math.abs(Math.sin(driftT))*28));
+  // global hue-rotate heavy
+  hue = (hue + 6) % 360;
+  document.documentElement.style.filter = `hue-rotate(${hue}deg) saturate(1.6)`;
+  // title color & jitter
+  bigTitle.style.color = `hsl(${(aura/6)%360} 95% 60%)`;
+  if(aura > 800) bigTitle.style.transform = `scale(${1 + 0.04*Math.sin(driftT*8)}) rotate(${Math.sin(driftT*5)*4}deg)`;
+}
 
-  function stepCubes(dt){
-    const vw = window.innerWidth;
-    for(let i=cubes.length-1;i>=0;i--){
-      const c = cubes[i];
-      const left = parseFloat(c.wrap.style.left) || 0;
-      const top = parseFloat(c.wrap.style.top) || 0;
-      const nx = left + c.vx * dt * 60;
-      const ny = top + c.vy * dt * 60;
-      c.wrap.style.left = nx + 'px';
-      c.wrap.style.top = ny + 'px';
-      c.ang = (c.ang + c.spin*dt*80) % 360;
-      c.cube.style.transform = `rotateX(${c.spin*20}deg) rotateY(${c.ang}deg)`;
-      if(Math.random() < 0.0008 && cubes.length < MAX_CUBES){
-        createCube(nx + rand(-160,160), ny + rand(-160,160), clamp(c.size*(0.6+Math.random()*0.7), 80, 420));
-      }
-      if(Math.random() < 0.001 && perfState.intensity>0.6){
-        const count = irand(6,18);
-        for(let j=0;j<count;j++){
-          spawnAt(nx + rand(-c.size/2, c.size/2), ny + rand(-c.size/2, c.size/2), { vx: rand(-30,30), vy: rand(-30,30), scale: rand(3,12) });
-        }
-        if(audioCtx) playScream();
-      }
-      if(cubes.length > MAX_CUBES*1.4){
-        const rem = cubes.shift();
-        if(rem) rem.wrap.remove();
-      }
-    }
-  }
+// lightning flash
+function lightning(color){
+  const el = document.createElement('div');
+  el.className = 'flash';
+  el.style.setProperty('--c', color || `hsl(${irand(0,359)} 100% 60%)`);
+  overlay.appendChild(el);
+  setTimeout(()=>{ try{ overlay.removeChild(el); }catch(e){} }, 700);
+}
 
-  // main loops: merged for perf
-  let last = performance.now();
-  function mainLoop(){
-    const nowFrame = performance.now();
-    const dt = (nowFrame - last)/1000;
-    last = nowFrame;
+// screen shake (intense)
+let shaking = false;
+function shake(intensity=40, duration=900){
+  if(shaking) return;
+  shaking = true;
+  const start = Date.now();
+  const orig = document.documentElement.style.transform || '';
+  (function tick(){
+    const dt = Date.now() - start;
+    if(dt > duration){ document.documentElement.style.transform = orig; shaking=false; return; }
+    const mag = intensity * (1 - dt/duration);
+    document.documentElement.style.transform = `translate(${irand(-mag,mag)}px,${irand(-mag,mag)}px) rotate(${irand(-mag/2,mag/2)}deg)`;
+    requestAnimationFrame(tick);
+  })();
+  setTimeout(()=>{ document.documentElement.style.transform = orig; shaking=false; }, duration+50);
+}
 
-    // FPS measurement (moving average)
-    const now = performance.now();
-    const frameTime = now - lastFrame;
-    lastFrame = now;
-    fpsHistory.push(1000/Math.max(1, frameTime));
-    if(fpsHistory.length > 30) fpsHistory.shift();
-    fps = fpsHistory.reduce((a,b)=>a+b,0)/fpsHistory.length;
+// solar flare
+function solarFlare(){
+  worldWrap.style.transition = 'filter 220ms ease, transform 220ms ease';
+  worldWrap.style.filter = 'brightness(3) blur(4px) saturate(1.8)';
+  setTimeout(()=> { worldWrap.style.filter = ''; }, 400 + irand(0,600));
+}
 
-    // Adaptive tuning every ~1s
-    if(now - lastAdaptiveCheck > 900){
-      adaptToPerf();
-      lastAdaptiveCheck = now;
-    }
+// audio
+function initAudio(){
+  if(audioCtx) return;
+  try{
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = 'lowpass'; lp.frequency.value = 1200;
+    osc.type = 'sine'; osc.frequency.value = 56;
+    g.gain.value = 0.00005;
+    osc.connect(lp); lp.connect(g); g.connect(audioCtx.destination);
+    osc.start();
+    humGain = g;
+  }catch(e){ console.warn('Audio init failed', e); audioCtx = null; }
+}
+function setHum(){
+  if(!humGain) return;
+  const level = clamp(aura/18000, 0.0002, 0.9);
+  try{ humGain.gain.linearRampToValueAtTime(level*0.02, audioCtx.currentTime + 0.06); }catch(e){}
+}
+function playSpawnSound(){ if(!audioCtx) return; const ctx = audioCtx; const o = ctx.createOscillator(); const g = ctx.createGain(); o.type='sawtooth'; o.frequency.value = rand(120,1400); g.gain.value = 0.0009; o.connect(g); g.connect(ctx.destination); o.start(); g.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.14); o.stop(ctx.currentTime + 0.18); }
+function playScream(){ if(!audioCtx) return; const ctx = audioCtx; const bsize = 2*ctx.sampleRate; const buffer = ctx.createBuffer(1,bsize,ctx.sampleRate); const d = buffer.getChannelData(0); for(let i=0;i<bsize;i++) d[i] = (Math.random()*2-1)*Math.exp(-i/bsize*3); const s = ctx.createBufferSource(); s.buffer = buffer; const g = ctx.createGain(); g.gain.value = 0.8; const bi = ctx.createBiquadFilter(); bi.type='highpass'; bi.frequency.value=200; s.connect(g); g.connect(bi); bi.connect(ctx.destination); s.start(); setTimeout(()=>{ try{ s.stop(); }catch(e){} }, 700 + irand(0,400)); }
 
-    // step physics and cubes
-    stepPhysics(dt);
-    stepCubes(dt);
+// jumpscare
+function leapscare(){
+  const img = document.createElement('img'); img.src = IMAGES[irand(0,IMAGES.length-1)]; jumpscareWrap.innerHTML=''; jumpscareWrap.appendChild(img); jumpscareWrap.style.display='flex';
+  if(audioCtx) playScream();
+  spawnGhosts(8);
+  shake(60,900);
+  solarFlare();
+  setTimeout(()=> { jumpscareWrap.style.display='none'; }, 700 + irand(0,900));
+}
+function spawnGhosts(n){ const arr = Array.from(active); for(let i=0;i<n;i++){ if(arr.length===0) break; const s = arr[irand(0, arr.length-1)]; if(s) spawnGhostFrom(s); } }
 
-    // world camera animations
-    animateWorld(dt);
+// chatbot logic
+const memory = { count:0, learned:{} };
+const baseReplies = ['yes','yep','absolutely','indeed','yes (aura rising)','real real yes','affirmative'];
+function botReply(text){
+  memory.count++;
+  text.split(/\s+/).forEach(w => { const k = w.toLowerCase().replace(/[^a-z0-9]/g,''); if(!k) return; memory.learned[k] = (memory.learned[k]||0)+1; });
+  const summon = ['summon','more','spawn','sam','aura','yes','rain'];
+  for(const s of summon) if(text.toLowerCase().includes(s)) { spawnRandomInViewport(24 + irand(4,40)); if(audioCtx) playSpawnSound(); }
+  const replies = baseReplies.slice();
+  if(memory.count>24) replies.push('i have learned to say yes more convincingly');
+  if(aura > 1200) replies.push('YESYESYESYES');
+  if(Math.random() < 0.08) replies.push('chatbot is vibrating');
+  if(Object.keys(memory.learned).length) { const k = Object.keys(memory.learned)[irand(0, Object.keys(memory.learned).length-1)]; if(k) replies.push('yes about ' + k); }
+  const r = replies[irand(0,replies.length-1)];
+  chatlog.innerHTML += `<div><b>Chatbot:</b> ${r}</div>`;
+  chatlog.scrollTop = chatlog.scrollHeight;
+  if('speechSynthesis' in window && Math.random() < 0.18) { const u = new SpeechSynthesisUtterance('yes'); u.volume = 0.06 + Math.random()*0.3; u.rate = 0.6 + Math.random()*0.8; u.pitch = 0.2 + Math.random()*1.4; speechSynthesis.speak(u); }
+}
+document.getElementById('chatInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ const t=e.target.value.trim(); if(t.length){ chatlog.innerHTML += `<div><b>You:</b> ${t}</div>`; e.target.value=''; setTimeout(()=> botReply(t), irand(200,900)); } }});
 
-    // retire if too many
-    if(active.size > MAX_LIVE){
-      const arr = Array.from(active);
-      for(let i=0;i< Math.min(40, active.size - MAX_LIVE); i++) retire(arr[i]);
-    }
-
-    // occasionally create small ghost trails limited by perf
-    requestAnimationFrame(mainLoop);
-  }
-
-  // aura tick (separate but lightweight)
-  function auraTick(){
-    if(!started) return;
-    aura += (active.size * 0.06) + rand(0,2) + (cubes.length * 1.8);
-    auraEl.style.width = (Math.min(aura, 99999999)) + '%';
-    if(aura > CONFIG.OVERFLOW_WARNING && Math.random() < 0.02 * perfState.intensity){
-      flashWarning();
-      corruptTitle();
-      playScream();
-      shake(28, 600);
-    }
-    if(aura > CONFIG.FINAL_AURA && !finalPhase){
-      finalPhase = true;
-      // moderate final behavior: spawn more but only if perf allows
-      if(perfState.intensity > 0.4) setInterval(()=> spawnRandomInViewport(48), 650);
-      if(perfState.intensity > 0.6) setInterval(()=> { document.documentElement.style.filter = `invert(${Math.random()<0.5?1:0})`; }, 1000);
-      lightning('white');
-    }
-    setHum();
-    setTimeout(auraTick, 80);
-  }
-
-  // adaptive performance controller
-  let lastAdaptiveCheck = performance.now();
-  const perfState = { intensity: 1.0, filterMultiplier: 1.0, warnThreshold: 1600 };
-
-  function adaptToPerf(){
-    // Use measured FPS to adapt intensity
-    const heavy = fps < 40;
-    const moderate = fps >= 40 && fps < 52;
-    const good = fps >= 52;
-
-    if(good){
-      perfState.intensity = clamp(perfState.intensity + 0.12, 0.6, 1.0);
-    } else if(moderate){
-      perfState.intensity = clamp(perfState.intensity - 0.06, 0.35, 0.95);
-    } else if(heavy){
-      perfState.intensity = clamp(perfState.intensity - 0.18, 0.12, 0.8);
-    }
-
-    // Map intensity to caps
-    MAX_LIVE = Math.floor(CONFIG.MAX_LIVE_BASE * perfState.intensity);
-    MAX_CUBES = Math.max(2, Math.floor(CONFIG.MAX_CUBES_BASE * perfState.intensity));
-    SPAWN_PER_INTERVAL = Math.max(4, Math.floor(CONFIG.SPAWN_PER_INTERVAL_BASE * perfState.intensity));
-    SPAWN_INTERVAL = Math.floor(CONFIG.SPAWN_INTERVAL_BASE / clamp(perfState.intensity, 0.35, 1));
-    spawnBurst = SPAWN_PER_INTERVAL;
-
-    // filter multiplier reduces wobble scale on low perf
-    perfState.filterMultiplier = clamp(perfState.intensity * 1.2, 0.2, 1.0);
-    perfState.warnThreshold = CONFIG.OVERFLOW_WARNING * clamp(1.2 - perfState.intensity*0.6, 0.8, 1.6);
-
-    // debug overlay update
-    debug.innerHTML = `FPS: ${fps.toFixed(1)}<br/>LIVE: ${active.size} / ${MAX_LIVE}<br/>CUBES: ${cubes.length} / ${MAX_CUBES}<br/>SPAWN: ${SPAWN_INTERVAL}ms (${SPAWN_PER_INTERVAL})<br/>INTENSITY: ${perfState.intensity.toFixed(2)}`;
-    debug.classList.remove('hidden');
-  }
-
-  // lightweight visual helpers
-  function flashWarning(){
-    warning.style.display = 'block';
-    let t = 0;
-    const id = setInterval(()=>{ warning.style.opacity = String((Math.sin(t*3)+1)/2*0.9 + 0.05); t+=0.2; }, 90);
-    setTimeout(()=>{ clearInterval(id); warning.style.display='none'; }, 2200);
-  }
-
-  function corruptTitle(){
-    const orig = TITLE_VARIANTS[irand(0,TITLE_VARIANTS.length-1)];
-    let steps = 0;
-    const id = setInterval(()=>{
-      let s = '';
-      for(let i=0;i<orig.length;i++){
-        if(Math.random() < 0.2) s += '*';
-        else s += orig[i];
-      }
-      bigTitle.textContent = s;
-      steps++;
-      if(steps > 8){ clearInterval(id); bigTitle.textContent = TITLE_VARIANTS[irand(0, TITLE_VARIANTS.length-1)]; }
-    }, 60);
-  }
-
-  function lightning(color){ // redefined small version that respects perfState
-    if(perfState.intensity < 0.18 && Math.random() < 0.8) return;
-    const el = document.createElement('div');
-    el.className = 'flash';
-    el.style.setProperty('--c', color || `hsl(${irand(0,359)} 100% 60%)`);
-    overlay.appendChild(el);
-    setTimeout(()=>{ try{ overlay.removeChild(el);}catch(e){} }, 700);
-  }
-
-  // spawn timer controlled adaptively (uses setTimeout chain so interval value can change)
-  let spawnerActive = false;
-  function startSpawner(){
-    if(spawnerActive) return;
-    spawnerActive = true;
-    (function tickSpawner(){
-      if(!started){ spawnerActive=false; return; }
-      // spawn adjusted amount
-      spawnRandomInViewport(spawnBurst);
-      if(Math.random() < 0.18*perfState.intensity) lightning(`hsl(${irand(0,359)} 100% 64%)`);
-      if(Math.random() < 0.1*perfState.intensity) solarFlare();
-      if(Math.random() < 0.02*perfState.intensity) leapscare();
-      if(Math.random() < 0.5*perfState.intensity) playSpawnSound();
-      setTimeout(tickSpawner, Math.max(280, SPAWN_INTERVAL));
-    })();
-  }
-
-  // cube warmup (light)
-  function warmCubes(){
-    const n = Math.max(2, Math.floor(MAX_CUBES * clamp(perfState.intensity,0.5,1)));
-    for(let i=0;i<n;i++){
-      const x = window.scrollX + window.innerWidth * rand(0.2,0.8);
-      const y = window.scrollY + window.innerHeight * rand(0.2,0.8);
-      createCube(x,y, 100 + rand(0,160) * perfState.intensity);
-    }
-  }
-
-  // create hero cube (scaled to perf)
-  function createHeroCube(){
-    const rect = document.getElementById('titleWrap').getBoundingClientRect();
-    const cx = window.scrollX + rect.left + rect.width/2;
-    const cy = window.scrollY + rect.top + rect.height/2;
-    const size = (Math.min(window.innerWidth, window.innerHeight) * 0.55) * perfState.intensity;
-    createCube(cx, cy, clamp(size, 160, 700));
-  }
-
-  // init audio, pools, start loops
-  function startChaos(){
-    if(started) return;
-    started = true;
-    initPools();
-    initAudio();
-    setHum();
-    spawnRandomInViewport(Math.max(12, Math.floor(CONFIG.INITIAL_SPAWN_BASE * perfState.intensity)));
-    warmCubes();
-    createHeroCube();
-    last = performance.now();
-    lastFrame = performance.now();
-    requestAnimationFrame(function loop(){
-      const now = performance.now();
-      const dt = (now - last)/1000;
-      last = now;
-      // measure FPS history
-      fpsHistory.push(1000/Math.max(1, now - lastFrame));
-      if(fpsHistory.length > 40) fpsHistory.shift();
-      fps = fpsHistory.reduce((a,b)=>a+b,0)/fpsHistory.length;
-      // adaptive adjust occasionally
-      if(now - lastAdaptiveCheck > 900) adaptToPerf();
-      // perform physics and cubes and world anim in merged steps
-      stepPhysics(dt);
-      stepCubes(dt);
-      animateWorld(dt);
-      // cleanup if too many
-      if(active.size > MAX_LIVE){
-        const arr = Array.from(active);
-        for(let i=0;i< Math.min(40, active.size - MAX_LIVE); i++) retire(arr[i]);
-      }
-      lastFrame = now;
-      requestAnimationFrame(loop);
-    });
-    auraTick();
-    startSpawner();
-  }
-
-  // user events (adaptive)
-  window.addEventListener('click', (e) => {
-    if(!started) return;
-    spawnExplosion(e.pageX, e.pageY, 18 + irand(6,20));
-    document.querySelector('filter feDisplacementMap').setAttribute('scale', String(14 * perfState.filterMultiplier));
-    setTimeout(()=> document.querySelector('filter feDisplacementMap').setAttribute('scale', String(1 + Math.abs(Math.sin(driftT))*6 * perfState.filterMultiplier)), 280);
-  }, { passive:true });
-
-  window.addEventListener('scroll', () => {
-    if(!started) return;
-    worldWrap.style.transition = 'transform 380ms ease';
-    worldWrap.style.transform += ` rotate(${irand(-6,6)}deg)`;
-    spawnRandomInViewport(Math.max(4, Math.floor(6 * perfState.intensity)));
-    if(audioCtx) playSpawnSound();
-    setTimeout(()=> worldWrap.style.transition = '', 640);
-  }, { passive:true });
-
-  window.addEventListener('mousemove', (e) => {
-    cursor.x = e.pageX;
-    cursor.y = e.pageY;
-    cursor.active = true;
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if(!started) return;
-    if(e.key === ' '){
-      spawnRandomInViewport(16 + Math.floor(20 * perfState.intensity));
-      lightning(`hsl(${irand(0,359)} 100% 60%)`);
+// CUBES (heavy)
+function createCube(x,y,size){
+  if(cubes.length >= MAX_CUBES) return null;
+  const wrap = document.createElement('div'); wrap.className='cubeWrap'; wrap.style.left = x + 'px'; wrap.style.top = y + 'px'; wrap.style.width = size + 'px'; wrap.style.height = size + 'px'; wrap.style.marginLeft = -(size/2) + 'px'; wrap.style.marginTop = -(size/2) + 'px'; wrap.style.perspective = (size*2)+'px';
+  const cube = document.createElement('div'); cube.className='cube'; cube.style.width = size + 'px'; cube.style.height = size + 'px';
+  wrap.appendChild(cube);
+  const faces = [];
+  for(let i=0;i<6;i++){ const f = document.createElement('div'); f.className='face'; f.style.width = size+'px'; f.style.height = size+'px'; f.style.backgroundImage = `url(${IMAGES[irand(0,IMAGES.length-1)]})`; cube.appendChild(f); faces.push(f); }
+  faces[0].style.transform = `rotateY(0deg) translateZ(${size/2}px)`; faces[1].style.transform = `rotateY(180deg) translateZ(${size/2}px)`;
+  faces[2].style.transform = `rotateY(90deg) translateZ(${size/2}px)`; faces[3].style.transform = `rotateY(-90deg) translateZ(${size/2}px)`;
+  faces[4].style.transform = `rotateX(90deg) translateZ(${size/2}px)`; faces[5].style.transform = `rotateX(-90deg) translateZ(${size/2}px)`;
+  world.appendChild(wrap);
+  const obj = { wrap, cube, size, vx: rand(-1.2,1.2), vy: rand(-1.2,1.2), ang: rand(0,360), spin: rand(0.4,2.2) };
+  cubes.push(obj);
+  return obj;
+}
+function stepCubes(dt){
+  for(let i=cubes.length-1;i>=0;i--){
+    const c = cubes[i];
+    const left = parseFloat(c.wrap.style.left) || 0, top = parseFloat(c.wrap.style.top) || 0;
+    const nx = left + c.vx * dt * 60, ny = top + c.vy * dt * 60;
+    c.wrap.style.left = nx + 'px'; c.wrap.style.top = ny + 'px';
+    c.ang = (c.ang + c.spin * dt * 120) % 360;
+    c.cube.style.transform = `rotateX(${c.spin*40}deg) rotateY(${c.ang}deg)`;
+    if(Math.random() < 0.004) {
+      const count = irand(12,48);
+      for(let j=0;j<count;j++) spawnAt(nx + rand(-c.size/2, c.size/2), ny + rand(-c.size/2, c.size/2), { vx: rand(-48,48), vy: rand(-48,48), scale: rand(4,18) });
       if(audioCtx) playSpawnSound();
-    } else {
-      bigTitle.style.fontFamily = FONTS[irand(0,FONTS.length-1)];
-      hue = (hue + irand(20,140)) % 360;
-      document.documentElement.style.filter = `hue-rotate(${hue}deg)`;
     }
-  });
+    if(cubes.length > MAX_CUBES*1.6){ const rem = cubes.shift(); if(rem) rem.wrap.remove(); }
+  }
+}
 
-  // helper: spawn random in viewport wrapper for external use
-  function spawnRandomInViewportPublic(n){ spawnRandomInViewport(n); }
+// main loop & aura tick
+let last = performance.now();
+let fpsLastCheck = performance.now();
+let fpsWindow = [];
+function mainLoop(){
+  const now = performance.now();
+  const dt = (now - last)/1000;
+  last = now;
+  // FPS sampling
+  const frameFPS = 1000 / Math.max(1, now - lastFrame);
+  fpsWindow.push(frameFPS);
+  if(fpsWindow.length > 60) fpsWindow.shift();
+  const avgFPS = fpsWindow.reduce((a,b)=>a+b,0)/fpsWindow.length;
+  lastFrame = now;
 
-  // create cube helper (lighter, respects perf)
-  function createCube(x,y,size){
-    if(cubes.length >= MAX_CUBES) return null;
-    const wrap = document.createElement('div'); wrap.className='cubeWrap';
-    wrap.style.left = x + 'px'; wrap.style.top = y + 'px';
-    wrap.style.width = size + 'px'; wrap.style.height = size + 'px';
-    wrap.style.marginLeft = -(size/2) + 'px'; wrap.style.marginTop = -(size/2) + 'px';
-    wrap.style.perspective = (size*2) + 'px';
-    const cube = document.createElement('div'); cube.className='cube'; cube.style.width = size + 'px'; cube.style.height = size + 'px';
-    wrap.appendChild(cube);
-    const faces = [];
-    for(let i=0;i<6;i++){
-      const f = document.createElement('div'); f.className='face'; f.style.width = size + 'px'; f.style.height = size + 'px';
-      f.style.backgroundImage = `url(${IMAGES[irand(0,IMAGES.length-1)]})`;
-      cube.appendChild(f); faces.push(f);
+  // emergency detection: if avgFPS < threshold for window duration -> safe mode
+  if(avgFPS < CONFIG.EMERGENCY_FPS_THRESHOLD){
+    if(!emergencySince) emergencySince = now;
+    if(!emergencyActive && (now - emergencySince) > CONFIG.EMERGENCY_CHECK_WINDOW){
+      // activate emergency safe mode
+      emergencyActive = true;
+      MAX_LIVE = CONFIG.MAX_LIVE_SAFE;
+      MAX_CUBES = CONFIG.MAX_CUBES_SAFE;
+      SPAWN_PER_INTERVAL = CONFIG.SPAWN_PER_INTERVAL_SAFE;
+      SPAWN_INTERVAL = CONFIG.SPAWN_INTERVAL_SAFE;
+      // tone down heavy filters & audio
+      document.querySelector('filter feDisplacementMap').setAttribute('scale','1');
+      if(humGain) try{ humGain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.1); }catch(e){}
+      document.documentElement.style.filter = 'hue-rotate(0deg) saturate(1)';
+      // show warning
+      warning.style.display = 'block';
+      setTimeout(()=> warning.style.display='none', 3000);
     }
-    faces[0].style.transform = `rotateY(0deg) translateZ(${size/2}px)`;
-    faces[1].style.transform = `rotateY(180deg) translateZ(${size/2}px)`;
-    faces[2].style.transform = `rotateY(90deg) translateZ(${size/2}px)`;
-    faces[3].style.transform = `rotateY(-90deg) translateZ(${size/2}px)`;
-    faces[4].style.transform = `rotateX(90deg) translateZ(${size/2}px)`;
-    faces[5].style.transform = `rotateX(-90deg) translateZ(${size/2}px)`;
-    world.appendChild(wrap);
-    const obj = { wrap, cube, size, vx: rand(-0.6,0.6), vy: rand(-0.6,0.6), ang: rand(0,360), spin: rand(0.2,1.2) };
-    cubes.push(obj);
-    return obj;
+  } else {
+    emergencySince = null;
+    // if performance recovered and emergency active, gradually restore unrestrained
+    if(emergencyActive && avgFPS > (CONFIG.EMERGENCY_FPS_THRESHOLD*1.6)){
+      emergencyActive = false;
+      MAX_LIVE = CONFIG.MAX_LIVE_UNRESTRAINED;
+      MAX_CUBES = CONFIG.MAX_CUBES_UNRESTRAINED;
+      SPAWN_PER_INTERVAL = CONFIG.SPAWN_PER_INTERVAL_UNRESTRAINED;
+      SPAWN_INTERVAL = CONFIG.SPAWN_INTERVAL_UNRESTRAINED;
+    }
   }
 
-  // spawn ghosts across active items
-  function spawnGhostFrom(el){
-    const g = acquireGhost();
-    if(!g) return;
-    g.src = el.src;
-    g.style.left = el.style.left;
-    g.style.top = el.style.top;
-    g.style.width = el.style.width;
-    g.style.height = el.style.height;
-    g.style.transform = el.style.transform;
-    g.style.display = 'block';
-    const t0 = Date.now();
-    const dur = 800 + irand(0,800);
-    (function fade(){
-      const t = (Date.now() - t0) / dur;
-      if(t >= 1){ g.style.display='none'; return; }
-      g.style.opacity = String(0.6*(1 - t));
-      requestAnimationFrame(fade);
-    })();
+  // physics & cubes & world animate
+  stepPhysics(dt);
+  stepCubes(dt);
+  animateWorld(dt);
+
+  // retire extras if too many
+  if(active.size > MAX_LIVE){
+    const arr = Array.from(active);
+    for(let i=0;i< Math.min(200, active.size - MAX_LIVE); i++) retire(arr[i]);
   }
 
-  // start on click/key/touch
-  intro.addEventListener('click', ()=>{ intro.style.display='none'; startChaos(); }, { once:true });
-  document.addEventListener('keydown', ()=> startChaos(), { once:true });
-  window.addEventListener('touchstart', ()=> startChaos(), { once:true });
+  // update aura & UI heavy-mode
+  aura += (active.size * 0.12) + (cubes.length * 5) + rand(0,8);
+  auraEl.style.width = (Math.min(aura, 99999999)) + '%';
+  // random heavy events
+  if(Math.random() < 0.06) lightning(`hsl(${irand(0,359)} 100% 60%)`);
+  if(Math.random() < 0.02) { solarFlare(); spawnRandomInViewport(16 + irand(12,60)); }
+  if(Math.random() < 0.012) leapscare();
 
-  // debug hook exposure
-  window.__samAdaptive = {
-    spawnRandomInViewport: spawnRandomInViewportPublic,
-    spawnExplosion,
-    createCube,
-    leapscare: leapscare,
-    getState: ()=> ({ fps, active: active.size, cubes: cubes.length, intensity: perfState.intensity })
-  };
-
-  // small initialization defaults
-  function initAudio(){ initAudio = initAudio; if(!audioCtx) try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); const osc = audioCtx.createOscillator(); const g = audioCtx.createGain(); const lp = audioCtx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=1200; osc.type='sine'; osc.frequency.value=56; g.gain.value=0.00005; osc.connect(lp); lp.connect(g); g.connect(audioCtx.destination); osc.start(); humGain = g; }catch(e){ audioCtx=null; console.warn('audio init failed', e); } }
-  // ensure pools created earlier than heavy loops
-  function initAudioAndPools(){
-    initPools();
-    initAudio();
-  }
-  // warm minimal things but defer heavy allocations until start
-  // set initial debug visibility if dev (you can hide later)
+  // debug
+  debug.innerHTML = `FPS: ${avgFPS.toFixed(1)}<br/>LIVE: ${active.size} / ${MAX_LIVE}<br/>CUBES: ${cubes.length} / ${MAX_CUBES}<br/>SPAWN: ${SPAWN_PER_INTERVAL} @ ${SPAWN_INTERVAL}ms`;
   debug.classList.remove('hidden');
-  debug.style.opacity = 0.9;
 
-  // tiny helper: smaller initial spawn to reduce first-jank on low devices
-  function startChaos(){
-    initAudioAndPools();
-    startChaos = startChaos; // keep
-    // finalize adaptive caps
-    adaptToPerf();
-    // initial spawn scaled by intensity
-    spawnRandomInViewport(Math.max(16, Math.floor(CONFIG.INITIAL_SPAWN_BASE * perfState.intensity * 0.9)));
-    // cubes
-    warmCubes();
-    createHeroCube();
-    // start main loops
-    last = performance.now();
-    lastFrame = performance.now();
-    // measure FPS history prefill
-    for(let i=0;i<10;i++) fpsHistory.push(60);
-    // main fusion loop
-    (function loop(){
-      const now = performance.now();
-      const dt = (now - last)/1000;
-      last = now;
-      // store FPS
-      const frameFPS = 1000 / Math.max(1, now - lastFrame);
-      fpsHistory.push(frameFPS);
-      if(fpsHistory.length > 40) fpsHistory.shift();
-      fps = fpsHistory.reduce((a,b)=>a+b,0)/fpsHistory.length;
-      lastFrame = now;
-      // adapt occasionally
-      if(now - lastAdaptiveCheck > 900) adaptToPerf();
-      // per-frame work
-      stepPhysics(dt);
-      stepCubes(dt);
-      animateWorld(dt);
-      // occasional lighter events
-      if(Math.random() < 0.002 * perfState.intensity) lightning(`hsl(${irand(0,359)} 100% 60%)`);
-      if(Math.random() < 0.001 * perfState.intensity) leapscare();
-      // trim if needed
-      if(active.size > MAX_LIVE){
-        const arr = Array.from(active);
-        for(let i=0;i< Math.min(40, active.size - MAX_LIVE); i++) retire(arr[i]);
-      }
-      requestAnimationFrame(loop);
-    })();
-    // aura tick
-    auraTick();
-    // spawner
-    startSpawner();
-  }
+  requestAnimationFrame(mainLoop);
+}
 
-})();
+// spawner (aggressive)
+let spawnerTimer = null;
+function startSpawner(){
+  if(spawnerTimer) return;
+  spawnerTimer = setInterval(()=>{
+    if(!started) return;
+    spawnRandomInViewport(SPAWN_PER_INTERVAL);
+    // spawn cubes freely up to cap
+    if(cubes.length < MAX_CUBES && Math.random() < 0.6) createCube(window.scrollX + window.innerWidth*rand(0.2,0.8), window.scrollY + window.innerHeight*rand(0.2,0.8), 80 + rand(0,480));
+    if(Math.random() < 0.35) playSpawnSound();
+  }, Math.max(120, SPAWN_INTERVAL));
+}
+
+// create cube (very heavy)
+function createCube(x,y,size){
+  if(cubes.length >= MAX_CUBES) return null;
+  const wrap = document.createElement('div'); wrap.className='cubeWrap'; wrap.style.left = x + 'px'; wrap.style.top = y + 'px'; wrap.style.width = size + 'px'; wrap.style.height = size + 'px'; wrap.style.marginLeft = -(size/2) + 'px'; wrap.style.marginTop = -(size/2) + 'px'; wrap.style.perspective = (size*2) + 'px';
+  const cube = document.createElement('div'); cube.className='cube'; cube.style.width = size + 'px'; cube.style.height = size + 'px';
+  wrap.appendChild(cube);
+  const faces = [];
+  for(let i=0;i<6;i++){ const f = document.createElement('div'); f.className='face'; f.style.width = size+'px'; f.style.height = size+'px'; f.style.backgroundImage = `url(${IMAGES[irand(0,IMAGES.length-1)]})`; cube.appendChild(f); faces.push(f); }
+  faces[0].style.transform = `rotateY(0deg) translateZ(${size/2}px)`; faces[1].style.transform = `rotateY(180deg) translateZ(${size/2}px)`; faces[2].style.transform = `rotateY(90deg) translateZ(${size/2}px)`; faces[3].style.transform = `rotateY(-90deg) translateZ(${size/2}px)`; faces[4].style.transform = `rotateX(90deg) translateZ(${size/2}px)`; faces[5].style.transform = `rotateX(-90deg) translateZ(${size/2}px)`;
+  world.appendChild(wrap);
+  const obj = { wrap, cube, size, vx: rand(-1.6,1.6), vy: rand(-1.6,1.6), ang: rand(0,360), spin: rand(0.6,3.2) };
+  cubes.push(obj);
+  return obj;
+}
+
+// spawn ghost from element
+function spawnGhostFrom(el){
+  const g = acquireGhost();
+  if(!g) return;
+  g.src = el.src;
+  g.style.left = el.style.left;
+  g.style.top = el.style.top;
+  g.style.width = el.style.width;
+  g.style.height = el.style.height;
+  g.style.transform = el.style.transform;
+  g.style.display = 'block';
+  const t0 = Date.now(), dur = 900 + irand(0,900);
+  (function fade(){ const t = (Date.now()-t0)/dur; if(t>=1){ g.style.display='none'; return; } g.style.opacity = String(0.6*(1-t)); requestAnimationFrame(fade); })();
+}
+
+// warm hero cubes & initial chaos
+function warmCubes(){
+  for(let i=0;i<6;i++) createCube(window.scrollX + window.innerWidth*rand(0.2,0.8), window.scrollY + window.innerHeight*rand(0.2,0.8), 120 + rand(0,420));
+}
+function createHeroCube(){
+  const rect = document.getElementById('titleWrap').getBoundingClientRect();
+  const cx = window.scrollX + rect.left + rect.width/2;
+  const cy = window.scrollY + rect.top + rect.height/2;
+  createCube(cx, cy, Math.min(window.innerWidth, window.innerHeight)*0.6);
+}
+
+// start sequence
+function startChaos(){
+  if(started) return;
+  started = true;
+  initPools();
+  initAudio();
+  // full unrestrained caps already set above
+  // initial huge spawn
+  spawnRandomInViewport(380);
+  warmCubes();
+  createHeroCube();
+  lastFrame = performance.now();
+  requestAnimationFrame(mainLoop);
+  startSpawner();
+  // aura tick separate
+  (function auraTick(){
+    if(!started) return;
+    aura += (active.size * 0.14) + (cubes.length * 6) + rand(0,12);
+    auraEl.style.width = (Math.min(aura, 99999999)) + '%';
+    if(aura > 800 && Math.random() < 0.04) lightning(`hsl(${irand(0,359)} 100% 64%)`);
+    if(aura > 2200 && Math.random() < 0.03) leapscare();
+    if(aura > CONFIG.AURA_FINAL_THRESHOLD) { /* final-phase may spawn continuous rains */ spawnRandomInViewport(200); }
+    setHum();
+    setTimeout(auraTick, 72);
+  })();
+}
+
+// events
+window.addEventListener('click', (e)=>{ if(!started) return; spawnExplosion(e.pageX, e.pageY, 48 + irand(10,120)); document.querySelector('filter feDisplacementMap').setAttribute('scale', String(40 + irand(0,200))); setTimeout(()=> document.querySelector('filter feDisplacementMap').setAttribute('scale','6'), 480); }, { passive:true });
+window.addEventListener('scroll', ()=>{ if(!started) return; worldWrap.style.transition='transform 420ms ease'; worldWrap.style.transform += ` rotate(${irand(-12,12)}deg)`; spawnRandomInViewport(24 + irand(6,40)); if(audioCtx) playSpawnSound(); setTimeout(()=> worldWrap.style.transition='', 680); }, { passive:true });
+window.addEventListener('mousemove', (e)=>{ cursor.x = e.pageX; cursor.y = e.pageY; cursor.active = true; });
+window.addEventListener('keydown', (e)=>{ if(!started) return; if(e.key===' ') { spawnRandomInViewport(120); lightning(`hsl(${irand(0,359)} 100% 60%)`); if(audioCtx) playSpawnSound(); } else { bigTitle.style.fontFamily = FONTS[irand(0,FONTS.length-1)]; }});
+
+// chat input
+document.getElementById('chatInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ const t=e.target.value.trim(); if(t){ chatlog.innerHTML += `<div><b>You:</b> ${t}</div>`; e.target.value=''; setTimeout(()=>{ botReply(t); }, irand(200,900)); } }});
+
+// bot reply
+function botReply(text){ memory.count++; text.split(/\s+/).forEach(w=>{ const k=w.toLowerCase().replace(/[^a-z0-9]/g,''); if(!k) return; memory.learned[k]=(memory.learned[k]||0)+1; }); const summon=['summon','more','spawn','sam','aura','yes','rain']; for(const s of summon) if(text.toLowerCase().includes(s)){ spawnRandomInViewport(40); if(audioCtx) playSpawnSound(); } const replies = baseReplies.slice(); if(memory.count>24) replies.push('i have learned to say yes more convincingly'); if(aura>1600) replies.push('YESYESYESYES'); if(Math.random()<0.08) replies.push('chatbot is vibrating'); if(Object.keys(memory.learned).length){ const k=Object.keys(memory.learned)[irand(0,Object.keys(memory.learned).length-1)]; if(k) replies.push('yes about '+k); } const r=replies[irand(0,replies.length-1)]; chatlog.innerHTML += `<div><b>Chatbot:</b> ${r}</div>`; chatlog.scrollTop=chatlog.scrollHeight; if('speechSynthesis' in window && Math.random() < 0.18){ const u=new SpeechSynthesisUtterance('yes'); u.volume=0.06+Math.random()*0.28; u.rate=0.6+Math.random()*0.9; u.pitch=0.25+Math.random()*1.3; speechSynthesis.speak(u); }}
+
+// init pools and audio on first user interaction
+intro.addEventListener('click', ()=>{ intro.style.display='none'; startChaos(); }, { once:true });
+document.addEventListener('keydown', ()=> startChaos(), { once:true });
+window.addEventListener('touchstart', ()=> startChaos(), { once:true });
+
+// expose debug helpers
+window.__samHeavy = { startChaos, spawnRandomInViewport, spawnExplosion, createCube };
+
+// pre-warm title cycling
+setInterval(()=>{ if(!started) return; bigTitle.textContent = TITLE_VARIANTS[irand(0,TITLE_VARIANTS.length-1)]; bigTitle.style.color = `hsl(${irand(0,359)} 90% 60%)`; bigTitle.style.fontFamily = FONTS[irand(0,FONTS.length-1)]; }, 120);
+
+// small initial pool init for lower first-jank
+initPools();
+initAudio();
 </script>
 </body>
 </html>
