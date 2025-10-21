@@ -28,16 +28,11 @@
     border-radius:10px;
   }
 
-  #game{
-    display:none;
-    position:relative;
-    min-height:400vh;
-  }
+  #game{display:none;position:relative;min-height:400vh;}
 
   #title{
     position:fixed;
-    left:50%;
-    top:50%;
+    left:50%;top:50%;
     transform:translate(-50%,-50%);
     text-align:center;
     z-index:2000;
@@ -52,31 +47,21 @@
   /* Aura meter */
   #auraWrap{
     position:fixed;
-    left:50%;
-    top:10px;
+    left:50%;top:10px;
     transform:translateX(-50%);
-    width:70%;
-    max-width:900px;
-    height:26px;
+    width:70%;max-width:900px;height:26px;
     background:rgba(255,255,255,0.1);
     border-radius:16px;
-    overflow:visible;
-    z-index:3000;
-    text-align:left;
-    padding:2px 8px;
+    overflow:visible;z-index:3000;
+    text-align:left;padding:2px 8px;
     box-shadow:0 0 20px rgba(0,0,0,0.6);
   }
   #auraLabel{
-    position:absolute;
-    top:-18px;
-    left:0;
-    font-size:13px;
-    color:#0ff;
-    text-shadow:0 0 4px #0ff;
+    position:absolute;top:-18px;left:0;
+    font-size:13px;color:#0ff;text-shadow:0 0 4px #0ff;
   }
   #aura{
-    height:100%;
-    width:1%;
+    height:100%;width:1%;
     background:linear-gradient(90deg,#00ffff,#ff00ff);
     border-radius:16px;
     transition:width 0.3s linear;
@@ -91,44 +76,27 @@
   }
 
   #chatbot{
-    position:fixed;
-    bottom:15px;
-    right:15px;
-    width:230px;
-    z-index:4000;
+    position:fixed;bottom:15px;right:15px;
+    width:230px;z-index:4000;
     background:rgba(255,255,255,0.06);
     border:1px solid rgba(255,255,255,0.1);
     border-radius:10px;
     padding:8px;
     box-shadow:0 4px 20px rgba(0,0,0,0.7);
   }
-  #chatlog{
-    max-height:150px;
-    overflow-y:auto;
-    font-size:13px;
-  }
+  #chatlog{max-height:150px;overflow-y:auto;font-size:13px;}
   #chatbot input{
-    width:100%;
-    border:none;
-    background:rgba(255,255,255,0.1);
-    color:white;
-    padding:4px;
-    border-radius:6px;
-    margin-top:6px;
+    width:100%;border:none;background:rgba(255,255,255,0.1);
+    color:white;padding:4px;border-radius:6px;margin-top:6px;
   }
 
   #jumpscare{
-    position:fixed;
-    inset:0;
-    background:black;
-    display:none;
-    align-items:center;
-    justify-content:center;
+    position:fixed;inset:0;background:black;
+    display:none;align-items:center;justify-content:center;
     z-index:5000;
   }
   #jumpscare img{
-    max-width:100%;
-    max-height:100%;
+    max-width:100%;max-height:100%;
     filter:drop-shadow(0 0 60px red);
   }
 </style>
@@ -161,8 +129,14 @@
 <script>
 (() => {
   const SAM_IMAGES = [
-    'sam.png','sam1.jpg','sam2.jpg','sam3.jpg','sam4.jpg','sam5.jpg'
+    'https://sam.pennbrenn.com/sam.png',
+    'https://sam.pennbrenn.com/sam1.jpg',
+    'https://sam.pennbrenn.com/sam2.jpg',
+    'https://sam.pennbrenn.com/sam3.jpg',
+    'https://sam.pennbrenn.com/sam4.jpg',
+    'https://sam.pennbrenn.com/sam5.jpg'
   ];
+
   const MAX_LIVE = 400;
   const SPAWN_BASE = 15;
   let started = false;
@@ -198,15 +172,14 @@
     const y = window.scrollY + rand(0, vh);
     img.style.left = x+'px';
     img.style.top = y+'px';
-    const scaleX = rand(1,20);
-    const scaleY = rand(1,20);
-    img.style.width = 40*scaleX+'px';
-    img.style.height = 40*scaleY+'px';
+    const scale = rand(2,20);
+    img.style.width = 60*scale+'px';
+    img.style.height = 60*scale+'px';
     img.style.transform = `rotate(${rand(0,360)}deg)`;
     img.style.filter = `hue-rotate(${irand(0,360)}deg) saturate(${rand(1,3)})`;
-    img.style.zIndex = irand(1,3000);
-    img.__vx = rand(-5,5);
-    img.__vy = rand(-5,5);
+    img.style.zIndex = irand(1,4000);
+    img.__vx = rand(-8,8);
+    img.__vy = rand(-8,8);
     document.body.appendChild(img);
     active.add(img);
   }
@@ -246,7 +219,7 @@
 
   function auraTick(){
     if(!started) return;
-    auraValue+=0.3+(active.size/300);
+    auraValue+=0.4+(active.size/200);
     aura.style.width=auraValue+'%';
     requestAnimationFrame(auraTick);
   }
@@ -281,7 +254,7 @@
   }
 
   function scrollSpawn(){
-    spawn(12+irand(5,12));
+    spawn(15+irand(5,12));
   }
 
   function chatbotRespond(msg){
@@ -308,7 +281,7 @@
     intro.style.display='none';
     game.style.display='block';
     started=true;
-    spawn(50);
+    spawn(60);
     setInterval(()=>spawn(SPAWN_BASE+irand(5,12)),2000);
     setInterval(bgCycle,900);
     auraTick();
