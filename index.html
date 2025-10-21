@@ -29,8 +29,8 @@
   .cubeWrap{ position:absolute; transform-style:preserve-3d; perspective:900px; pointer-events:none; }
   .cube{ position:absolute; width:100%; height:100%; transform-style:preserve-3d; will-change:transform; }
   .face{ position:absolute; width:100%; height:100%; backface-visibility:hidden; background-size:cover; background-position:center; }
-  /* SAMBOT AI */
-  #SAMBOT AI{ position:fixed; right:18px; bottom:18px; width:300px; z-index:1000001; pointer-events:auto; background:rgba(0,0,0,0.45); color:#cff; border-radius:10px; padding:10px; border:1px solid rgba(255,255,255,0.06); box-shadow:0 12px 60px rgba(0,0,0,0.6); font-size:13px;}
+  /* chatbot AI */
+  #chatbot AI{ position:fixed; right:18px; bottom:18px; width:300px; z-index:1000001; pointer-events:auto; background:rgba(0,0,0,0.45); color:#cff; border-radius:10px; padding:10px; border:1px solid rgba(255,255,255,0.06); box-shadow:0 12px 60px rgba(0,0,0,0.6); font-size:13px;}
   #chatlog{ max-height:160px; overflow:auto; padding:6px; color:#cfe; }
   #chatInput{ width:100%; padding:8px; margin-top:6px; border-radius:6px; border:none; background:rgba(255,255,255,0.04); color:white; }
   /* warnings */
@@ -58,8 +58,8 @@
   <div id="warning">AURA OVERFLOW</div>
   <div id="jumpscare"></div>
 
-  <div id="SAMBOT AI" aria-live="polite">
-    <div id="chatlog"><div><b>SAMBOT AI:</b> yes</div></div>
+  <div id="chatbot AI" aria-live="polite">
+    <div id="chatlog"><div><b>chatbot AI:</b> yes</div></div>
     <input id="chatInput" placeholder="Type..." />
   </div>
 
@@ -257,7 +257,7 @@ function spawnGhostFrom(el){
   })();
 }
 
-// physics & attractor + cursor orbit + SAMBOT AI repulsion
+// physics & attractor + cursor orbit + chatbot AI repulsion
 let cursor = { x:window.innerWidth/2, y:window.innerHeight/2, active:false };
 const attractor = { x: window.innerWidth/2 + window.scrollX, y: window.innerHeight/2 + window.scrollY, strength: 0.06 };
 
@@ -292,8 +292,8 @@ function stepPhysics(dt){
       }
     }
 
-    // SAMBOT AI repulsion
-    const chatRect = document.getElementById('SAMBOT AI').getBoundingClientRect();
+    // chatbot AI repulsion
+    const chatRect = document.getElementById('chatbot AI').getBoundingClientRect();
     const chatX = chatRect.left + chatRect.width/2 + window.scrollX;
     const chatY = chatRect.top + chatRect.height/2 + window.scrollY;
     const cdx2 = x - chatX; const cdy2 = y - chatY; const cd = Math.sqrt(cdx2*cdx2 + cdy2*cdy2);
@@ -418,7 +418,7 @@ function leapscare(){
 }
 function spawnGhosts(n){ const arr = Array.from(active); for(let i=0;i<n;i++){ if(arr.length===0) break; const s = arr[irand(0, arr.length-1)]; if(s) spawnGhostFrom(s); } }
 
-// SAMBOT AI logic
+// chatbot AI logic
 const memory = { count:0, learned:{} };
 const baseReplies = ['yes','yep','absolutely','indeed','yes (aura rising)','real real yes','affirmative'];
 function botReply(text){
@@ -429,10 +429,10 @@ function botReply(text){
   const replies = baseReplies.slice();
   if(memory.count>24) replies.push('i have learned to say yes more convincingly');
   if(aura > 1200) replies.push('YESYESYESYES');
-  if(Math.random() < 0.08) replies.push('SAMBOT AI is vibrating');
+  if(Math.random() < 0.08) replies.push('chatbot AI is vibrating');
   if(Object.keys(memory.learned).length) { const k = Object.keys(memory.learned)[irand(0, Object.keys(memory.learned).length-1)]; if(k) replies.push('yes about ' + k); }
   const r = replies[irand(0,replies.length-1)];
-  chatlog.innerHTML += `<div><b>SAMBOT AI:</b> ${r}</div>`;
+  chatlog.innerHTML += `<div><b>chatbot AI:</b> ${r}</div>`;
   chatlog.scrollTop = chatlog.scrollHeight;
   if('speechSynthesis' in window && Math.random() < 0.18) { const u = new SpeechSynthesisUtterance('yes'); u.volume = 0.06 + Math.random()*0.3; u.rate = 0.6 + Math.random()*0.8; u.pitch = 0.2 + Math.random()*1.4; speechSynthesis.speak(u); }
 }
@@ -633,7 +633,7 @@ window.addEventListener('keydown', (e)=>{ if(!started) return; if(e.key===' ') {
 document.getElementById('chatInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ const t=e.target.value.trim(); if(t){ chatlog.innerHTML += `<div><b>You:</b> ${t}</div>`; e.target.value=''; setTimeout(()=>{ botReply(t); }, irand(200,900)); } }});
 
 // bot reply
-function botReply(text){ memory.count++; text.split(/\s+/).forEach(w=>{ const k=w.toLowerCase().replace(/[^a-z0-9]/g,''); if(!k) return; memory.learned[k]=(memory.learned[k]||0)+1; }); const summon=['summon','more','spawn','sam','aura','yes','rain']; for(const s of summon) if(text.toLowerCase().includes(s)){ spawnRandomInViewport(40); if(audioCtx) playSpawnSound(); } const replies = baseReplies.slice(); if(memory.count>24) replies.push('i have learned to say yes more convincingly'); if(aura>1600) replies.push('YESYESYESYES'); if(Math.random()<0.08) replies.push('SAMBOT AI is vibrating'); if(Object.keys(memory.learned).length){ const k=Object.keys(memory.learned)[irand(0,Object.keys(memory.learned).length-1)]; if(k) replies.push('yes about '+k); } const r=replies[irand(0,replies.length-1)]; chatlog.innerHTML += `<div><b>SAMBOT AI:</b> ${r}</div>`; chatlog.scrollTop=chatlog.scrollHeight; if('speechSynthesis' in window && Math.random() < 0.18){ const u=new SpeechSynthesisUtterance('yes'); u.volume=0.06+Math.random()*0.28; u.rate=0.6+Math.random()*0.9; u.pitch=0.25+Math.random()*1.3; speechSynthesis.speak(u); }}
+function botReply(text){ memory.count++; text.split(/\s+/).forEach(w=>{ const k=w.toLowerCase().replace(/[^a-z0-9]/g,''); if(!k) return; memory.learned[k]=(memory.learned[k]||0)+1; }); const summon=['summon','more','spawn','sam','aura','yes','rain']; for(const s of summon) if(text.toLowerCase().includes(s)){ spawnRandomInViewport(40); if(audioCtx) playSpawnSound(); } const replies = baseReplies.slice(); if(memory.count>24) replies.push('i have learned to say yes more convincingly'); if(aura>1600) replies.push('YESYESYESYES'); if(Math.random()<0.08) replies.push('chatbot AI is vibrating'); if(Object.keys(memory.learned).length){ const k=Object.keys(memory.learned)[irand(0,Object.keys(memory.learned).length-1)]; if(k) replies.push('yes about '+k); } const r=replies[irand(0,replies.length-1)]; chatlog.innerHTML += `<div><b>chatbot AI:</b> ${r}</div>`; chatlog.scrollTop=chatlog.scrollHeight; if('speechSynthesis' in window && Math.random() < 0.18){ const u=new SpeechSynthesisUtterance('yes'); u.volume=0.06+Math.random()*0.28; u.rate=0.6+Math.random()*0.9; u.pitch=0.25+Math.random()*1.3; speechSynthesis.speak(u); }}
 
 // init pools and audio on first user interaction
 intro.addEventListener('click', ()=>{ intro.style.display='none'; startChaos(); }, { once:true });
