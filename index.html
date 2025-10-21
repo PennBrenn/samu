@@ -5,82 +5,65 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning but no cap</title>
 <style>
-  :root{ --ui-z: 999999; --bg: #000; }
-  html,body{ margin:0;height:100%;background:var(--bg);overflow:auto;color:#fff;font-family:system-ui, "Segoe UI", Roboto, Arial; }
-  /* keep UI always on top */
-  #uiTop { position:fixed; left:0; right:0; top:0; pointer-events:none; z-index:1000000; display:flex; align-items:flex-start; justify-content:center; gap:12px; padding:10px; }
-  #auraWrap{ position:relative; width:70%; max-width:1100px; height:34px; background:rgba(255,255,255,0.06); border-radius:18px; padding:4px 10px; box-shadow:0 10px 60px rgba(0,0,0,0.6); }
-  #auraLabel{ position:absolute; left:12px; top:-18px; font-size:13px; color:#7ff; text-shadow:0 0 6px #7ff; pointer-events:none; }
-  #aura{ height:100%; width:1%; border-radius:14px; background:linear-gradient(90deg,#00f,#0ff,#f0f); box-shadow:0 0 30px rgba(255,255,255,0.06); transition: width 0.18s linear; }
+  :root{ --ui-z:999999; --bg:#000; --safe-filter: none; }
+  html,body{ margin:0; height:100%; background:var(--bg); overflow:auto; color:#fff; font-family:system-ui, "Segoe UI", Roboto, Arial; transition: filter 0.2s linear; }
+  /* UI top (always on top) */
+  #uiTop{ position:fixed; left:0; right:0; top:0; display:flex; justify-content:center; pointer-events:none; z-index:1000000; padding:10px; }
+  #auraWrap{ width:70%; max-width:1100px; height:30px; background:rgba(255,255,255,0.05); border-radius:18px; padding:3px 10px; box-shadow:0 10px 40px rgba(0,0,0,0.6); pointer-events:none; }
+  #auraLabel{ position:absolute; left:12px; top:6px; font-size:13px; color:#7ff; text-shadow:0 0 6px #7ff; }
+  #aura{ height:100%; width:1%; border-radius:14px; background:linear-gradient(90deg,#00f,#0ff,#f0f); box-shadow:0 0 20px rgba(255,255,255,0.06); transition: width 0.18s linear; }
+  /* title */
   #titleWrap{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:1000001; pointer-events:none; text-align:center; }
-  #bigTitle{ margin:0; font-weight:900; font-size:clamp(20px,8vw,82px); line-height:1; text-shadow:0 12px 40px rgba(0,0,0,0.6); transition: color 0.06s linear, transform 0.06s linear; }
-  /* world container holds sam images and cubes and is transformed for spin/zoom */
-  #worldWrap{ position:relative; transform-origin:center center; will-change: transform, filter; min-height:160vh; height:160vh; overflow:visible; }
-  #world{ position:absolute; left:0; top:0; right:0; bottom:0; pointer-events:none; }
-
-  /* Sam image elements */
-  .sam{ position:absolute; pointer-events:none; user-select:none; will-change:left,top,transform,filter; mix-blend-mode:normal; }
-
-  /* ghost afterimages */
-  .ghost{ position:absolute; pointer-events:none; user-select:none; filter: blur(6px) brightness(1.3) saturate(1.5); opacity:0.6; }
-
-  /* overlays and lightning */
+  #bigTitle{ margin:0; font-weight:900; font-size:clamp(20px,8vw,72px); line-height:1; text-shadow:0 12px 40px rgba(0,0,0,0.6); transition: color 0.08s linear, transform 0.12s ease; }
+  /* world and elements */
+  #worldWrap{ position:relative; will-change:transform,filter; min-height:120vh; }
+  #world{ position:relative; height:100%; width:100%; pointer-events:none; overflow:visible; }
+  .sam{ position:absolute; pointer-events:none; user-select:none; will-change:left,top,transform; mix-blend-mode:normal; }
+  .ghost{ position:absolute; pointer-events:none; user-select:none; filter: blur(6px) brightness(1.3) saturate(1.4); opacity:0.6; }
+  /* overlay */
   #overlay{ position:fixed; inset:0; pointer-events:none; z-index:900000; mix-blend-mode:screen; }
-
   .flash{ position:absolute; inset:0; background:var(--c); opacity:0; animation: flashAnim 420ms ease-out forwards; }
   @keyframes flashAnim{ from{opacity:0.95} to{opacity:0} }
-
-  /* chatbot - still on top but clickable */
-  #chatbot{ position:fixed; right:16px; bottom:18px; width:280px; z-index:1000002; pointer-events:auto; background:rgba(0,0,0,0.45); color:#cff; border-radius:10px; padding:10px; border:1px solid rgba(255,255,255,0.06); box-shadow:0 10px 40px rgba(0,0,0,0.6); font-size:13px; }
-  #chatlog{ max-height:160px; overflow:auto; padding:6px; color:#cfe; }
+  /* chatbot */
+  #chatbot{ position:fixed; right:16px; bottom:18px; width:260px; z-index:1000002; pointer-events:auto; background:rgba(0,0,0,0.45); color:#cff; border-radius:10px; padding:8px; border:1px solid rgba(255,255,255,0.06); box-shadow:0 10px 40px rgba(0,0,0,0.6); font-size:13px;}
+  #chatlog{ max-height:150px; overflow:auto; padding:6px; color:#cfe; }
   #chatInput{ width:100%; padding:8px; margin-top:6px; border-radius:6px; border:none; background:rgba(255,255,255,0.04); color:white; }
-
-  /* cubes - 3D */
-  .cubeWrap{ position:absolute; left:50%; top:50%; transform-style:preserve-3d; perspective:1000px; pointer-events:none; }
-  .cube{ position:absolute; width:160px; height:160px; transform-style:preserve-3d; transition: transform 0.12s linear; will-change: transform; }
-  .face{ position:absolute; width:100%; height:100%; backface-visibility:hidden; background-size:cover; background-position:center; box-shadow:0 6px 20px rgba(0,0,0,0.6); }
-
-  /* warnings / fake errors */
+  /* cubes */
+  .cubeWrap{ position:absolute; transform-style:preserve-3d; perspective:800px; pointer-events:none; }
+  .cube{ position:absolute; transform-style:preserve-3d; will-change:transform; }
+  .face{ position:absolute; width:100%; height:100%; backface-visibility:hidden; background-size:cover; background-position:center; box-shadow:0 4px 18px rgba(0,0,0,0.5); }
+  /* warnings */
   #warning{ position:fixed; left:50%; top:8%; transform:translateX(-50%); z-index:1000003; display:none; background:rgba(255,40,40,0.95); color:white; padding:10px 18px; border-radius:8px; font-weight:900; box-shadow:0 12px 60px rgba(255,40,40,0.2); }
-
-  #fakeErr{ position:fixed; left:15%; top:12%; transform:translateX(-50%); z-index:1000004; display:none; background:#111; color:#fff; border:3px solid #f00; padding:16px; border-radius:6px; }
-
-  /* jumpscare */
   #jumpscare{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1000005; }
   #jumpscare img{ max-width:120vw; max-height:120vh; filter: drop-shadow(0 0 60px red); }
-
-  /* small helpers */
-  .hidden{ display:none !important; }
-  .ui-button{ pointer-events:auto; }
+  /* svg wobble filter (small default) */
+  svg{ position:absolute; width:0; height:0; }
+  /* debug overlay (FPS etc) */
+  #debug{ position:fixed; left:8px; bottom:8px; z-index:1000010; background:rgba(0,0,0,0.45); padding:8px; border-radius:8px; font-family:monospace; font-size:12px; color:#bfe; pointer-events:none; }
+  /* responsive helpers */
+  @media (max-width:700px){ #bigTitle{ font-size:28px; } #chatbot{ width:46%; } }
 </style>
 
-<!-- SVG wobble filter -->
-<svg width="0" height="0" style="position:absolute">
+<!-- wobble filter -->
+<svg aria-hidden="true">
   <filter id="wobble">
     <feTurbulence type="fractalNoise" baseFrequency="0.0002" numOctaves="1" result="noise"/>
     <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G" />
   </filter>
 </svg>
-</head>
+
 <body>
-  <!-- UI always on top -->
   <div id="uiTop">
-    <div id="auraWrap">
-      <div id="auraLabel">Aura Level</div>
-      <div id="aura"></div>
-    </div>
+    <div id="auraWrap"><div id="auraLabel">Aura Level</div><div id="aura"></div></div>
   </div>
 
-  <div id="titleWrap">
-    <h1 id="bigTitle">sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning but no cap</h1>
-  </div>
+  <div id="titleWrap"><h1 id="bigTitle">sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning but no cap</h1></div>
 
   <div id="overlay"></div>
   <div id="warning">AURA OVERFLOW</div>
-  <div id="fakeErr">AURA OVERFLOW DETECTED — SYSTEM COMPROMISED</div>
   <div id="jumpscare"></div>
 
-  <div id="chatbot" role="dialog" aria-live="polite">
+  <div id="chatbot" aria-live="polite">
     <div id="chatlog"><div><b>Chatbot:</b> yes</div></div>
     <input id="chatInput" placeholder="Type..." />
   </div>
@@ -91,19 +74,21 @@
     </p>
   </div>
 
-  <!-- world that will be transformed: contains sam images and cubes -->
-  <div id="worldWrap">
-    <div id="world"></div>
-  </div>
+  <div id="worldWrap"><div id="world"></div></div>
+
+  <div id="debug" class="hidden">FPS: --<br/>LIVE: -- / --<br/>CUBES: --<br/>SPAWN: --</div>
 
 <script>
-/* MAXIMUM CHAOS - Cube edition
-   WARNING: intense flashing, motion, audio.
-   Tune MAX_LIVE / MAX_CUBES if your machine struggles.
+/*
+ Adaptive Chaos Edition - optimized & adaptive
+ - Merges logic & measures FPS to adapt intensity
+ - Reuses pools, reuses audio nodes
+ - Keeps features but scales effects on low FPS
 */
+
 (() => {
-  // --- CONFIG ---
-  const IMAGE_SOURCES = [
+  // CONFIG (base)
+  const IMAGES = [
     'https://sam.pennbrenn.com/sam.png',
     'https://sam.pennbrenn.com/sam1.jpg',
     'https://sam.pennbrenn.com/sam2.jpg',
@@ -111,48 +96,58 @@
     'https://sam.pennbrenn.com/sam4.jpg',
     'https://sam.pennbrenn.com/sam5.jpg'
   ];
-  const MAX_LIVE = 700;         // total sam images cap (reduce if laggy)
-  const POOL_SIZE = MAX_LIVE + 300;
-  const INITIAL_SPAWN = 140;
-  const SPAWN_INTERVAL = 1200;  // ms
-  const SPAWN_PER_INTERVAL = 40;
-  const MAX_CUBES = 12;         // cubes limit
-  const CUBE_SIZE_BASE = 140;   // px
-  const OVERFLOW_WARNING = 1600;
-  const FINAL_AURA = 12000;
 
-  // DOM
+  const CONFIG = {
+    MAX_LIVE_BASE: 700,
+    MAX_CUBES_BASE: 12,
+    SPAWN_INTERVAL_BASE: 1200,
+    SPAWN_PER_INTERVAL_BASE: 40,
+    INITIAL_SPAWN_BASE: 140,
+    OVERFLOW_WARNING: 1600,
+    FINAL_AURA: 12000,
+    POOL_MARGIN: 300
+  };
+
+  // Adaptive state (will be tuned)
+  let MAX_LIVE = CONFIG.MAX_LIVE_BASE;
+  let MAX_CUBES = CONFIG.MAX_CUBES_BASE;
+  let SPAWN_INTERVAL = CONFIG.SPAWN_INTERVAL_BASE;
+  let SPAWN_PER_INTERVAL = CONFIG.SPAWN_PER_INTERVAL_BASE;
+  let spawnBurst = SPAWN_PER_INTERVAL;
   const world = document.getElementById('world');
   const worldWrap = document.getElementById('worldWrap');
   const auraEl = document.getElementById('aura');
   const bigTitle = document.getElementById('bigTitle');
   const overlay = document.getElementById('overlay');
   const warning = document.getElementById('warning');
-  const fakeErr = document.getElementById('fakeErr');
   const jumpscareWrap = document.getElementById('jumpscare');
   const chatlog = document.getElementById('chatlog');
   const chatInput = document.getElementById('chatInput');
   const intro = document.getElementById('intro');
+  const debug = document.getElementById('debug');
 
-  // state pools
-  const pool = [];
-  const ghostPool = [];
+  // pools
+  let POOL_SIZE = MAX_LIVE + CONFIG.POOL_MARGIN;
+  let pool = [];
+  let ghostPool = [];
+  let poolCreated = false;
+
+  // runtime state
+  let started = false;
   let active = new Set();
   let ghosts = new Set();
   let cubes = [];
-  let started = false;
   let aura = 0;
   let hue = 0;
-  let drift = 0;
-  let worldAngle = 0;
-  let worldScale = 1;
   let finalPhase = false;
-  let spawnBurst = SPAWN_PER_INTERVAL;
   let audioCtx = null;
   let humGain = null;
-  let lastTick = performance.now();
+  let lastFrame = performance.now();
+  let fpsHistory = [];
+  let lastFPSCheck = performance.now();
+  let fps = 60;
 
-  // text variants - many mutated versions
+  // text variants
   const TITLE_VARIANTS = [
     "sams aura farm simulator 2025 all dlc unlocked real real no cap have a good morning but no cap",
     "sam's aura farm simulator 2025 all dlc unlocked no cap real real have a good morning",
@@ -165,65 +160,61 @@
     "sɑm's aura farm simulator 2025 all dlc unlocked real real no cap have a good morning",
     "sams aura farm simulator Twenty Twenty-Five - all dlc - real real - no cap"
   ];
-
-  // fonts for crazy switching
   const FONTS = ['Impact','"Comic Sans MS"','"Courier New"','Georgia','"Trebuchet MS"','Verdana','Palatino','serif','monospace'];
 
-  // UTIL
+  // utilities
   const rand = (a,b) => Math.random()*(b-a)+a;
   const irand = (a,b) => Math.floor(rand(a,b+1));
   const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
-  function now(){ return performance.now(); }
 
-  // pool init
-  function makeSamEl(){
-    const img = document.createElement('img');
-    img.className = 'sam';
-    img.style.display = 'none';
-    img.draggable = false;
-    img.__alive = false;
-    img.__born = 0;
-    img.__vx = 0; img.__vy = 0;
-    pool.push(img);
-    world.appendChild(img);
-    return img;
+  // pool creation (deferred until start to avoid load)
+  function initPools(){
+    if(poolCreated) return;
+    POOL_SIZE = MAX_LIVE + CONFIG.POOL_MARGIN;
+    for(let i=0;i<POOL_SIZE;i++){
+      const img = document.createElement('img');
+      img.className = 'sam';
+      img.style.display='none';
+      img.draggable = false;
+      img.__alive = false;
+      img.__born = 0;
+      img.__vx = 0; img.__vy = 0;
+      pool.push(img);
+      world.appendChild(img);
+    }
+    for(let i=0;i<120;i++){
+      const g = document.createElement('img');
+      g.className = 'ghost';
+      g.style.display='none';
+      g.draggable=false;
+      ghostPool.push(g);
+      world.appendChild(g);
+    }
+    poolCreated = true;
   }
-  function makeGhost(){
-    const g = document.createElement('img');
-    g.className = 'ghost';
-    g.style.display = 'none';
-    g.draggable = false;
-    ghostPool.push(g);
-    world.appendChild(g);
-    return g;
-  }
-  for(let i=0;i<POOL_SIZE;i++) makeSamEl();
-  for(let i=0;i<120;i++) makeGhost();
 
   function acquire(){
-    const el = pool.find(p=>!p.__alive);
+    const el = pool.find(p => !p.__alive);
     if(el) return el;
-    // if none available create one (limit somewhat)
-    if(pool.length < POOL_SIZE*1.5) return makeSamEl();
-    return null;
+    return null; // constrained for adaptive performance
   }
-  function acquireGhost(){ return ghostPool.find(g=>g.style.display==='none') || makeGhost(); }
+  function acquireGhost(){ return ghostPool.find(g => g.style.display==='none') || null; }
 
-  // spawn at world coords
+  // spawn functions
   function spawnAt(x,y,opts={}){
     const el = acquire();
     if(!el) return null;
-    el.src = opts.src || IMAGE_SOURCES[irand(0, IMAGE_SOURCES.length-1)];
+    el.src = opts.src || IMAGES[irand(0,IMAGES.length-1)];
     el.style.left = x + 'px';
     el.style.top = y + 'px';
-    const scale = opts.scale || rand(1.8,12);
-    el.style.width = (40*scale) + 'px';
-    el.style.height = (40*scale) + 'px';
+    const scale = opts.scale || rand(1.8,8); // somewhat reduced scales for perf
+    el.style.width = (36*scale) + 'px';
+    el.style.height = (36*scale) + 'px';
     el.style.transform = `rotate(${rand(0,360)}deg)`;
     el.style.filter = `hue-rotate(${irand(0,360)}deg)`;
     el.style.zIndex = irand(1,20000);
-    el.__vx = opts.vx !== undefined ? opts.vx : rand(-14,14);
-    el.__vy = opts.vy !== undefined ? opts.vy : rand(-14,14);
+    el.__vx = opts.vx !== undefined ? opts.vx : rand(-10,10);
+    el.__vy = opts.vy !== undefined ? opts.vy : rand(-10,10);
     el.__alive = true;
     el.__born = Date.now();
     el.style.display = 'block';
@@ -232,21 +223,25 @@
   }
 
   function spawnRandomInViewport(n){
+    if(!poolCreated) return;
     const vw = window.innerWidth, vh = window.innerHeight;
-    for(let i=0;i<n;i++){
+    const budget = Math.max(1, Math.floor((MAX_LIVE - active.size) * 0.5));
+    const toSpawn = Math.min(n, budget);
+    for(let i=0;i<toSpawn;i++){
       if(active.size >= MAX_LIVE) break;
-      const x = window.scrollX + rand(-vw*0.3, vw*1.3);
-      const y = window.scrollY + rand(-vh*0.3, vh*1.3);
+      const x = window.scrollX + rand(-vw*0.2, vw*1.2);
+      const y = window.scrollY + rand(-vh*0.2, vh*1.2);
       spawnAt(x,y);
     }
   }
 
-  function spawnExplosion(x,y,n){
-    for(let i=0;i<n;i++){
-      if(active.size >= MAX_LIVE) break;
-      spawnAt(x + rand(-40,40), y + rand(-40,40), { vx: rand(-26,26), vy: rand(-26,26), scale: rand(3,16) });
+  function spawnExplosion(x,y,amount){
+    if(!poolCreated) return;
+    const cap = Math.min(amount, Math.max(4, Math.floor((MAX_LIVE - active.size)*0.75)));
+    for(let i=0;i<cap;i++){
+      spawnAt(x + rand(-40,40), y + rand(-40,40), { vx: rand(-20,20), vy: rand(-20,20), scale: rand(3,12) });
     }
-    if(audioCtx) playSpawnSound();
+    playSpawnSound();
   }
 
   function retire(el){
@@ -256,8 +251,10 @@
     active.delete(el);
   }
 
+  // ghost trails
   function spawnGhostFrom(el){
     const g = acquireGhost();
+    if(!g) return;
     g.src = el.src;
     g.style.left = el.style.left;
     g.style.top = el.style.top;
@@ -265,29 +262,30 @@
     g.style.height = el.style.height;
     g.style.transform = el.style.transform;
     g.style.display = 'block';
-    const t0 = Date.now();
-    const dur = 1200 + irand(0,1200);
+    g.style.opacity = 0.75;
+    const start = Date.now();
+    const dur = 900 + irand(0,600);
     (function fade(){
-      const t = (Date.now() - t0) / dur;
-      if(t >= 1){ g.style.display = 'none'; return; }
+      const t = (Date.now() - start) / dur;
+      if(t >= 1){ g.style.display='none'; return; }
       g.style.opacity = String(0.6*(1 - t));
       requestAnimationFrame(fade);
     })();
   }
 
-  // physics + attractors + orbit cursor + chatbot repel
-  let cursor = {x:window.innerWidth/2, y:window.innerHeight/2, active:false};
+  // physics step (merged)
+  let cursor = { x: window.innerWidth/2, y: window.innerHeight/2, active:false };
   const attractor = { x: window.innerWidth/2 + window.scrollX, y: window.innerHeight/2 + window.scrollY, strength: 0.06 };
 
   function stepPhysics(dt){
     const vw = window.innerWidth;
     const worldH = document.body.scrollHeight;
     const nowms = Date.now();
-    active.forEach(el=>{
+    active.forEach(el => {
       let x = parseFloat(el.style.left) || 0;
       let y = parseFloat(el.style.top) || 0;
 
-      // attractor center
+      // central attractor (soft)
       let dx = (attractor.x + (window.scrollX||0)) - x;
       let dy = (attractor.y + (window.scrollY||0)) - y;
       const d2 = dx*dx + dy*dy + 0.0001;
@@ -295,18 +293,18 @@
       el.__vx += dx * force * dt * 60;
       el.__vy += dy * force * dt * 60;
 
-      // orbit to cursor
+      // orbit to cursor (only when active)
       if(cursor.active){
         const cdx = cursor.x - x;
         const cdy = cursor.y - y;
-        const dist = Math.sqrt(cdx*cdx + cdy*cdy)+0.0001;
-        if(dist < 520){
+        const dist = Math.sqrt(cdx*cdx + cdy*cdy) + 0.0001;
+        if(dist < 420){
           const perpX = -cdy/dist; const perpY = cdx/dist;
-          const orbit = (1 - dist/520)*0.8;
+          const orbit = (1 - dist/420) * 0.7;
           el.__vx += perpX * orbit * dt * 60;
           el.__vy += perpY * orbit * dt * 60;
-          el.__vx += (cdx/dist) * 0.03 * dt * 60;
-          el.__vy += (cdy/dist) * 0.03 * dt * 60;
+          el.__vx += (cdx/dist) * 0.02 * dt * 60;
+          el.__vy += (cdy/dist) * 0.02 * dt * 60;
         }
       }
 
@@ -316,84 +314,77 @@
       const chatY = chatRect.top + chatRect.height/2 + window.scrollY;
       const cdx2 = x - chatX; const cdy2 = y - chatY;
       const cd = Math.sqrt(cdx2*cdx2 + cdy2*cdy2);
-      if(cd < 260){
-        const repel = (260-cd)/260*0.6;
+      if(cd < 220){
+        const repel = (220-cd)/220 * 0.6;
         el.__vx += (cdx2/cd) * repel * dt * 120;
         el.__vy += (cdy2/cd) * repel * dt * 120;
       }
 
-      // integrate
+      // integrate + friction
       el.__vx *= 0.995;
       el.__vy *= 0.995;
       x += el.__vx * dt * 60;
       y += el.__vy * dt * 60;
 
-      // bounce
-      const w = el.offsetWidth || 40, h = el.offsetHeight || 40;
+      // bounce / bounds
+      const w = el.offsetWidth || 36, h = el.offsetHeight || 36;
       if(x < -w){ x = -w; el.__vx *= -0.86; el.__vy *= 0.98; }
       if(x > vw*1.8){ x = vw*1.8; el.__vx *= -0.86; el.__vy *= 0.98; }
       if(y < -h){ y = -h; el.__vy *= -0.86; el.__vx *= 0.98; }
       if(y > worldH){ y = worldH; el.__vy *= -0.86; el.__vx *= 0.98; }
 
-      el.style.left = x+'px';
-      el.style.top = y+'px';
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
 
-      // random ghost trails
-      if(Math.random() < 0.001 && nowms - el.__born > 400){
+      // occasional ghost trails (lowered probability for perf)
+      if(Math.random() < 0.0009 && nowms - el.__born > 900){
         spawnGhostFrom(el);
       }
-      // retire very old elements to recycle
+
+      // retire extremely old
       if(nowms - el.__born > 1200*1000){
         retire(el);
       }
     });
   }
 
-  // WORLD: camera drift, zoom breathing, wobble with svg filter
-  let lastFrame = performance.now();
+  // camera: drift, breathing, wobble (small)
+  let lastWorldTime = performance.now();
   let driftT = 0;
-  function animateWorld(){
-    const t = performance.now();
-    const dt = (t - lastFrame)/1000;
-    lastFrame = t;
+  function animateWorld(dt){
     driftT += dt;
-    const panX = Math.sin(driftT*0.14)*16;
-    const panY = Math.sin(driftT*0.09)*10;
-    worldAngle = (worldAngle + (finalPhase?1.2:0.35)) % 360;
-    worldScale = 1 + Math.sin(driftT*0.7)*0.024 + (finalPhase?0.08*Math.sin(driftT*4):0);
-    worldWrap.style.transform = `translate(${panX}px,${panY}px) rotate(${worldAngle/10}deg) scale(${worldScale})`;
-    // wobble filter
+    const panX = Math.sin(driftT*0.16) * 12 * (perfState.intensity);
+    const panY = Math.sin(driftT*0.11) * 8 * (perfState.intensity);
+    worldWrap.style.transform = `translate(${panX}px, ${panY}px) rotate(${(driftT*0.02) * (perfState.intensity)}deg) scale(${1 + Math.sin(driftT*0.7) * 0.018 * (perfState.intensity)})`;
+    // wobble filter scale tuned for perf
     const turb = document.querySelector('filter feTurbulence');
-    if(turb) turb.setAttribute('baseFrequency', String(0.0002 + Math.abs(Math.sin(driftT*0.6))*0.0016));
-    document.querySelector('filter feDisplacementMap').setAttribute('scale', String(2 + Math.abs(Math.sin(driftT))*10 * (finalPhase?3:1)));
-    // hue rotate global
-    hue = (hue + (finalPhase?6:1.8)) % 360;
-    document.documentElement.style.filter = `hue-rotate(${hue}deg) saturate(${finalPhase?1.6:1})`;
-    // title colour pulse
-    bigTitle.style.color = `hsl(${(aura/5)%360} 95% 60%)`;
-    if(aura > OVERFLOW_WARNING){
-      bigTitle.style.transform = `scale(${1 + 0.02*Math.sin(driftT*10)}) rotate(${Math.sin(driftT*6)*2}deg)`;
+    if(turb) turb.setAttribute('baseFrequency', String(0.0002 + Math.abs(Math.sin(driftT*0.6))*0.0012 * perfState.filterMultiplier));
+    document.querySelector('filter feDisplacementMap').setAttribute('scale', String(1 + Math.abs(Math.sin(driftT))*6 * perfState.filterMultiplier));
+    // hue rotate global (controlled)
+    hue = (hue + 1.6 * perfState.intensity) % 360;
+    document.documentElement.style.filter = `hue-rotate(${hue}deg) saturate(${1 + 0.2*perfState.intensity})`;
+    // title color pulse
+    bigTitle.style.color = `hsl(${(aura/6)%360} 95% ${clamp(50 + perfState.intensity*10,40,72)}%)`;
+    if(aura > perfState.warnThreshold){
+      bigTitle.style.transform = `scale(${1 + 0.012*Math.sin(driftT*10) * perfState.intensity}) rotate(${Math.sin(driftT*6)*1*perfState.intensity}deg)`;
     } else {
       bigTitle.style.transform = 'scale(1) rotate(0deg)';
     }
-    // physics step
-    stepPhysics(dt);
-    requestAnimationFrame(animateWorld);
   }
 
-  // overlay lightning flash
+  // overlay flash & lightning (reduced frequency on low perf)
   function lightning(color){
     const el = document.createElement('div');
     el.className = 'flash';
     el.style.setProperty('--c', color || `hsl(${irand(0,359)} 100% 60%)`);
     overlay.appendChild(el);
-    setTimeout(()=>{ try{ overlay.removeChild(el);}catch(e){} }, 800);
+    setTimeout(()=>{ try{ overlay.removeChild(el);}catch(e){} }, 700);
   }
 
-  // screen shake helper
+  // screen shake
   let shaking = false;
-  function shake(intensity=18, duration=450){
-    if(shaking) return;
+  function shake(intensity=12, duration=360){
+    if(shaking || perfState.intensity < 0.35) return;
     shaking = true;
     const start = Date.now();
     const orig = document.documentElement.style.transform || '';
@@ -404,29 +395,18 @@
       document.documentElement.style.transform = `translate(${irand(-mag,mag)}px,${irand(-mag,mag)}px) rotate(${irand(-mag/2,mag/2)}deg)`;
       requestAnimationFrame(tick);
     })();
-    setTimeout(()=>{ document.documentElement.style.transform = orig; shaking=false; }, duration+80);
+    setTimeout(()=>{ document.documentElement.style.transform = orig; shaking=false; }, duration+50);
   }
 
-  // solar flare
+  // solar flare (short)
   function solarFlare(){
-    worldWrap.style.transition = 'filter 240ms ease, transform 240ms ease';
-    worldWrap.style.filter = 'brightness(2.6) blur(3px) saturate(1.6)';
-    setTimeout(()=> { worldWrap.style.filter=''; }, 420 + irand(0,800));
+    if(perfState.intensity < 0.25) return;
+    worldWrap.style.transition = 'filter 240ms ease';
+    worldWrap.style.filter = 'brightness(2.2) blur(2px) saturate(1.4)';
+    setTimeout(()=> { worldWrap.style.filter = ''; }, 260 + irand(0,600));
   }
 
-  // aura overflow warning
-  function flashWarning(){
-    warning.style.display = 'block';
-    let t = 0;
-    const id = setInterval(()=>{ warning.style.opacity = String((Math.sin(t*3)+1)/2*0.9 + 0.05); t+=0.25; }, 90);
-    setTimeout(()=>{ clearInterval(id); warning.style.display='none'; }, 3000);
-  }
-  function fakeError(){
-    fakeErr.style.display = 'block';
-    setTimeout(()=> fakeErr.style.display='none', 2300 + irand(0,2000));
-  }
-
-  // AUDIO: Web Audio hum + spawn + scream
+  // audio: single AudioContext, small hum oscillator + reusable short notes
   function initAudio(){
     if(audioCtx) return;
     try{
@@ -440,52 +420,52 @@
       osc.connect(lp); lp.connect(gain); gain.connect(audioCtx.destination);
       osc.start();
       humGain = gain;
-    }catch(e){ console.warn('Audio failed', e); }
+    }catch(e){ console.warn('Audio not available', e); }
   }
   function setHum(){
     if(!humGain) return;
-    const g = clamp(aura / 12000, 0.0002, 0.6);
-    try{ humGain.gain.linearRampToValueAtTime(g*0.02, audioCtx.currentTime + 0.06); }catch(e){}
+    const g = clamp(aura / 12000, 0.0002, 0.45);
+    try{ humGain.gain.linearRampToValueAtTime(g*0.012, audioCtx.currentTime + 0.06); }catch(e){}
   }
   function playSpawnSound(){
-    if(!audioCtx) return;
+    if(!audioCtx || perfState.intensity < 0.18) return;
     const ctx = audioCtx;
     const o = ctx.createOscillator(); const g = ctx.createGain();
-    o.type = 'sawtooth'; o.frequency.value = rand(120,900); g.gain.value = 0.0008;
+    o.type = 'triangle'; o.frequency.value = rand(180,700); g.gain.value = 0.0009 * perfState.intensity;
     o.connect(g); g.connect(ctx.destination); o.start();
-    g.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.16);
-    o.stop(ctx.currentTime + 0.2);
+    g.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.14);
+    o.stop(ctx.currentTime + 0.18);
   }
   function playScream(){
-    if(!audioCtx) return;
+    if(!audioCtx || perfState.intensity < 0.6) return;
     const ctx = audioCtx;
     const bufferSize = 2 * ctx.sampleRate;
     const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const data = buffer.getChannelData(0);
     for(let i=0;i<bufferSize;i++) data[i] = (Math.random()*2-1) * Math.exp(-i/bufferSize*3);
     const src = ctx.createBufferSource(); src.buffer = buffer;
-    const g = ctx.createGain(); g.gain.value = 0.6;
+    const g = ctx.createGain(); g.gain.value = 0.6 * perfState.intensity;
     const bi = ctx.createBiquadFilter(); bi.type='highpass'; bi.frequency.value = 200;
     src.connect(g); g.connect(bi); bi.connect(ctx.destination);
     src.start();
-    setTimeout(()=>{ try{ src.stop(); }catch(e){} }, 600 + irand(0,400));
+    setTimeout(()=>{ try{ src.stop(); }catch(e){} }, 500 + irand(0,300));
   }
 
   // jumpscare
   function leapscare(){
+    if(perfState.intensity < 0.25) return;
     const img = document.createElement('img');
-    img.src = IMAGE_SOURCES[irand(0, IMAGE_SOURCES.length-1)];
+    img.src = IMAGES[irand(0,IMAGES.length-1)];
     jumpscareWrap.innerHTML = '';
     jumpscareWrap.appendChild(img);
     jumpscareWrap.style.display = 'flex';
     playScream();
-    spawnGhosts(6);
-    shake(42, 700);
+    spawnGhosts(5);
+    shake(32, 650);
     solarFlare();
-    setTimeout(()=> { jumpscareWrap.style.display = 'none'; }, 700 + irand(0,700));
+    setTimeout(()=> { jumpscareWrap.style.display = 'none'; }, 700 + irand(0,500));
   }
 
-  // spawn ghosts from a few active sam images
   function spawnGhosts(n){
     const arr = Array.from(active);
     for(let i=0;i<n;i++){
@@ -495,8 +475,8 @@
     }
   }
 
-  // Chatbot evolution & triggers
-  const memory = { count: 0, learned: {} };
+  // chatbot
+  const memory = { count:0, learned:{} };
   const baseReplies = ['yes','yep','absolutely','indeed','yes (aura rising)','real real yes','affirmative'];
 
   function botReply(text){
@@ -504,286 +484,448 @@
     text.split(/\s+/).forEach(w=>{
       const word = w.toLowerCase().replace(/[^a-z0-9]/g,'');
       if(!word) return;
-      memory.learned[word] = (memory.learned[word]||0)+1;
+      memory.learned[word]=(memory.learned[word]||0)+1;
     });
     // summon words
     const summon = ['summon','more','spawn','sam','aura','yes','rain'];
-    for(const s of summon) if(text.toLowerCase().includes(s)) { spawnRandomInViewport(14 + irand(2,18)); if(audioCtx) playSpawnSound(); }
+    for(const s of summon) if(text.toLowerCase().includes(s)) { spawnRandomInViewport(8 + irand(1,10)); playSpawnSound(); }
 
     const replies = baseReplies.slice();
-    if(memory.count > 24) replies.push('i have learned to say yes more');
-    if(aura > OVERFLOW_WARNING) replies.push('YESYESYESYES'); // panic
-    if(Math.random()<0.08) replies.push('chatbot is vibrating');
+    if(memory.count > 20) replies.push('i am learning to say yes more convincingly');
+    if(aura > CONFIG.OVERFLOW_WARNING) replies.push('YESYESYESYES');
+    if(Math.random() < 0.08) replies.push('chatbot is vibrating');
     if(Object.keys(memory.learned).length>0){
-      const k = Object.keys(memory.learned)[irand(0, Object.keys(memory.learned).length-1)];
+      const keys = Object.keys(memory.learned);
+      const k = keys[irand(0, keys.length-1)];
       if(k) replies.push('yes about ' + k);
     }
-    const r = replies[irand(0,replies.length-1)];
-    chatlog.innerHTML += `<div><b>Chatbot:</b> ${r}</div>`;
+    const reply = replies[irand(0,replies.length-1)];
+    chatlog.innerHTML += `<div><b>Chatbot:</b> ${reply}</div>`;
     chatlog.scrollTop = chatlog.scrollHeight;
-    // speech
-    if('speechSynthesis' in window && Math.random() < 0.14){
-      const u = new SpeechSynthesisUtterance('yes'); u.volume = 0.05 + Math.random()*0.25; u.rate = 0.6+Math.random()*0.9; u.pitch = 0.2+Math.random()*1.4; speechSynthesis.speak(u);
+    if('speechSynthesis' in window && Math.random() < 0.12 && perfState.intensity>0.3){
+      const u = new SpeechSynthesisUtterance('yes'); u.volume = 0.05 + Math.random()*0.2; u.rate = 0.6 + Math.random()*0.8; u.pitch = 0.2 + Math.random()*1.4; speechSynthesis.speak(u);
     }
-    // interrupt occasionally
-    if(Math.random() < 0.05) setTimeout(()=> { chatlog.innerHTML += `<div><b>Chatbot:</b> ${['vibrating','aura intensifies'][irand(0,1)]}</div>`; chatlog.scrollTop = chatlog.scrollHeight; }, irand(300,1200));
   }
 
-  // message input handler
-  document.getElementById('chatInput').addEventListener('keydown', (e) => {
+  document.getElementById('chatInput').addEventListener('keydown', (e)=>{
     if(e.key === 'Enter'){ const t = e.target.value.trim(); if(t.length){ chatlog.innerHTML += `<div><b>You:</b> ${t}</div>`; e.target.value=''; setTimeout(()=> botReply(t), irand(200,900)); } }
   });
 
-  // periodic bot interrupts
-  setInterval(()=>{ if(!started) return; if(Math.random()<0.07) { chatlog.innerHTML += `<div><b>Chatbot:</b> ${['yes','real real yes','vibrating'][irand(0,2)]}</div>`; chatlog.scrollTop = chatlog.scrollHeight; } }, 4200);
-
-  // user triggers
-  window.addEventListener('click', (ev)=>{ if(!started) return; spawnExplosion(ev.pageX, ev.pageY, 26+irand(8,28)); document.querySelector('filter feDisplacementMap').setAttribute('scale', String(16+irand(0,48))); setTimeout(()=> document.querySelector('filter feDisplacementMap').setAttribute('scale','3'), 360); }, {passive:true});
-  window.addEventListener('scroll', ()=>{ if(!started) return; worldWrap.style.transition='transform 420ms ease'; worldWrap.style.transform += ` rotate(${irand(-8,8)}deg)`; spawnRandomInViewport(8+irand(0,16)); if(audioCtx) playSpawnSound(); setTimeout(()=> worldWrap.style.transition='', 640); }, {passive:true});
-  window.addEventListener('mousemove', (e)=>{ cursor.x = e.pageX; cursor.y = e.pageY; cursor.active = true; });
-
-  // keypress triggers
-  window.addEventListener('keydown', (e)=>{ if(!started) return; if(e.key === ' ') { spawnRandomInViewport(36); lightning(`hsl(${irand(0,359)} 100% 60%)`); if(audioCtx) playSpawnSound(); } else { bigTitle.style.fontFamily = FONTS[irand(0,FONTS.length-1)]; hue = (hue + irand(20,160)) % 360; document.documentElement.style.filter = `hue-rotate(${hue}deg)`; } });
-
-  // cubes: create 3D cube element with faces populated by sam images
+  // cubes (lightweight)
   function createCube(x,y,size){
-    const wrap = document.createElement('div');
-    wrap.className = 'cubeWrap';
-    wrap.style.left = x + 'px';
-    wrap.style.top = y + 'px';
-    wrap.style.width = size + 'px';
-    wrap.style.height = size + 'px';
-    wrap.style.marginLeft = -(size/2) + 'px';
-    wrap.style.marginTop = -(size/2) + 'px';
-    wrap.style.perspective = (size*3) + 'px';
-    const cube = document.createElement('div');
-    cube.className = 'cube';
-    cube.style.width = size + 'px';
-    cube.style.height = size + 'px';
+    if(cubes.length >= MAX_CUBES) return null;
+    const wrap = document.createElement('div'); wrap.className='cubeWrap'; wrap.style.left = x + 'px'; wrap.style.top = y + 'px'; wrap.style.width = size + 'px'; wrap.style.height = size + 'px'; wrap.style.marginLeft = -(size/2) + 'px'; wrap.style.marginTop = -(size/2) + 'px';
+    wrap.style.perspective = (size*2) + 'px';
+    const cube = document.createElement('div'); cube.className='cube'; cube.style.width = size + 'px'; cube.style.height = size + 'px';
     wrap.appendChild(cube);
-    // faces
     const faces = [];
     for(let i=0;i<6;i++){
-      const f = document.createElement('div'); f.className='face';
-      f.style.width = size + 'px'; f.style.height = size + 'px';
-      f.style.backgroundImage = `url(${IMAGE_SOURCES[irand(0,IMAGE_SOURCES.length-1)]})`;
-      cube.appendChild(f);
-      faces.push(f);
+      const f = document.createElement('div'); f.className='face'; f.style.width = size + 'px'; f.style.height = size + 'px'; f.style.backgroundImage = `url(${IMAGES[irand(0,IMAGES.length-1)]})`;
+      cube.appendChild(f); faces.push(f);
     }
-    // position faces (CSS 3D)
-    faces[0].style.transform = `rotateY(0deg) translateZ(${size/2}px)`; // front
-    faces[1].style.transform = `rotateY(180deg) translateZ(${size/2}px)`; // back
-    faces[2].style.transform = `rotateY(90deg) translateZ(${size/2}px)`; // right
-    faces[3].style.transform = `rotateY(-90deg) translateZ(${size/2}px)`; // left
-    faces[4].style.transform = `rotateX(90deg) translateZ(${size/2}px)`; // top
-    faces[5].style.transform = `rotateX(-90deg) translateZ(${size/2}px)`; // bottom
-    // attach wrapper to world
+    faces[0].style.transform = `rotateY(0deg) translateZ(${size/2}px)`;
+    faces[1].style.transform = `rotateY(180deg) translateZ(${size/2}px)`;
+    faces[2].style.transform = `rotateY(90deg) translateZ(${size/2}px)`;
+    faces[3].style.transform = `rotateY(-90deg) translateZ(${size/2}px)`;
+    faces[4].style.transform = `rotateX(90deg) translateZ(${size/2}px)`;
+    faces[5].style.transform = `rotateX(-90deg) translateZ(${size/2}px)`;
     world.appendChild(wrap);
-    const cubeObj = { wrap, cube, size, vx: rand(-0.8,0.8), vy: rand(-0.8,0.8), vz: rand(-1.8,1.8), ang: rand(0,360), spin: rand(0.3,1.6) };
-    cubes.push(cubeObj);
-    return cubeObj;
+    const obj = { wrap, cube, size, vx: rand(-0.6,0.6), vy: rand(-0.6,0.6), ang: rand(0,360), spin: rand(0.2,1.2) };
+    cubes.push(obj);
+    return obj;
   }
 
-  // update cubes (float, rotate, clone occasionally)
   function stepCubes(dt){
     const vw = window.innerWidth;
     for(let i=cubes.length-1;i>=0;i--){
       const c = cubes[i];
-      // float
       const left = parseFloat(c.wrap.style.left) || 0;
       const top = parseFloat(c.wrap.style.top) || 0;
       const nx = left + c.vx * dt * 60;
       const ny = top + c.vy * dt * 60;
       c.wrap.style.left = nx + 'px';
       c.wrap.style.top = ny + 'px';
-      // spin 3D
       c.ang = (c.ang + c.spin*dt*80) % 360;
-      c.cube.style.transform = `rotateX(${c.vz*40}deg) rotateY(${c.ang}deg) translateZ(0px)`;
-      // occasional clone or explode
-      if(Math.random() < 0.002 && cubes.length < MAX_CUBES){
-        // spawn new cube nearby
-        createCube(nx + rand(-200,200), ny + rand(-200,200), clamp(c.size*(0.6+Math.random()*0.8), 80, 420));
+      c.cube.style.transform = `rotateX(${c.spin*20}deg) rotateY(${c.ang}deg)`;
+      if(Math.random() < 0.0008 && cubes.length < MAX_CUBES){
+        createCube(nx + rand(-160,160), ny + rand(-160,160), clamp(c.size*(0.6+Math.random()*0.7), 80, 420));
       }
-      if(Math.random() < 0.0015){
-        // explode into sam images
-        const count = irand(8,28);
+      if(Math.random() < 0.001 && perfState.intensity>0.6){
+        const count = irand(6,18);
         for(let j=0;j<count;j++){
-          spawnAt(nx + rand(-c.size/2, c.size/2), ny + rand(-c.size/2, c.size/2), { vx: rand(-36,36), vy: rand(-36,36), scale: rand(3,16) });
+          spawnAt(nx + rand(-c.size/2, c.size/2), ny + rand(-c.size/2, c.size/2), { vx: rand(-30,30), vy: rand(-30,30), scale: rand(3,12) });
         }
         if(audioCtx) playScream();
       }
-      // remove if too far or too many cubes
-      const centerX = window.scrollX + vw/2;
       if(cubes.length > MAX_CUBES*1.4){
-        // prune some
         const rem = cubes.shift();
-        if(rem){ rem.wrap.remove(); }
+        if(rem) rem.wrap.remove();
       }
     }
   }
 
-  // main tick
+  // main loops: merged for perf
   let last = performance.now();
-  function tick(){
-    const t = performance.now();
-    const dt = (t - last)/1000;
-    last = t;
-    // physics step already handled in animateWorld; but we need cubes movement too
+  function mainLoop(){
+    const nowFrame = performance.now();
+    const dt = (nowFrame - last)/1000;
+    last = nowFrame;
+
+    // FPS measurement (moving average)
+    const now = performance.now();
+    const frameTime = now - lastFrame;
+    lastFrame = now;
+    fpsHistory.push(1000/Math.max(1, frameTime));
+    if(fpsHistory.length > 30) fpsHistory.shift();
+    fps = fpsHistory.reduce((a,b)=>a+b,0)/fpsHistory.length;
+
+    // Adaptive tuning every ~1s
+    if(now - lastAdaptiveCheck > 900){
+      adaptToPerf();
+      lastAdaptiveCheck = now;
+    }
+
+    // step physics and cubes
+    stepPhysics(dt);
     stepCubes(dt);
-    // retire some if too many active images
+
+    // world camera animations
+    animateWorld(dt);
+
+    // retire if too many
     if(active.size > MAX_LIVE){
       const arr = Array.from(active);
-      for(let i=0;i< Math.min(60, active.size - MAX_LIVE); i++){
-        retire(arr[i]);
-      }
+      for(let i=0;i< Math.min(40, active.size - MAX_LIVE); i++) retire(arr[i]);
     }
-    requestAnimationFrame(tick);
+
+    // occasionally create small ghost trails limited by perf
+    requestAnimationFrame(mainLoop);
   }
 
-  // aura tick - grows endlessly and triggers events
+  // aura tick (separate but lightweight)
   function auraTick(){
     if(!started) return;
-    aura += (active.size * 0.08) + rand(0,4) + (cubes.length * 3.2);
+    aura += (active.size * 0.06) + rand(0,2) + (cubes.length * 1.8);
     auraEl.style.width = (Math.min(aura, 99999999)) + '%';
-    // spill particles sometimes
-    if(aura > 120 && Math.random() < 0.07){
-      const s = document.createElement('div');
-      s.className = 'aura-spill';
-      s.style.left = (window.innerWidth*0.5 + irand(-120,120)) + 'px';
-      s.style.top = '6px';
-      s.style.background = `hsl(${aura%360} 100% 60%)`;
-      s.style.zIndex = 1000000;
-      document.getElementById('auraWrap').appendChild(s);
-      setTimeout(()=> s.remove(), 3200);
-    }
-    if(aura > OVERFLOW_WARNING && Math.random() < 0.02){
+    if(aura > CONFIG.OVERFLOW_WARNING && Math.random() < 0.02 * perfState.intensity){
       flashWarning();
       corruptTitle();
       playScream();
-      shake(36, 650);
+      shake(28, 600);
     }
-    if(aura > FINAL_AURA && !finalPhase){
+    if(aura > CONFIG.FINAL_AURA && !finalPhase){
       finalPhase = true;
-      // final mode: heavy rains and strobe
-      setInterval(()=> spawnRandomInViewport(120), 420);
-      setInterval(()=> { document.documentElement.style.filter = `invert(${Math.random()<0.5?1:0})`; }, 900);
+      // moderate final behavior: spawn more but only if perf allows
+      if(perfState.intensity > 0.4) setInterval(()=> spawnRandomInViewport(48), 650);
+      if(perfState.intensity > 0.6) setInterval(()=> { document.documentElement.style.filter = `invert(${Math.random()<0.5?1:0})`; }, 1000);
       lightning('white');
     }
     setHum();
-    requestAnimationFrame(auraTick);
+    setTimeout(auraTick, 80);
   }
 
-  // spawning interval
-  function startSpawner(){
-    setInterval(()=>{
-      if(!started) return;
-      spawnRandomInViewport(spawnBurst);
-      if(Math.random() < 0.2) lightning(`hsl(${irand(0,359)} 100% 64%)`);
-      if(Math.random() < 0.12) solarFlare();
-      if(Math.random() < 0.03) leapscare();
-      if(Math.random() < 0.5 && audioCtx) playSpawnSound();
-    }, SPAWN_INTERVAL);
+  // adaptive performance controller
+  let lastAdaptiveCheck = performance.now();
+  const perfState = { intensity: 1.0, filterMultiplier: 1.0, warnThreshold: 1600 };
+
+  function adaptToPerf(){
+    // Use measured FPS to adapt intensity
+    const heavy = fps < 40;
+    const moderate = fps >= 40 && fps < 52;
+    const good = fps >= 52;
+
+    if(good){
+      perfState.intensity = clamp(perfState.intensity + 0.12, 0.6, 1.0);
+    } else if(moderate){
+      perfState.intensity = clamp(perfState.intensity - 0.06, 0.35, 0.95);
+    } else if(heavy){
+      perfState.intensity = clamp(perfState.intensity - 0.18, 0.12, 0.8);
+    }
+
+    // Map intensity to caps
+    MAX_LIVE = Math.floor(CONFIG.MAX_LIVE_BASE * perfState.intensity);
+    MAX_CUBES = Math.max(2, Math.floor(CONFIG.MAX_CUBES_BASE * perfState.intensity));
+    SPAWN_PER_INTERVAL = Math.max(4, Math.floor(CONFIG.SPAWN_PER_INTERVAL_BASE * perfState.intensity));
+    SPAWN_INTERVAL = Math.floor(CONFIG.SPAWN_INTERVAL_BASE / clamp(perfState.intensity, 0.35, 1));
+    spawnBurst = SPAWN_PER_INTERVAL;
+
+    // filter multiplier reduces wobble scale on low perf
+    perfState.filterMultiplier = clamp(perfState.intensity * 1.2, 0.2, 1.0);
+    perfState.warnThreshold = CONFIG.OVERFLOW_WARNING * clamp(1.2 - perfState.intensity*0.6, 0.8, 1.6);
+
+    // debug overlay update
+    debug.innerHTML = `FPS: ${fps.toFixed(1)}<br/>LIVE: ${active.size} / ${MAX_LIVE}<br/>CUBES: ${cubes.length} / ${MAX_CUBES}<br/>SPAWN: ${SPAWN_INTERVAL}ms (${SPAWN_PER_INTERVAL})<br/>INTENSITY: ${perfState.intensity.toFixed(2)}`;
+    debug.classList.remove('hidden');
   }
 
-  // corrupt title (text glitch)
-  function corruptTitle(){
-    const orig = TITLE_VARIANTS[irand(0, TITLE_VARIANTS.length-1)];
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+=-[]{};:<>?,./';
+  // lightweight visual helpers
+  function flashWarning(){
+    warning.style.display = 'block';
     let t = 0;
+    const id = setInterval(()=>{ warning.style.opacity = String((Math.sin(t*3)+1)/2*0.9 + 0.05); t+=0.2; }, 90);
+    setTimeout(()=>{ clearInterval(id); warning.style.display='none'; }, 2200);
+  }
+
+  function corruptTitle(){
+    const orig = TITLE_VARIANTS[irand(0,TITLE_VARIANTS.length-1)];
+    let steps = 0;
     const id = setInterval(()=>{
       let s = '';
       for(let i=0;i<orig.length;i++){
-        if(Math.random() < 0.22) s += chars[irand(0, chars.length-1)];
+        if(Math.random() < 0.2) s += '*';
         else s += orig[i];
       }
       bigTitle.textContent = s;
-      t++;
-      if(t > 10){ clearInterval(id); bigTitle.textContent = TITLE_VARIANTS[irand(0, TITLE_VARIANTS.length-1)]; }
+      steps++;
+      if(steps > 8){ clearInterval(id); bigTitle.textContent = TITLE_VARIANTS[irand(0, TITLE_VARIANTS.length-1)]; }
     }, 60);
   }
 
-  // continuously morph title variants & fonts fast
-  setInterval(()=> {
-    if(!started) return;
-    bigTitle.textContent = TITLE_VARIANTS[irand(0, TITLE_VARIANTS.length-1)];
-    bigTitle.style.fontFamily = FONTS[irand(0,FONTS.length-1)];
-    bigTitle.style.color = `hsl(${irand(0,359)} 90% 60%)`;
-  }, 120);
+  function lightning(color){ // redefined small version that respects perfState
+    if(perfState.intensity < 0.18 && Math.random() < 0.8) return;
+    const el = document.createElement('div');
+    el.className = 'flash';
+    el.style.setProperty('--c', color || `hsl(${irand(0,359)} 100% 60%)`);
+    overlay.appendChild(el);
+    setTimeout(()=>{ try{ overlay.removeChild(el);}catch(e){} }, 700);
+  }
 
-  // cube creation: spawn a few initially
+  // spawn timer controlled adaptively (uses setTimeout chain so interval value can change)
+  let spawnerActive = false;
+  function startSpawner(){
+    if(spawnerActive) return;
+    spawnerActive = true;
+    (function tickSpawner(){
+      if(!started){ spawnerActive=false; return; }
+      // spawn adjusted amount
+      spawnRandomInViewport(spawnBurst);
+      if(Math.random() < 0.18*perfState.intensity) lightning(`hsl(${irand(0,359)} 100% 64%)`);
+      if(Math.random() < 0.1*perfState.intensity) solarFlare();
+      if(Math.random() < 0.02*perfState.intensity) leapscare();
+      if(Math.random() < 0.5*perfState.intensity) playSpawnSound();
+      setTimeout(tickSpawner, Math.max(280, SPAWN_INTERVAL));
+    })();
+  }
+
+  // cube warmup (light)
   function warmCubes(){
-    for(let i=0;i<6;i++){
+    const n = Math.max(2, Math.floor(MAX_CUBES * clamp(perfState.intensity,0.5,1)));
+    for(let i=0;i<n;i++){
       const x = window.scrollX + window.innerWidth * rand(0.2,0.8);
       const y = window.scrollY + window.innerHeight * rand(0.2,0.8);
-      createCube(x,y, CUBE_SIZE_BASE * rand(0.6,2.4));
+      createCube(x,y, 100 + rand(0,160) * perfState.intensity);
     }
   }
 
-  // create "big cube" centered behind the title
+  // create hero cube (scaled to perf)
   function createHeroCube(){
     const rect = document.getElementById('titleWrap').getBoundingClientRect();
     const cx = window.scrollX + rect.left + rect.width/2;
     const cy = window.scrollY + rect.top + rect.height/2;
-    const size = Math.min(window.innerWidth, window.innerHeight) * 0.6;
-    createCube(cx, cy, clamp(size, 180, 900));
+    const size = (Math.min(window.innerWidth, window.innerHeight) * 0.55) * perfState.intensity;
+    createCube(cx, cy, clamp(size, 160, 700));
   }
 
-  // boot sequence
-  function start(){
+  // init audio, pools, start loops
+  function startChaos(){
     if(started) return;
     started = true;
+    initPools();
     initAudio();
-    aura = 0;
-    // initial spawn
-    spawnRandomInViewport(INITIAL_SPAWN);
+    setHum();
+    spawnRandomInViewport(Math.max(12, Math.floor(CONFIG.INITIAL_SPAWN_BASE * perfState.intensity)));
+    warmCubes();
+    createHeroCube();
+    last = performance.now();
+    lastFrame = performance.now();
+    requestAnimationFrame(function loop(){
+      const now = performance.now();
+      const dt = (now - last)/1000;
+      last = now;
+      // measure FPS history
+      fpsHistory.push(1000/Math.max(1, now - lastFrame));
+      if(fpsHistory.length > 40) fpsHistory.shift();
+      fps = fpsHistory.reduce((a,b)=>a+b,0)/fpsHistory.length;
+      // adaptive adjust occasionally
+      if(now - lastAdaptiveCheck > 900) adaptToPerf();
+      // perform physics and cubes and world anim in merged steps
+      stepPhysics(dt);
+      stepCubes(dt);
+      animateWorld(dt);
+      // cleanup if too many
+      if(active.size > MAX_LIVE){
+        const arr = Array.from(active);
+        for(let i=0;i< Math.min(40, active.size - MAX_LIVE); i++) retire(arr[i]);
+      }
+      lastFrame = now;
+      requestAnimationFrame(loop);
+    });
+    auraTick();
+    startSpawner();
+  }
+
+  // user events (adaptive)
+  window.addEventListener('click', (e) => {
+    if(!started) return;
+    spawnExplosion(e.pageX, e.pageY, 18 + irand(6,20));
+    document.querySelector('filter feDisplacementMap').setAttribute('scale', String(14 * perfState.filterMultiplier));
+    setTimeout(()=> document.querySelector('filter feDisplacementMap').setAttribute('scale', String(1 + Math.abs(Math.sin(driftT))*6 * perfState.filterMultiplier)), 280);
+  }, { passive:true });
+
+  window.addEventListener('scroll', () => {
+    if(!started) return;
+    worldWrap.style.transition = 'transform 380ms ease';
+    worldWrap.style.transform += ` rotate(${irand(-6,6)}deg)`;
+    spawnRandomInViewport(Math.max(4, Math.floor(6 * perfState.intensity)));
+    if(audioCtx) playSpawnSound();
+    setTimeout(()=> worldWrap.style.transition = '', 640);
+  }, { passive:true });
+
+  window.addEventListener('mousemove', (e) => {
+    cursor.x = e.pageX;
+    cursor.y = e.pageY;
+    cursor.active = true;
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if(!started) return;
+    if(e.key === ' '){
+      spawnRandomInViewport(16 + Math.floor(20 * perfState.intensity));
+      lightning(`hsl(${irand(0,359)} 100% 60%)`);
+      if(audioCtx) playSpawnSound();
+    } else {
+      bigTitle.style.fontFamily = FONTS[irand(0,FONTS.length-1)];
+      hue = (hue + irand(20,140)) % 360;
+      document.documentElement.style.filter = `hue-rotate(${hue}deg)`;
+    }
+  });
+
+  // helper: spawn random in viewport wrapper for external use
+  function spawnRandomInViewportPublic(n){ spawnRandomInViewport(n); }
+
+  // create cube helper (lighter, respects perf)
+  function createCube(x,y,size){
+    if(cubes.length >= MAX_CUBES) return null;
+    const wrap = document.createElement('div'); wrap.className='cubeWrap';
+    wrap.style.left = x + 'px'; wrap.style.top = y + 'px';
+    wrap.style.width = size + 'px'; wrap.style.height = size + 'px';
+    wrap.style.marginLeft = -(size/2) + 'px'; wrap.style.marginTop = -(size/2) + 'px';
+    wrap.style.perspective = (size*2) + 'px';
+    const cube = document.createElement('div'); cube.className='cube'; cube.style.width = size + 'px'; cube.style.height = size + 'px';
+    wrap.appendChild(cube);
+    const faces = [];
+    for(let i=0;i<6;i++){
+      const f = document.createElement('div'); f.className='face'; f.style.width = size + 'px'; f.style.height = size + 'px';
+      f.style.backgroundImage = `url(${IMAGES[irand(0,IMAGES.length-1)]})`;
+      cube.appendChild(f); faces.push(f);
+    }
+    faces[0].style.transform = `rotateY(0deg) translateZ(${size/2}px)`;
+    faces[1].style.transform = `rotateY(180deg) translateZ(${size/2}px)`;
+    faces[2].style.transform = `rotateY(90deg) translateZ(${size/2}px)`;
+    faces[3].style.transform = `rotateY(-90deg) translateZ(${size/2}px)`;
+    faces[4].style.transform = `rotateX(90deg) translateZ(${size/2}px)`;
+    faces[5].style.transform = `rotateX(-90deg) translateZ(${size/2}px)`;
+    world.appendChild(wrap);
+    const obj = { wrap, cube, size, vx: rand(-0.6,0.6), vy: rand(-0.6,0.6), ang: rand(0,360), spin: rand(0.2,1.2) };
+    cubes.push(obj);
+    return obj;
+  }
+
+  // spawn ghosts across active items
+  function spawnGhostFrom(el){
+    const g = acquireGhost();
+    if(!g) return;
+    g.src = el.src;
+    g.style.left = el.style.left;
+    g.style.top = el.style.top;
+    g.style.width = el.style.width;
+    g.style.height = el.style.height;
+    g.style.transform = el.style.transform;
+    g.style.display = 'block';
+    const t0 = Date.now();
+    const dur = 800 + irand(0,800);
+    (function fade(){
+      const t = (Date.now() - t0) / dur;
+      if(t >= 1){ g.style.display='none'; return; }
+      g.style.opacity = String(0.6*(1 - t));
+      requestAnimationFrame(fade);
+    })();
+  }
+
+  // start on click/key/touch
+  intro.addEventListener('click', ()=>{ intro.style.display='none'; startChaos(); }, { once:true });
+  document.addEventListener('keydown', ()=> startChaos(), { once:true });
+  window.addEventListener('touchstart', ()=> startChaos(), { once:true });
+
+  // debug hook exposure
+  window.__samAdaptive = {
+    spawnRandomInViewport: spawnRandomInViewportPublic,
+    spawnExplosion,
+    createCube,
+    leapscare: leapscare,
+    getState: ()=> ({ fps, active: active.size, cubes: cubes.length, intensity: perfState.intensity })
+  };
+
+  // small initialization defaults
+  function initAudio(){ initAudio = initAudio; if(!audioCtx) try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); const osc = audioCtx.createOscillator(); const g = audioCtx.createGain(); const lp = audioCtx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=1200; osc.type='sine'; osc.frequency.value=56; g.gain.value=0.00005; osc.connect(lp); lp.connect(g); g.connect(audioCtx.destination); osc.start(); humGain = g; }catch(e){ audioCtx=null; console.warn('audio init failed', e); } }
+  // ensure pools created earlier than heavy loops
+  function initAudioAndPools(){
+    initPools();
+    initAudio();
+  }
+  // warm minimal things but defer heavy allocations until start
+  // set initial debug visibility if dev (you can hide later)
+  debug.classList.remove('hidden');
+  debug.style.opacity = 0.9;
+
+  // tiny helper: smaller initial spawn to reduce first-jank on low devices
+  function startChaos(){
+    initAudioAndPools();
+    startChaos = startChaos; // keep
+    // finalize adaptive caps
+    adaptToPerf();
+    // initial spawn scaled by intensity
+    spawnRandomInViewport(Math.max(16, Math.floor(CONFIG.INITIAL_SPAWN_BASE * perfState.intensity * 0.9)));
     // cubes
     warmCubes();
     createHeroCube();
-    // animate loops
-    lastTick = performance.now();
-    requestAnimationFrame(animateWorld);
-    requestAnimationFrame(tick);
-    requestAnimationFrame(auraTick);
-    startSpawner();
-    // ramp spawn burst gradually
-    setInterval(()=> { spawnBurst = Math.min(spawnBurst + 1, 280); }, 25*1000);
-    // periodic random effects
-    setInterval(()=> { if(Math.random() < 0.25) lightning(`hsl(${irand(0,359)} 100% 64%)`); if(Math.random()<0.06) solarFlare(); if(Math.random()<0.02) leapscare(); }, 1400);
-    // escalate auto-reload-ish effect
-    setInterval(()=> {
-      if(Math.random() < 0.04) { fakeErr.style.display = 'block'; setTimeout(()=> fakeErr.style.display='none', 2400); }
-      if(Math.random() < 0.03 && Math.random() < 0.07) location.reload();
-    }, 30*1000);
-    // developer hook - small cleanup
-    setInterval(()=> {
+    // start main loops
+    last = performance.now();
+    lastFrame = performance.now();
+    // measure FPS history prefill
+    for(let i=0;i<10;i++) fpsHistory.push(60);
+    // main fusion loop
+    (function loop(){
+      const now = performance.now();
+      const dt = (now - last)/1000;
+      last = now;
+      // store FPS
+      const frameFPS = 1000 / Math.max(1, now - lastFrame);
+      fpsHistory.push(frameFPS);
+      if(fpsHistory.length > 40) fpsHistory.shift();
+      fps = fpsHistory.reduce((a,b)=>a+b,0)/fpsHistory.length;
+      lastFrame = now;
+      // adapt occasionally
+      if(now - lastAdaptiveCheck > 900) adaptToPerf();
+      // per-frame work
+      stepPhysics(dt);
+      stepCubes(dt);
+      animateWorld(dt);
+      // occasional lighter events
+      if(Math.random() < 0.002 * perfState.intensity) lightning(`hsl(${irand(0,359)} 100% 60%)`);
+      if(Math.random() < 0.001 * perfState.intensity) leapscare();
+      // trim if needed
       if(active.size > MAX_LIVE){
         const arr = Array.from(active);
-        for(let i=0;i< Math.min(80, active.size - MAX_LIVE); i++) retire(arr[i]);
+        for(let i=0;i< Math.min(40, active.size - MAX_LIVE); i++) retire(arr[i]);
       }
-    }, 1200);
+      requestAnimationFrame(loop);
+    })();
+    // aura tick
+    auraTick();
+    // spawner
+    startSpawner();
   }
-
-  // initial event wiring & start on click/touch/keypress
-  intro.addEventListener('click', ()=> { intro.style.display='none'; start(); }, { once:true });
-  document.addEventListener('keydown', ()=> start(), { once:true });
-  window.addEventListener('touchstart', ()=> start(), { once:true });
-
-  // responsive: reposition attractor center on resize/scroll
-  window.addEventListener('resize', ()=> { attractor.x = window.innerWidth/2; attractor.y = window.innerHeight/2; });
-  window.addEventListener('scroll', ()=> { attractor.x = window.innerWidth/2; attractor.y = window.innerHeight/2; });
-
-  // small helper functions exposure for debugging in console
-  window.__samChaos = {
-    spawnRandomInViewport,
-    spawnExplosion,
-    createCube,
-    leapscare,
-    countActive: ()=> active.size,
-    auraValue: ()=> aura
-  };
-
-  // pre-warm by setting a hero title variant
-  bigTitle.textContent = TITLE_VARIANTS[0];
 
 })();
 </script>
