@@ -81,8 +81,8 @@
 // === CONFIG: tune these to push/pull chaos ===
 const CONFIG = {
   // full unrestrained caps
-  MAX_LIVE_UNRESTRAINED: 2500,
-  MAX_CUBES_UNRESTRAINED: 36,
+  MAX_LIVE_UNRESTRAINED: 2000,
+  MAX_CUBES_UNRESTRAINED: 100,
   SPAWN_PER_INTERVAL_UNRESTRAINED: 140,
   SPAWN_INTERVAL_UNRESTRAINED: 700, // ms
 
@@ -93,7 +93,7 @@ const CONFIG = {
   SPAWN_INTERVAL_SAFE: 1500, // ms
 
   // thresholds
-  EMERGENCY_FPS_THRESHOLD: 5, // below this -> safe mode
+  EMERGENCY_FPS_THRESHOLD: 10, // below this -> safe mode
   EMERGENCY_CHECK_WINDOW: 1800, // ms to observe low FPS before forcing safe mode
   AURA_FINAL_THRESHOLD: 15000
 };
